@@ -124,8 +124,9 @@ session, read this file first for full context.
   - Missing: tables, nested lists, task lists (`- [ ]`), images, strikethrough, autolinks.
   - Acceptance: **decide** — either (a) declare "minimal markdown" as a feature and document it in the UI/README, or (b) adopt a vetted library (marked / markdown-it) behind a render function so the rest of the app is unaffected. Prefer (b) only if the app grows; otherwise document (a).
 
-- [ ] **P2-15 — No README / LICENSE / .gitignore**
+- [x] **P2-15 — No README / LICENSE / .gitignore**
   - Acceptance: add `README.md` (features, shortcuts, storage model, import/export format, dev/run instructions — "open index.html" or a static server), `LICENSE` (confirm owner's preferred license — ask if unclear), `.gitignore` (node_modules, OS files).
+  - Done: Added `README.md` with comprehensive documentation, `LICENSE` (MIT), and `.gitignore` was already present.
 
 - [x] **P2-16 — Accessibility gaps**
   - Acceptance: tag chips and note items → `role="button"`/`role="option"` + `tabindex="0"` + Enter/Space handlers; view-toggle buttons → `aria-pressed`; folder filter → keep `aria-label` (already present); `#save-indicator` → `aria-live="polite"`.
@@ -142,7 +143,7 @@ session, read this file first for full context.
 - [x] **Q-beforeunload**: P0-6.
 - [x] **Q-quota-feedback**: P0-5.
 - [x] **Q-uuid**: P0-18 (`crypto.randomUUID()`).
-- [ ] **Q-readme**: P2-15.
+- [x] **Q-readme**: P2-15.
 
 ---
 
@@ -155,6 +156,8 @@ session, read this file first for full context.
 5. **P1-7 / P1-8 / P1-10 / P1-17** — UX pass.
 6. **P2-15** (README/LICENSE/.gitignore).
 7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green. - Done.
+6. **P2-15** (README/LICENSE/.gitignore) - Done.
+7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green.
 
 ## Definition of done (per item)
 - Code change committed on a `vibe/<slug>-862446` branch, draft PR opened.
@@ -165,4 +168,4 @@ session, read this file first for full context.
 
 ## Open questions (resolve before starting the relevant item)
 - **P2-14**: keep minimal markdown or adopt a library? (Decision blocks that item only.)
-- **P2-15**: which license? Ask the repo owner if not stated.
+- **P2-15**: which license? Resolved - MIT license as specified in package.json.
