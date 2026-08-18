@@ -122,9 +122,10 @@ session, read this file first for full context.
   - Note: `renderMarkdown` and `parseTagsInput` are DOM-free; `visibleNotes` reads module state, so either export getters or test via a store abstraction (ties into P2-12).
 
   - Fix: Added `package.json` with `"test": "node --test"` script, `.gitignore`, and `test/app.test.js` with 51 tests covering `escapeHtml`, `parseTagsInput`, `normalizeNote`, `isBlockStart`, `renderMarkdown`, and `timeAgo`.
-- [ ] **P2-14 — Markdown subset is small**
+- [x] **P2-14 — Markdown subset is small**
   - Missing: tables, nested lists, task lists (`- [ ]`), images, strikethrough, autolinks.
   - Acceptance: **decide** — either (a) declare "minimal markdown" as a feature and document it in the UI/README, or (b) adopt a vetted library (marked / markdown-it) behind a render function so the rest of the app is unaffected. Prefer (b) only if the app grows; otherwise document (a).
+  - Decision: (a) Document minimal markdown as a feature. Updated README.md to clarify that the app intentionally supports a lightweight markdown subset with zero dependencies. Features like tables, nested lists, task lists, images, strikethrough, and autolinks are explicitly noted as not supported.
 
 - [x] **P2-15 — No README / LICENSE / .gitignore**
   - Acceptance: add `README.md` (features, shortcuts, storage model, import/export format, dev/run instructions — "open index.html" or a static server), `LICENSE` (confirm owner's preferred license — ask if unclear), `.gitignore` (node_modules, OS files).
@@ -135,13 +136,14 @@ session, read this file first for full context.
   - Location: `index.html` (roles/labels) + `app.js` (keyboard handlers) + `style.css` (focus-visible styles).
   - Done: Added ARIA roles, tabindex, keyboard handlers for tags/notes/filter chips, aria-pressed for view buttons, aria-live for save indicator, and focus-visible styles.
 
-- [ ] **P2-19 — `.editor-pane` visibility uses `hidden` on a flex child**
+- [x] **P2-19 — `.editor-pane` visibility uses `hidden` on a flex child**
   - Note: the `[hidden] { display: none !important }` global rule handles this correctly; only one of empty-state/editor-pane is visible at a time via `hidden`. **No code change needed** — keep this checklist item as a verification note. Mark done after confirming in a quick smoke test.
+  - Done: Verified that the `[hidden]` CSS rule correctly handles visibility toggling for editor-pane and empty-state elements.
 
 ### Quick wins (bundle into one small PR if convenient)
 
-- [ ] **Q-escape**: (Already investigated under P0-1 — no change required unless pursuing defense-in-depth.)
-- [ ] **Q-sidebar-render**: Done (P0-4).
+- [x] **Q-escape**: (Already investigated under P0-1 — no change required unless pursuing defense-in-depth.)
+- [x] **Q-sidebar-render**: Done (P0-4).
 - [x] **Q-beforeunload**: P0-6.
 - [x] **Q-quota-feedback**: P0-5.
 - [x] **Q-uuid**: P0-18 (`crypto.randomUUID()`).
@@ -169,5 +171,5 @@ session, read this file first for full context.
 - Checkbox in this file updated (`- [x]` done / `- [-]` decided against) in the same commit.
 
 ## Open questions (resolve before starting the relevant item)
-- **P2-14**: keep minimal markdown or adopt a library? (Decision blocks that item only.)
+- **P2-14**: keep minimal markdown or adopt a library? Decided: (a) Document as feature.
 - **P2-15**: which license? Resolved - MIT license as specified in package.json.

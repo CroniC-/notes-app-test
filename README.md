@@ -4,7 +4,7 @@ A lightweight, client-side markdown notes application built with vanilla JavaScr
 
 ## Features
 
-- **Markdown Support**: Write notes in markdown with live preview
+- **Markdown Support**: Write notes in a lightweight, intentional subset of markdown with live preview
   - Headings (`#`, `##`, `###`, `####`)
   - Bold (`**bold**`), Italic (`*italic*`)
   - Inline code (`` `code` ``)
@@ -14,6 +14,7 @@ A lightweight, client-side markdown notes application built with vanilla JavaScr
   - Unordered lists (`- item` or `* item`)
   - Ordered lists (`1. item`)
   - Horizontal rules (`---` or `***`)
+  - *Note: This is a minimal markdown implementation by design. Features like tables, nested lists, task lists, images, strikethrough, and autolinks are intentionally not supported to keep the app lightweight with zero dependencies.*
 
 - **Organization**
   - Folders: Categorize notes by folder
