@@ -189,6 +189,17 @@ function loadNotes() {
   }
 }
 
+function isTimestamp(v) {
+  if (typeof v === 'number') return Number.isFinite(v) && v > 0;
+  if (typeof v === 'string') {
+    const t = v.trim();
+    if (!t) return false;
+    const num = Number(t);
+    return Number.isFinite(num) && num > 0;
+  }
+  return false;
+}
+
 function normalizeNote(n) {
   return {
     id: n.id,
@@ -196,7 +207,7 @@ function normalizeNote(n) {
     body: typeof n.body === 'string' ? n.body : '',
     folder: typeof n.folder === 'string' ? n.folder : '',
     tags: Array.isArray(n.tags) ? n.tags.filter((t) => typeof t === 'string') : [],
-    updatedAt: Number(n.updatedAt) || Date.now(),
+    updatedAt: isTimestamp(n.updatedAt) ? Number(n.updatedAt) : Date.now(),
   };
 }
 

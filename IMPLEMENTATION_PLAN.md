@@ -68,11 +68,11 @@ session, read this file first for full context.
   - Acceptance: add `window.addEventListener('beforeunload', flushSave)` where `flushSave` clears `saveTimer` and calls `persist()` immediately if a save is pending.
   - Note: keep `scheduleSave` setting `n.updatedAt` synchronously (it already does) so even an unflushed edit is at most a write-away.
 
-- [ ] **P0-9 — Import treats `NaN`/invalid `updatedAt` as "now"**
-  - Location: `app.js` `normalizeNote()` (~line 185): `updatedAt: Number(n.updatedAt) || Date.now()`.
-  - Problem: `Number(undefined)` → `NaN` → falls back to `Date.now()`, which can reorder note history incorrectly on import.
-  - Acceptance: use `Number.isFinite(Number(n.updatedAt)) ? Number(n.updatedAt) : Date.now()` (or drop the note). Apply the same in `loadNotes`.
-  - Tests: import a note with `updatedAt: null` / `"abc"` and assert it does not clobber ordering.
+- [x] **P0-9 — Import treats `NaN`/invalid `updatedAt` as "now"**
+  - Location: `app.js` `normalizeNote()` (+ new `isTimestamp()` helper). `loadNotes` already routes through `normalizeNote`, so both load and import are covered.
+  - Problem: `Number(undefined)` → `NaN` → fell back to `Date.now()`, which could reorder note history on import. Also `Number(null)`/`Number("")` → `0` would set `updatedAt` to `0`.
+  - Done: extracted `isTimestamp(v)` — accepts only finite numbers (and numeric strings) **strictly greater than 0**, after trimming strings. `null`, `undefined`, `""`, whitespace, `0`, `"0"`, `NaN`, `±Infinity`, negatives, objects, and booleans all fall back to `Date.now()`. The `> 0` rule preserves the old `||` falsy-0 behavior (a real `updatedAt` is always a large ms timestamp).
+  - Tests: `test/normalizeNote.test.js` (19 cases) — valid number/string/whitespace-string preserved; all invalid inputs fall back to a pinned `Date.now()` (not `0`); result `updatedAt` is always a finite number; import ordering stays sane. End-to-end via a DOM shim confirms `loadNotes` keeps valid timestamps and repairs invalid ones.
 
 - [x] **P0-18 — `uid()` collision risk under rapid creates**
   - Location: `app.js` `uid()` (~line 195).
