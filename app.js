@@ -349,6 +349,10 @@ function renderAll() {
   renderEditor();
 }
 
+function refreshTimestamps() {
+  renderNoteList();
+}
+
 function flashSaved() {
   els.saveIndicator.textContent = 'Saved';
   els.saveIndicator.classList.remove('error');
@@ -569,12 +573,21 @@ els.themeToggle.addEventListener('click', () => {
 });
 
 window.addEventListener('beforeunload', flushSave);
+clearInterval(timestampInterval);
 
 // ---------- init ----------
 
 applyTheme(currentTheme());
 activeId = visibleNotes()[0] ? visibleNotes()[0].id : null;
 renderAll();
+
+// Refresh relative timestamps every 60 seconds
+const timestampInterval = setInterval(refreshTimestamps, 60000);
+
+// Also refresh when the page regains visibility
+window.addEventListener('visibilitychange', () => {
+  if (!document.hidden) refreshTimestamps();
+});
 
 // ---------- keyboard shortcuts ----------
 

@@ -99,7 +99,7 @@ session, read this file first for full context.
   - Acceptance: add `Ctrl/Cmd+N` (new note), `Ctrl/Cmd+S` (flush save, prevent default), Arrow Up/Down to move between note-list items, Enter to select. Avoid hijacking browser shortcuts that conflict.
   - Location: event wiring section of `app.js`; add `tabindex`/`role` to `.note-item` in `index.html`/`style.css`.
 
-- [ ] **P1-17 — `timeAgo` becomes stale while app stays open**
+- [x] **P1-17 — `timeAgo` becomes stale while app stays open**
   - Location: `app.js` `timeAgo()` + rendering.
   - Acceptance: refresh note-list timestamps on a 60s interval and on `visibilitychange`/focus by calling `renderNoteList()` (cheap, list-only).
   - Caution: do not call full `renderSidebar()` (would rebuild chrome unnecessarily).
