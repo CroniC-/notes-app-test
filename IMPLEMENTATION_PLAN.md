@@ -95,7 +95,7 @@ session, read this file first for full context.
   - Acceptance: when filtered result is empty due to active filters, show active filter chips and a "Clear filters" action; keep "No notes match." only for empty search.
   - Tests: filter to zero results → assert "Clear filters" control present; clicking it restores list.
 
-- [ ] **P1-10 — No keyboard navigation or shortcuts**
+- [x] **P1-10 — No keyboard navigation or shortcuts**
   - Acceptance: add `Ctrl/Cmd+N` (new note), `Ctrl/Cmd+S` (flush save, prevent default), Arrow Up/Down to move between note-list items, Enter to select. Avoid hijacking browser shortcuts that conflict.
   - Location: event wiring section of `app.js`; add `tabindex`/`role` to `.note-item` in `index.html`/`style.css`.
 
