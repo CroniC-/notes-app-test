@@ -106,10 +106,11 @@ session, read this file first for full context.
 
 ### P2 — Architecture & Maintainability
 
-- [ ] **P2-11 — Inline HTML string concatenation**
+- [x] **P2-11 — Inline HTML string concatenation**
   - Location: `renderSidebar`/`renderNoteList`/tag cloud.
   - Acceptance: introduce a tiny `el(tag, props, children)` helper using `document.createElement`, OR `<template>` elements, for the sidebar/list/tag cloud. Keep `renderMarkdown` output as HTML strings (it's parsed into a dedicated `.markdown` container).
   - Scope: refactor only; no behavior change. Add snapshot/string-equivalence tests before/after.
+  - Done: Added `el(tag, props, children)` helper function. Refactored `renderSidebarChrome()` and `renderNoteList()` to use DOM element creation instead of innerHTML string concatenation. Preserved P2-16 accessibility attributes (role, tabindex). Added test file `test/el.test.js` with 13 passing tests.
 
 - [ ] **P2-12 — Global mutable state + free functions**
   - Location: module-level `let notes`, `activeId`, `view`, etc.
