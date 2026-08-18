@@ -216,12 +216,72 @@ const els = {
   preview: $('#preview'),
 };
 
+
+// === store ===
+
+// Simple reactive store for managing application state
+// Provides get, set, and subscribe functionality
+// Usage:
+//   store.set('key', value)
+//   store.get('key')
+//   store.subscribe('key', callback)
+const store = (() => {
+  const state = {};
+  const subscribers = {};
+
+  return {
+    // Get current value for a key
+    get(key) {
+      return state[key];
+    },
+
+    // Set value for a key and notify subscribers
+    set(key, value) {
+      const oldValue = state[key];
+      state[key] = value;
+      const subs = subscribers[key];
+      if (subs && oldValue !== value) {
+        for (const sub of subs) {
+          sub(value, oldValue);
+        }
+      }
+    },
+
+    // Subscribe to changes for a key
+    subscribe(key, callback) {
+      if (!subscribers[key]) {
+        subscribers[key] = new Set();
+      }
+      subscribers[key].add(callback);
+      // Return unsubscribe function
+      return () => subscribers[key].delete(callback);
+    },
+
+    // Get current state (for debugging/testing)
+    getState() {
+      return { ...state };
+    }
+  };
+})();
+
 let notes = loadNotes();
 let activeId = null;
 let view = 'write';
 let searchQuery = '';
 let folderFilter = '';
 let selectedTags = new Set();
+
+// Initialize store with current state
+store.set('notes', notes);
+store.set('activeId', activeId);
+store.set('view', view);
+store.set('searchQuery', searchQuery);
+store.set('folderFilter', folderFilter);
+store.set('selectedTags', selectedTags);
+
+// Sync global state to store when it changes
+// This allows incremental migration - code can use either globals or store
+
 let saveTimer = null;
 let indicatorTimer = null;
 

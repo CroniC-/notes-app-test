@@ -112,9 +112,10 @@ session, read this file first for full context.
   - Scope: refactor only; no behavior change. Add snapshot/string-equivalence tests before/after.
   - Done: Added `el(tag, props, children)` helper function. Refactored `renderSidebarChrome()` and `renderNoteList()` to use DOM element creation instead of innerHTML string concatenation. Preserved P2-16 accessibility attributes (role, tabindex). Added test file `test/el.test.js` with 13 passing tests.
 
-- [ ] **P2-12 — Global mutable state + free functions**
+- [x] **P2-12 — Global mutable state + free functions**
   - Location: module-level `let notes`, `activeId`, `view`, etc.
   - Acceptance: introduce a small `store` object (`{ get, set, subscribe }`) so re-renders are predictable and `storage` events (multi-tab sync) become feasible later. Migrate incrementally; keep public behavior identical.
+  - Done: Added store implementation with get/set/subscribe API. Initialized store with global state values. Added test suite with 9 tests covering all store functionality. Global variables remain for backward compatibility, allowing incremental migration.
 
 - [x] **P2-13 — No tests**
   - Acceptance: add `test/app.test.js` runnable with `node --test` (no deps). Cover pure helpers first: `renderMarkdown`, `parseTagsInput`, `normalizeNote`, `visibleNotes` (latter needs a state shim). Add a `package.json` with a `"test"` script and a `.gitignore`.
@@ -156,7 +157,7 @@ session, read this file first for full context.
 4. **P0-2** (paragraph parser) — after tests exist.
 5. **P1-7 / P1-8 / P1-10 / P1-17** — UX pass.
 6. **P2-15** (README/LICENSE/.gitignore).
-7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green. - Done.
+7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green. - Done (P2-11, P2-12, P2-16 all complete).
 6. **P2-15** (README/LICENSE/.gitignore) - Done.
 7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green.
 
