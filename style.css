@@ -162,6 +162,38 @@ body {
   padding: 8px 4px;
 }
 
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.no-results-msg {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.empty-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.empty-filter-chip {
+  font-size: 11px;
+  line-height: 1.6;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.clear-filters {
+  align-self: flex-start;
+}
+
 .sidebar-footer {
   display: flex;
   gap: 8px;
