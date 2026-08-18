@@ -136,13 +136,14 @@ session, read this file first for full context.
   - Location: `index.html` (roles/labels) + `app.js` (keyboard handlers) + `style.css` (focus-visible styles).
   - Done: Added ARIA roles, tabindex, keyboard handlers for tags/notes/filter chips, aria-pressed for view buttons, aria-live for save indicator, and focus-visible styles.
 
-- [ ] **P2-19 — `.editor-pane` visibility uses `hidden` on a flex child**
+- [x] **P2-19 — `.editor-pane` visibility uses `hidden` on a flex child**
   - Note: the `[hidden] { display: none !important }` global rule handles this correctly; only one of empty-state/editor-pane is visible at a time via `hidden`. **No code change needed** — keep this checklist item as a verification note. Mark done after confirming in a quick smoke test.
+  - Done: Verified that the `[hidden]` CSS rule correctly handles visibility toggling for editor-pane and empty-state elements.
 
 ### Quick wins (bundle into one small PR if convenient)
 
-- [ ] **Q-escape**: (Already investigated under P0-1 — no change required unless pursuing defense-in-depth.)
-- [ ] **Q-sidebar-render**: Done (P0-4).
+- [x] **Q-escape**: (Already investigated under P0-1 — no change required unless pursuing defense-in-depth.)
+- [x] **Q-sidebar-render**: Done (P0-4).
 - [x] **Q-beforeunload**: P0-6.
 - [x] **Q-quota-feedback**: P0-5.
 - [x] **Q-uuid**: P0-18 (`crypto.randomUUID()`).
