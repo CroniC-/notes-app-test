@@ -17,8 +17,9 @@ function isBlockStart(line) {
   if (/^#{1,4}\s/.test(t)) return true;
   if (/^```/.test(t)) return true;
   if (/^\s*>/.test(line)) return true;
-  if (/^\s*[-*]\s+/.test(line)) return true;
-  if (/^\s*\d+\.\s+/.test(line)) return true;
+  // List markers only start a block when at column 0 (no leading indent)
+  if (/^[-*]\s+/.test(line)) return true;
+  if (/^\d+\.\s+/.test(line)) return true;
   if (/^(-{3,}|\*{3,})$/.test(t)) return true;
   return false;
 }
@@ -88,20 +89,20 @@ function renderMarkdown(src) {
       continue;
     }
 
-    if (/^\s*[-*]\s+/.test(line)) {
+    if (/^[-*]\s+/.test(line)) {
       const buf = [];
-      while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
-        buf.push(lines[i].replace(/^\s*[-*]\s+/, ''));
+      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
+        buf.push(lines[i].replace(/^[-*]\s+/, ''));
         i++;
       }
       out.push('<ul>' + buf.map((li) => '<li>' + inline(li) + '</li>').join('') + '</ul>');
       continue;
     }
 
-    if (/^\s*\d+\.\s+/.test(line)) {
+    if (/^\d+\.\s+/.test(line)) {
       const buf = [];
-      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
-        buf.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
+        buf.push(lines[i].replace(/^\d+\.\s+/, ''));
         i++;
       }
       out.push('<ol>' + buf.map((li) => '<li>' + inline(li) + '</li>').join('') + '</ol>');
