@@ -281,6 +281,11 @@ body {
   opacity: 1;
 }
 
+.save-indicator.error {
+  color: var(--danger);
+  font-weight: 600;
+}
+
 #note-body {
   flex: 1;
   resize: none;

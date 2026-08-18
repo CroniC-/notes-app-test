@@ -200,15 +200,21 @@ function normalizeNote(n) {
 }
 
 function persist() {
+  let ok = true;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-  } catch {
-    return;
+  } catch (e) {
+    ok = false;
   }
-  flashSaved();
+  if (ok) flashSaved();
+  else flashSaveError();
+  return ok;
 }
 
 function uid() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
   return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
 }
 
@@ -313,9 +319,17 @@ function renderAll() {
 
 function flashSaved() {
   els.saveIndicator.textContent = 'Saved';
+  els.saveIndicator.classList.remove('error');
   els.saveIndicator.classList.add('show');
   clearTimeout(indicatorTimer);
   indicatorTimer = setTimeout(() => els.saveIndicator.classList.remove('show'), 1500);
+}
+
+function flashSaveError() {
+  els.saveIndicator.textContent = 'Save failed — storage full';
+  els.saveIndicator.classList.add('error', 'show');
+  clearTimeout(indicatorTimer);
+  indicatorTimer = setTimeout(() => els.saveIndicator.classList.remove('show'), 4000);
 }
 
 // ---------- actions ----------
@@ -365,9 +379,18 @@ function scheduleSave() {
   n.updatedAt = Date.now();
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
+    saveTimer = null;
     persist();
     renderSidebar();
   }, 400);
+}
+
+function flushSave() {
+  if (saveTimer === null) return;
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  persist();
+  renderSidebar();
 }
 
 function exportNotes() {
@@ -491,6 +514,8 @@ els.themeToggle.addEventListener('click', () => {
   }
   applyTheme(next);
 });
+
+window.addEventListener('beforeunload', flushSave);
 
 // ---------- init ----------
 
