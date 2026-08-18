@@ -1,4 +1,53 @@
 'use strict';
+// DOM element creation helper - creates elements with props and children
+// Usage: el('div', { class: 'foo', 'data-id': '123' }, 'text content')
+//        el('div', {}, [el('span', {}, 'child1'), el('span', {}, 'child2')])
+function el(tag, props, children) {
+  const element = document.createElement(tag);
+  
+  // Set properties/attributes
+  if (props) {
+    for (const [key, value] of Object.entries(props)) {
+      if (key === 'className' || key === 'class') {
+        element.className = value;
+      } else if (key === 'textContent') {
+        element.textContent = value;
+      } else if (key === 'innerHTML') {
+        element.innerHTML = value;
+      } else if (key.startsWith('on') && typeof value === 'function') {
+        element[key] = value;
+      } else if (value === true) {
+        element.setAttribute(key, '');
+      } else if (value === false || value === null || value === undefined) {
+        // Skip boolean false, null, undefined
+      } else {
+        element.setAttribute(key, String(value));
+      }
+    }
+  }
+  
+  // Append children
+  if (children !== undefined && children !== null) {
+    if (Array.isArray(children)) {
+      for (const child of children) {
+        if (child !== null && child !== undefined) {
+          if (typeof child === 'string') {
+            element.appendChild(document.createTextNode(child));
+          } else if (child instanceof Node) {
+            element.appendChild(child);
+          }
+        }
+      }
+    } else if (typeof children === 'string') {
+      element.textContent = children;
+    } else if (children instanceof Node) {
+      element.appendChild(children);
+    }
+  }
+  
+  return element;
+}
+
 
 // === pure helpers ===
 
@@ -258,56 +307,54 @@ function renderSidebarChrome() {
   if (folderFilter && !folders.includes(folderFilter)) folderFilter = '';
   selectedTags = new Set([...selectedTags].filter((t) => notes.some((n) => n.tags.includes(t))));
 
-  els.folderFilter.innerHTML =
-    '<option value="">All folders</option>' +
-    folders
-      .map((f) => '<option value="' + escapeHtml(f) + '"' + (f === folderFilter ? ' selected' : '') + '>' + escapeHtml(f) + '</option>')
-      .join('');
+  els.folderFilter.textContent = "";
+  els.folderFilter.appendChild(el("option", { value: "" }, "All folders"));
+  for (const f of folders) {
+    els.folderFilter.appendChild(el("option", { value: f, selected: f === folderFilter }, escapeHtml(f)));
+  }
 
   const tags = [...new Set(notes.flatMap((n) => n.tags))].sort();
-  els.tagCloud.innerHTML = tags.length
-    ? tags
-        .map((t) => '<span class="tag' + (selectedTags.has(t) ? ' selected' : '') + '" data-tag="' + escapeHtml(t) + '" role="button" tabindex="0">' + escapeHtml(t) + '</span>')
-        .join('')
-    : '';
+  els.tagCloud.textContent = "";
+  if (tags.length) {
+    for (const t of tags) {
+      els.tagCloud.appendChild(el("span", { class: "tag" + (selectedTags.has(t) ? " selected" : ""), "data-tag": t, role: "button", tabindex: "0" }, escapeHtml(t)));
+    }
+  }
 }
 
 function renderNoteList() {
   const list = visibleNotes();
   if (list.length) {
-    els.noteList.innerHTML = list
-      .map(
-        (n) =>
-          '<li class="note-item' + (n.id === activeId ? ' active' : '') + '" data-id="' + escapeHtml(n.id) + '" role="option" tabindex="' + (n.id === activeId ? '0' : '-1') + '">' +
-          '<div class="note-title">' + escapeHtml(n.title || 'Untitled') + '</div>' +
-          '<div class="note-sub">' +
-          (n.folder ? '<span>' + escapeHtml(n.folder) + '</span>' : '') +
-          '<span>' + timeAgo(n.updatedAt) + '</span>' +
-          '</div>' +
-          '</li>'
-      )
-      .join('');
+    els.noteList.textContent = "";
+    for (const n of list) {
+      const li = el("li", { class: "note-item" + (n.id === activeId ? " active" : ""), "data-id": n.id, role: "option", tabindex: n.id === activeId ? "0" : "-1" }, [
+        el("div", { class: "note-title" }, escapeHtml(n.title || "Untitled")),
+        el("div", { class: "note-sub" }, [
+          n.folder ? el("span", {}, escapeHtml(n.folder)) : "",
+          el("span", {}, timeAgo(n.updatedAt))
+        ])
+      ]);
+      els.noteList.appendChild(li);
+    }
     return;
   }
-
   // No notes match. Distinguish "nothing in the store" from "filters excluded
   // everything": only the latter shows active filters + a clear-filters action.
   if (!notes.length) {
-    els.noteList.innerHTML = '<li class="no-notes">No notes yet — create one with + New.</li>';
+    els.noteList.textContent = "";
+    els.noteList.appendChild(el("li", { class: "no-notes" }, "No notes yet — create one with + New."));
     return;
   }
-
   const chips = [];
-  if (folderFilter) chips.push('<span class="empty-filter-chip" data-filter="folder" role="button" tabindex="0">Folder: ' + escapeHtml(folderFilter) + '</span>');
-  for (const t of selectedTags) chips.push('<span class="empty-filter-chip" data-filter="tag" data-tag="' + escapeHtml(t) + '" role="button" tabindex="0">Tag: ' + escapeHtml(t) + '</span>');
-  if (searchQuery.trim()) chips.push('<span class="empty-filter-chip" data-filter="search" role="button" tabindex="0">Search: ' + escapeHtml(searchQuery.trim()) + '</span>');
-
-  els.noteList.innerHTML =
-    '<li class="no-notes no-results">' +
-    '<div class="no-results-msg">No notes match the current filters.</div>' +
-    (chips.length ? '<div class="empty-filter-chips">' + chips.join('') + '</div>' : '') +
-    '<button class="btn btn-ghost clear-filters" type="button" role="button">Clear filters</button>' +
-    '</li>';
+  if (folderFilter) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "folder", role: "button", tabindex: "0" }, "Folder: " + escapeHtml(folderFilter)));
+  for (const t of selectedTags) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "tag", "data-tag": t, role: "button", tabindex: "0" }, "Tag: " + escapeHtml(t)));
+  if (searchQuery.trim()) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "search", role: "button", tabindex: "0" }, "Search: " + escapeHtml(searchQuery.trim())));
+  els.noteList.textContent = "";
+  els.noteList.appendChild(el("li", { class: "no-notes no-results" }, [
+    el("div", { class: "no-results-msg" }, "No notes match the current filters."),
+    chips.length ? el("div", { class: "empty-filter-chips" }, chips) : "",
+    el("button", { class: "btn btn-ghost clear-filters", type: "button", role: "button" }, "Clear filters")
+  ]));
 }
 
 function renderSidebar() {
