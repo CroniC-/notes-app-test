@@ -82,12 +82,13 @@ session, read this file first for full context.
 
 ### P1 — Robustness & UX
 
-- [ ] **P1-7 — Active note fallback after delete may pick unrelated note**
+- [x] **P1-7 — Active note fallback after delete may pick unrelated note**
   - Location: `app.js` `deleteActive()`.
   - Problem: falls back to `visibleNotes()[0]`, which respects current filters; deleting a note outside the current filter can select an unexpected note.
   - Acceptance: after delete, prefer the nearest sibling in sort order; if none, clear `activeId` (show empty state).
   - Tests: delete active note with a folder filter active; assert selection is a sibling or empty.
 
+  - Fix: Changed `deleteActive()` to find index in sorted notes list before deleting, then select nearest sibling (previous or next in sort order) instead of using `visibleNotes()[0]`. Added `test/deleteActive.test.js` with 7 passing tests.
 - [ ] **P1-8 — Stale filters yield empty list with no explanation**
   - Location: `app.js` `renderSidebar()` / `renderNoteList()`.
   - Problem: when `selectedTags`/`folderFilter` match nothing, the list shows "No notes match." with no way to see/clear the active filters.
