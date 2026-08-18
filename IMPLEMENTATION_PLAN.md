@@ -5,6 +5,7 @@
 > **Status**: Active Development
 > **Last Updated**: Tue Aug 18 10:55:40 PM UTC 2026
 > **Current Version**: 1.0.0
+> **Task Reference Format**: `P#.T#` (Phase.Number)
 
 ---
 
@@ -19,6 +20,7 @@
 7. [Testing Strategy](#-testing-strategy)
 8. [Resources & References](#-resources--references)
 9. [Session Context](#-session-context)
+10. [Task Index](#-task-index)
 
 ---
 
@@ -35,78 +37,78 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - `test/` - Test suite (82 tests, 100% passing)
 
 ### Key Features (Current)
-- [x] Markdown support (headings, bold, italic, code, lists, links, blockquotes, horizontal rules)
-- [x] LocalStorage persistence with auto-save (400ms debounce)
-- [x] Folders and tags for organization
-- [x] Full-text search across all notes
-- [x] Light and dark theme toggle
-- [x] Responsive design (mobile and desktop)
-- [x] Import/export as JSON
-- [x] Keyboard shortcuts (Ctrl+N, Ctrl+S, Arrow keys, Enter, Escape)
-- [x] Relative timestamps with auto-refresh
-- [x] Accessibility features (ARIA labels, keyboard navigation)
+- [x] **P0.T1** - Markdown support (headings, bold, italic, code, lists, links, blockquotes, horizontal rules)
+- [x] **P0.T2** - LocalStorage persistence with auto-save (400ms debounce)
+- [x] **P0.T3** - Folders and tags for organization
+- [x] **P0.T4** - Full-text search across all notes
+- [x] **P0.T5** - Light and dark theme toggle
+- [x] **P0.T6** - Responsive design (mobile and desktop)
+- [x] **P0.T7** - Import/export as JSON
+- [x] **P0.T8** - Keyboard shortcuts (Ctrl+N, Ctrl+S, Arrow keys, Enter, Escape)
+- [x] **P0.T9** - Relative timestamps with auto-refresh
+- [x] **P0.T10** - Accessibility features (ARIA labels, keyboard navigation)
 
 ---
 
 ## ✅ Current State
 
 ### What's Working
-- [x] All 82 tests passing
-- [x] Clean, well-organized codebase
-- [x] Zero dependencies
-- [x] Good documentation (README.md)
-- [x] Comprehensive test coverage
-- [x] Responsive design
-- [x] Accessibility best practices
-- [x] MIT License
+- [x] **P0.T11** - All 82 tests passing
+- [x] **P0.T12** - Clean, well-organized codebase
+- [x] **P0.T13** - Zero dependencies
+- [x] **P0.T14** - Good documentation (README.md)
+- [x] **P0.T15** - Comprehensive test coverage
+- [x] **P0.T16** - Responsive design
+- [x] **P0.T17** - Accessibility best practices
+- [x] **P0.T18** - MIT License
 
 ### Code Quality
-- [x] ES6+ JavaScript
-- [x] Modular helper functions
-- [x] Store pattern for state management
-- [x] Pure functions where possible
-- [x] HTML escaping for security
-- [x] Input validation
-- [x] Error handling
+- [x] **P0.T19** - ES6+ JavaScript
+- [x] **P0.T20** - Modular helper functions
+- [x] **P0.T21** - Store pattern for state management
+- [x] **P0.T22** - Pure functions where possible
+- [x] **P0.T23** - HTML escaping for security
+- [x] **P0.T24** - Input validation
+- [x] **P0.T25** - Error handling
 
 ### Test Coverage
-- [x] `app.test.js` - Helper functions and utilities
-- [x] `deleteActive.test.js` - Note deletion logic
-- [x] `el.test.js` - DOM element creation
-- [x] `markdown.test.js` - Markdown rendering
-- [x] `normalizeNote.test.js` - Note normalization
-- [x] `store.test.js` - State management store
+- [x] **P0.T26** - `app.test.js` - Helper functions and utilities
+- [x] **P0.T27** - `deleteActive.test.js` - Note deletion logic
+- [x] **P0.T28** - `el.test.js` - DOM element creation
+- [x] **P0.T29** - `markdown.test.js` - Markdown rendering
+- [x] **P0.T30** - `normalizeNote.test.js` - Note normalization
+- [x] **P0.T31** - `store.test.js` - State management store
 
 ---
 
 ## 🎯 Goals & Vision
 
 ### Short-Term Goals (1-2 months)
-- [ ] Enhance user experience with rich text editing
-- [ ] Improve mobile experience
-- [ ] Add commonly requested features (tables, task lists, note linking)
-- [ ] Polish visual design with icons and animations
-- [ ] Maintain 100% test coverage
+- [ ] **G1.T1** - Enhance user experience with rich text editing
+- [ ] **G1.T2** - Improve mobile experience
+- [ ] **G1.T3** - Add commonly requested features (tables, task lists, note linking)
+- [ ] **G1.T4** - Polish visual design with icons and animations
+- [ ] **G1.T5** - Maintain 100% test coverage
 
 ### Medium-Term Goals (2-4 months)
-- [ ] Add power user features (plugins, backlinks, graph view)
-- [ ] Implement sync capabilities (File System Access, GitHub)
-- [ ] Build PWA features (service worker, install prompt)
-- [ ] Grow community (documentation, contributions)
+- [ ] **G2.T1** - Add power user features (plugins, backlinks, graph view)
+- [ ] **G2.T2** - Implement sync capabilities (File System Access, GitHub)
+- [ ] **G2.T3** - Build PWA features (service worker, install prompt)
+- [ ] **G2.T4** - Grow community (documentation, contributions)
 
 ### Long-Term Goals (4-8 months)
-- [ ] Desktop and mobile apps (Electron, Tauri, React Native)
-- [ ] Browser extension (Chrome, Firefox)
-- [ ] Plugin ecosystem
-- [ ] End-to-end encryption
-- [ ] Multi-device sync
+- [ ] **G3.T1** - Desktop and mobile apps (Electron, Tauri, React Native)
+- [ ] **G3.T2** - Browser extension (Chrome, Firefox)
+- [ ] **G3.T3** - Plugin ecosystem
+- [ ] **G3.T4** - End-to-end encryption
+- [ ] **G3.T5** - Multi-device sync
 
 ### Success Metrics
-- [ ] Test coverage: 90%+
-- [ ] GitHub stars: 100+
-- [ ] Active contributors: 5+
-- [ ] Performance: < 100ms for all operations
-- [ ] Accessibility score: 100/100
+- [ ] **G4.T1** - Test coverage: 90%+
+- [ ] **G4.T2** - GitHub stars: 100+
+- [ ] **G4.T3** - Active contributors: 5+
+- [ ] **G4.T4** - Performance: < 100ms for all operations
+- [ ] **G4.T5** - Accessibility score: 100/100
 
 ---
 
@@ -118,52 +120,53 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Goal**: Immediate UX improvements with minimal code changes
 **Estimated Time**: 1-2 weeks
 **Status**: ⏳ Not Started
+**Phase ID**: P1
 
-#### User Experience
-- [ ] Add rich text editor toolbar with formatting buttons
-  - [ ] Bold, Italic, Strikethrough
-  - [ ] Headers (H1-H4)
-  - [ ] Lists (ordered, unordered)
-  - [ ] Links
-  - [ ] Code blocks
-  - [ ] Blockquotes
-  - [ ] Horizontal rule
-- [ ] Implement note drag & drop reordering
-- [ ] Add word/character count display
-- [ ] Auto-focus title input when creating new note
-- [ ] Add `Ctrl/Cmd + D` shortcut to duplicate current note
-- [ ] Add click-to-filter for tags in metadata
-- [ ] Show full timestamp on hover of relative time
-- [ ] Add smooth transitions and animations
-- [ ] Improve empty states with icons and illustrations
+#### User Experience (P1.UX)
+- [ ] **P1.UX.1** - Add rich text editor toolbar with formatting buttons
+  - [ ] **P1.UX.1.1** - Bold, Italic, Strikethrough
+  - [ ] **P1.UX.1.2** - Headers (H1-H4)
+  - [ ] **P1.UX.1.3** - Lists (ordered, unordered)
+  - [ ] **P1.UX.1.4** - Links
+  - [ ] **P1.UX.1.5** - Code blocks
+  - [ ] **P1.UX.1.6** - Blockquotes
+  - [ ] **P1.UX.1.7** - Horizontal rule
+- [ ] **P1.UX.2** - Implement note drag & drop reordering
+- [ ] **P1.UX.3** - Add word/character count display
+- [ ] **P1.UX.4** - Auto-focus title input when creating new note
+- [ ] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
+- [ ] **P1.UX.6** - Add click-to-filter for tags in metadata
+- [ ] **P1.UX.7** - Show full timestamp on hover of relative time
+- [ ] **P1.UX.8** - Add smooth transitions and animations
+- [ ] **P1.UX.9** - Improve empty states with icons and illustrations
 
-#### Mobile Experience
-- [ ] Add swipe gestures (swipe to delete)
-- [ ] Create mobile-specific toolbar (fixed bottom)
-- [ ] Increase touch target sizes
-- [ ] Add pull-to-refresh for note list
-- [ ] Improve mobile keyboard handling
-- [ ] Add mobile-specific CSS
+#### Mobile Experience (P1.MO)
+- [ ] **P1.MO.1** - Add swipe gestures (swipe to delete)
+- [ ] **P1.MO.2** - Create mobile-specific toolbar (fixed bottom)
+- [ ] **P1.MO.3** - Increase touch target sizes
+- [ ] **P1.MO.4** - Add pull-to-refresh for note list
+- [ ] **P1.MO.5** - Improve mobile keyboard handling
+- [ ] **P1.MO.6** - Add mobile-specific CSS
 
-#### Performance
-- [ ] Debounce search input (currently fires on every keystroke)
-- [ ] Add loading indicators for async operations
-- [ ] Optimize markdown rendering
-- [ ] Add performance profiling
+#### Performance (P1.PF)
+- [ ] **P1.PF.1** - Debounce search input (currently fires on every keystroke)
+- [ ] **P1.PF.2** - Add loading indicators for async operations
+- [ ] **P1.PF.3** - Optimize markdown rendering
+- [ ] **P1.PF.4** - Add performance profiling
 
-#### Accessibility
-- [ ] Add skip-to-main-content link
-- [ ] Improve focus indicators
-- [ ] Add reduced motion support (`prefers-reduced-motion`)
-- [ ] Add high contrast mode support
-- [ ] Test with screen readers (NVDA, VoiceOver)
-- [ ] Add keyboard shortcut customization
+#### Accessibility (P1.A1)
+- [ ] **P1.A1.1** - Add skip-to-main-content link
+- [ ] **P1.A1.2** - Improve focus indicators
+- [ ] **P1.A1.3** - Add reduced motion support (`prefers-reduced-motion`)
+- [ ] **P1.A1.4** - Add high contrast mode support
+- [ ] **P1.A1.5** - Test with screen readers (NVDA, VoiceOver)
+- [ ] **P1.A1.6** - Add keyboard shortcut customization
 
-#### Code Quality
-- [ ] Add JSDoc comments to all functions
-- [ ] Improve error messages
-- [ ] Add more defensive programming
-- [ ] Refactor duplicate code
+#### Code Quality (P1.CQ)
+- [ ] **P1.CQ.1** - Add JSDoc comments to all functions
+- [ ] **P1.CQ.2** - Improve error messages
+- [ ] **P1.CQ.3** - Add more defensive programming
+- [ ] **P1.CQ.4** - Refactor duplicate code
 
 ---
 
@@ -171,47 +174,48 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Goal**: Add commonly requested features
 **Estimated Time**: 2-4 weeks
 **Status**: ⏳ Not Started
+**Phase ID**: P2
 **Depends On**: Phase 1
 
-#### Markdown Support
-- [ ] Add strikethrough support (`~~text~~`)
-- [ ] Add tables support
-- [ ] Add task lists (`- [ ] task`)
-- [ ] Add images (`![alt](url)`)
-- [ ] Add autolinks (`https://example.com`)
-- [ ] Add footnotes
-- [ ] Add definition lists
-- [ ] Improve nested list support
+#### Markdown Support (P2.MD)
+- [ ] **P2.MD.1** - Add strikethrough support (`~~text~~`)
+- [ ] **P2.MD.2** - Add tables support
+- [ ] **P2.MD.3** - Add task lists (`- [ ] task`)
+- [ ] **P2.MD.4** - Add images (`![alt](url)`)
+- [ ] **P2.MD.5** - Add autolinks (`https://example.com`)
+- [ ] **P2.MD.6** - Add footnotes
+- [ ] **P2.MD.7** - Add definition lists
+- [ ] **P2.MD.8** - Improve nested list support
 
-#### Organization
-- [ ] Implement nested folders
-- [ ] Add smart folders (saved searches)
-- [ ] Add note linking with `[[Note Title]]` syntax
-- [ ] Add backlinks view
-- [ ] Add recent notes sidebar
-- [ ] Add pin notes feature
-- [ ] Add note templates
-- [ ] Add bulk note selection
-- [ ] Add bulk actions (delete, export, tag)
+#### Organization (P2.OR)
+- [ ] **P2.OR.1** - Implement nested folders
+- [ ] **P2.OR.2** - Add smart folders (saved searches)
+- [ ] **P2.OR.3** - Add note linking with `[[Note Title]]` syntax
+- [ ] **P2.OR.4** - Add backlinks view
+- [ ] **P2.OR.5** - Add recent notes sidebar
+- [ ] **P2.OR.6** - Add pin notes feature
+- [ ] **P2.OR.7** - Add note templates
+- [ ] **P2.OR.8** - Add bulk note selection
+- [ ] **P2.OR.9** - Add bulk actions (delete, export, tag)
 
-#### Viewing & Editing
-- [ ] Add split view (editor + preview side-by-side)
-- [ ] Add distraction-free/zen mode
-- [ ] Add full-screen mode
-- [ ] Add resizable panels
-- [ ] Add collapsible sidebar
-- [ ] Add undo/redo functionality
-- [ ] Add find in note (`Ctrl/Cmd + F`)
-- [ ] Add replace in note (`Ctrl/Cmd + H`)
+#### Viewing & Editing (P2.VE)
+- [ ] **P2.VE.1** - Add split view (editor + preview side-by-side)
+- [ ] **P2.VE.2** - Add distraction-free/zen mode
+- [ ] **P2.VE.3** - Add full-screen mode
+- [ ] **P2.VE.4** - Add resizable panels
+- [ ] **P2.VE.5** - Add collapsible sidebar
+- [ ] **P2.VE.6** - Add undo/redo functionality
+- [ ] **P2.VE.7** - Add find in note (`Ctrl/Cmd + F`)
+- [ ] **P2.VE.8** - Add replace in note (`Ctrl/Cmd + H`)
 
-#### Visual Improvements
-- [ ] Add icons to all buttons and actions
-- [ ] Add syntax highlighting for code blocks
-- [ ] Add custom theme colors
-- [ ] Add custom CSS support
-- [ ] Add multiple font options
-- [ ] Add line height adjustment
-- [ ] Add reading mode (larger text, reduced distractions)
+#### Visual Improvements (P2.VI)
+- [ ] **P2.VI.1** - Add icons to all buttons and actions
+- [ ] **P2.VI.2** - Add syntax highlighting for code blocks
+- [ ] **P2.VI.3** - Add custom theme colors
+- [ ] **P2.VI.4** - Add custom CSS support
+- [ ] **P2.VI.5** - Add multiple font options
+- [ ] **P2.VI.6** - Add line height adjustment
+- [ ] **P2.VI.7** - Add reading mode (larger text, reduced distractions)
 
 ---
 
@@ -219,45 +223,46 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Goal**: Power user features and polish
 **Estimated Time**: 4-8 weeks
 **Status**: ⏳ Not Started
+**Phase ID**: P3
 **Depends On**: Phase 2
 
-#### Sync & Storage
-- [ ] Implement File System Access API for local file sync
-- [ ] Add GitHub sync (via GitHub API)
-- [ ] Add Dropbox/Google Drive sync
-- [ ] Implement end-to-end encryption
-- [ ] Add password protection
-- [ ] Add biometric authentication (Fingerprint/Face ID)
-- [ ] Add auto-lock after inactivity
-- [ ] Add storage versioning for migrations
-- [ ] Add IndexedDB for larger datasets
-- [ ] Add automatic backups
+#### Sync & Storage (P3.SS)
+- [ ] **P3.SS.1** - Implement File System Access API for local file sync
+- [ ] **P3.SS.2** - Add GitHub sync (via GitHub API)
+- [ ] **P3.SS.3** - Add Dropbox/Google Drive sync
+- [ ] **P3.SS.4** - Implement end-to-end encryption
+- [ ] **P3.SS.5** - Add password protection
+- [ ] **P3.SS.6** - Add biometric authentication (Fingerprint/Face ID)
+- [ ] **P3.SS.7** - Add auto-lock after inactivity
+- [ ] **P3.SS.8** - Add storage versioning for migrations
+- [ ] **P3.SS.9** - Add IndexedDB for larger datasets
+- [ ] **P3.SS.10** - Add automatic backups
 
-#### Plugins & Extensions
-- [ ] Design plugin architecture
-- [ ] Create plugin API
-- [ ] Add plugin loader
-- [ ] Create example plugins
-- [ ] Add plugin marketplace/documentation
+#### Plugins & Extensions (P3.PL)
+- [ ] **P3.PL.1** - Design plugin architecture
+- [ ] **P3.PL.2** - Create plugin API
+- [ ] **P3.PL.3** - Add plugin loader
+- [ ] **P3.PL.4** - Create example plugins
+- [ ] **P3.PL.5** - Add plugin marketplace/documentation
 
-#### Advanced Features
-- [ ] Add graph view for note connections
-- [ ] Add advanced search (regex, operators)
-- [ ] Add tags autocomplete
-- [ ] Add folders autocomplete
-- [ ] Add note references/mentions
-- [ ] Add daily notes feature
-- [ ] Add calendar view
-- [ ] Add Kanban board view
-- [ ] Add mind map view
+#### Advanced Features (P3.AF)
+- [ ] **P3.AF.1** - Add graph view for note connections
+- [ ] **P3.AF.2** - Add advanced search (regex, operators)
+- [ ] **P3.AF.3** - Add tags autocomplete
+- [ ] **P3.AF.4** - Add folders autocomplete
+- [ ] **P3.AF.5** - Add note references/mentions
+- [ ] **P3.AF.6** - Add daily notes feature
+- [ ] **P3.AF.7** - Add calendar view
+- [ ] **P3.AF.8** - Add Kanban board view
+- [ ] **P3.AF.9** - Add mind map view
 
-#### PWA Features
-- [ ] Add service worker for offline support
-- [ ] Add manifest.json for PWA
-- [ ] Add install prompt
-- [ ] Add push notifications
-- [ ] Add background sync
-- [ ] Add periodic sync
+#### PWA Features (P3.PW)
+- [ ] **P3.PW.1** - Add service worker for offline support
+- [ ] **P3.PW.2** - Add manifest.json for PWA
+- [ ] **P3.PW.3** - Add install prompt
+- [ ] **P3.PW.4** - Add push notifications
+- [ ] **P3.PW.5** - Add background sync
+- [ ] **P3.PW.6** - Add periodic sync
 
 ---
 
@@ -265,45 +270,46 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Goal**: Performance, accessibility, and refinement
 **Estimated Time**: Ongoing
 **Status**: ⏳ Not Started
+**Phase ID**: P4
 **Depends On**: Phase 3
 
-#### Performance
-- [ ] Implement virtual scrolling for large note lists
-- [ ] Add memoization for markdown rendering
-- [ ] Add code splitting and lazy loading
-- [ ] Add build system (Vite/Rollup)
-- [ ] Minify assets
-- [ ] Add tree-shaking
-- [ ] Optimize storage usage
-- [ ] Add performance budgets
+#### Performance (P4.PF)
+- [ ] **P4.PF.1** - Implement virtual scrolling for large note lists
+- [ ] **P4.PF.2** - Add memoization for markdown rendering
+- [ ] **P4.PF.3** - Add code splitting and lazy loading
+- [ ] **P4.PF.4** - Add build system (Vite/Rollup)
+- [ ] **P4.PF.5** - Minify assets
+- [ ] **P4.PF.6** - Add tree-shaking
+- [ ] **P4.PF.7** - Optimize storage usage
+- [ ] **P4.PF.8** - Add performance budgets
 
-#### Testing
-- [ ] Add E2E tests with Playwright
-- [ ] Add visual regression testing (Percy/Chromatic)
-- [ ] Add accessibility testing (axe-core)
-- [ ] Add performance testing (Lighthouse CI)
-- [ ] Increase test coverage to 90%+
-- [ ] Add integration tests
-- [ ] Add stress tests
+#### Testing (P4.TE)
+- [ ] **P4.TE.1** - Add E2E tests with Playwright
+- [ ] **P4.TE.2** - Add visual regression testing (Percy/Chromatic)
+- [ ] **P4.TE.3** - Add accessibility testing (axe-core)
+- [ ] **P4.TE.4** - Add performance testing (Lighthouse CI)
+- [ ] **P4.TE.5** - Increase test coverage to 90%+
+- [ ] **P4.TE.6** - Add integration tests
+- [ ] **P4.TE.7** - Add stress tests
 
-#### Code Quality
-- [ ] Migrate to TypeScript
-- [ ] Split app.js into multiple modules
-- [ ] Add linting (ESLint)
-- [ ] Add formatting (Prettier)
-- [ ] Add commit hooks (Husky)
-- [ ] Add code review guidelines
-- [ ] Add contribution guidelines
+#### Code Quality (P4.CQ)
+- [ ] **P4.CQ.1** - Migrate to TypeScript
+- [ ] **P4.CQ.2** - Split app.js into multiple modules
+- [ ] **P4.CQ.3** - Add linting (ESLint)
+- [ ] **P4.CQ.4** - Add formatting (Prettier)
+- [ ] **P4.CQ.5** - Add commit hooks (Husky)
+- [ ] **P4.CQ.6** - Add code review guidelines
+- [ ] **P4.CQ.7** - Add contribution guidelines
 
-#### Documentation
-- [ ] Create user guide
-- [ ] Create markdown reference
-- [ ] Create keyboard shortcuts cheatsheet
-- [ ] Create troubleshooting section
-- [ ] Create API reference
-- [ ] Create architecture overview
-- [ ] Create testing guide
-- [ ] Create deployment guide
+#### Documentation (P4.DO)
+- [ ] **P4.DO.1** - Create user guide
+- [ ] **P4.DO.2** - Create markdown reference
+- [ ] **P4.DO.3** - Create keyboard shortcuts cheatsheet
+- [ ] **P4.DO.4** - Create troubleshooting section
+- [ ] **P4.DO.5** - Create API reference
+- [ ] **P4.DO.6** - Create architecture overview
+- [ ] **P4.DO.7** - Create testing guide
+- [ ] **P4.DO.8** - Create deployment guide
 
 ---
 
@@ -311,30 +317,31 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Goal**: Build community and ecosystem
 **Estimated Time**: Ongoing
 **Status**: ⏳ Not Started
+**Phase ID**: P5
 
-#### Community
-- [ ] Enable GitHub Discussions
-- [ ] Add issue templates
-- [ ] Add pull request templates
-- [ ] Add code of conduct
-- [ ] Add contributing guide
-- [ ] Create website/landing page
-- [ ] Add roadmap to README
-- [ ] Add changelog
+#### Community (P5.CO)
+- [ ] **P5.CO.1** - Enable GitHub Discussions
+- [ ] **P5.CO.2** - Add issue templates
+- [ ] **P5.CO.3** - Add pull request templates
+- [ ] **P5.CO.4** - Add code of conduct
+- [ ] **P5.CO.5** - Add contributing guide
+- [ ] **P5.CO.6** - Create website/landing page
+- [ ] **P5.CO.7** - Add roadmap to README
+- [ ] **P5.CO.8** - Add changelog
 
-#### Extensions
-- [ ] Create browser extension (Chrome/Firefox)
-- [ ] Create desktop app (Electron/Tauri)
-- [ ] Create mobile app (React Native/Capacitor)
-- [ ] Create VS Code extension
-- [ ] Create CLI tool
+#### Extensions (P5.EX)
+- [ ] **P5.EX.1** - Create browser extension (Chrome/Firefox)
+- [ ] **P5.EX.2** - Create desktop app (Electron/Tauri)
+- [ ] **P5.EX.3** - Create mobile app (React Native/Capacitor)
+- [ ] **P5.EX.4** - Create VS Code extension
+- [ ] **P5.EX.5** - Create CLI tool
 
-#### Analytics (Optional, with consent)
-- [ ] Add local analytics (stored in localStorage)
-- [ ] Add opt-in telemetry
-- [ ] Add error tracking (anonymized)
-- [ ] Add feature usage tracking
-- [ ] Add performance metrics
+#### Analytics (P5.AN) - Optional, with consent
+- [ ] **P5.AN.1** - Add local analytics (stored in localStorage)
+- [ ] **P5.AN.2** - Add opt-in telemetry
+- [ ] **P5.AN.3** - Add error tracking (anonymized)
+- [ ] **P5.AN.4** - Add feature usage tracking
+- [ ] **P5.AN.5** - Add performance metrics
 
 ---
 
@@ -345,234 +352,234 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 ### User Experience Features
 
 #### Editor Enhancements
-- [ ] **Rich Text Toolbar**
-  - [ ] Add toolbar above editor
-  - [ ] Add buttons for all markdown formatting
-  - [ ] Add keyboard shortcuts display
-  - [ ] Add mobile-optimized toolbar
-  - [ ] Add customizable toolbar
+- [ ] **F1.EE.1** - Rich Text Toolbar
+  - [ ] **F1.EE.1.1** - Add toolbar above editor
+  - [ ] **F1.EE.1.2** - Add buttons for all markdown formatting
+  - [ ] **F1.EE.1.3** - Add keyboard shortcuts display
+  - [ ] **F1.EE.1.4** - Add mobile-optimized toolbar
+  - [ ] **F1.EE.1.5** - Add customizable toolbar
 
-- [ ] **Word Count**
-  - [ ] Display word count
-  - [ ] Display character count
-  - [ ] Display paragraph count
-  - [ ] Display reading time
-  - [ ] Add live update
+- [ ] **F1.EE.2** - Word Count
+  - [ ] **F1.EE.2.1** - Display word count
+  - [ ] **F1.EE.2.2** - Display character count
+  - [ ] **F1.EE.2.3** - Display paragraph count
+  - [ ] **F1.EE.2.4** - Display reading time
+  - [ ] **F1.EE.2.5** - Add live update
 
-- [ ] **Find & Replace**
-  - [ ] Add `Ctrl/Cmd + F` for find
-  - [ ] Add `Ctrl/Cmd + H` for replace
-  - [ ] Add case-sensitive option
-  - [ ] Add regex support
-  - [ ] Add match highlighting
+- [ ] **F1.EE.3** - Find & Replace
+  - [ ] **F1.EE.3.1** - Add `Ctrl/Cmd + F` for find
+  - [ ] **F1.EE.3.2** - Add `Ctrl/Cmd + H` for replace
+  - [ ] **F1.EE.3.3** - Add case-sensitive option
+  - [ ] **F1.EE.3.4** - Add regex support
+  - [ ] **F1.EE.3.5** - Add match highlighting
 
-- [ ] **Undo/Redo**
-  - [ ] Add history stack
-  - [ ] Add `Ctrl/Cmd + Z` for undo
-  - [ ] Add `Ctrl/Cmd + Y` for redo
-  - [ ] Add history limit
-  - [ ] Add undo/redo buttons
+- [ ] **F1.EE.4** - Undo/Redo
+  - [ ] **F1.EE.4.1** - Add history stack
+  - [ ] **F1.EE.4.2** - Add `Ctrl/Cmd + Z` for undo
+  - [ ] **F1.EE.4.3** - Add `Ctrl/Cmd + Y` for redo
+  - [ ] **F1.EE.4.4** - Add history limit
+  - [ ] **F1.EE.4.5** - Add undo/redo buttons
 
-- [ ] **Auto-save Improvements**
-  - [ ] Add visual feedback
-  - [ ] Add save history
-  - [ ] Add restore from backup
-  - [ ] Add conflict resolution
+- [ ] **F1.EE.5** - Auto-save Improvements
+  - [ ] **F1.EE.5.1** - Add visual feedback
+  - [ ] **F1.EE.5.2** - Add save history
+  - [ ] **F1.EE.5.3** - Add restore from backup
+  - [ ] **F1.EE.5.4** - Add conflict resolution
 
 #### Viewing Enhancements
-- [ ] **Split View**
-  - [ ] Show editor and preview side-by-side
-  - [ ] Add sync scrolling
-  - [ ] Add resize handle
-  - [ ] Add mobile support
+- [ ] **F1.VE.1** - Split View
+  - [ ] **F1.VE.1.1** - Show editor and preview side-by-side
+  - [ ] **F1.VE.1.2** - Add sync scrolling
+  - [ ] **F1.VE.1.3** - Add resize handle
+  - [ ] **F1.VE.1.4** - Add mobile support
 
-- [ ] **Zen Mode**
-  - [ ] Hide all UI except editor
-  - [ ] Center text
-  - [ ] Increase font size
-  - [ ] Add typewriter scrolling
+- [ ] **F1.VE.2** - Zen Mode
+  - [ ] **F1.VE.2.1** - Hide all UI except editor
+  - [ ] **F1.VE.2.2** - Center text
+  - [ ] **F1.VE.2.3** - Increase font size
+  - [ ] **F1.VE.2.4** - Add typewriter scrolling
 
-- [ ] **Full-Screen Mode**
-  - [ ] Add full-screen button
-  - [ ] Add `F11` support
-  - [ ] Add mobile full-screen
+- [ ] **F1.VE.3** - Full-Screen Mode
+  - [ ] **F1.VE.3.1** - Add full-screen button
+  - [ ] **F1.VE.3.2** - Add `F11` support
+  - [ ] **F1.VE.3.3** - Add mobile full-screen
 
-- [ ] **Reading Mode**
-  - [ ] Larger text
-  - [ ] Reduced distractions
-  - [ ] Better typography
-  - [ ] Customizable
+- [ ] **F1.VE.4** - Reading Mode
+  - [ ] **F1.VE.4.1** - Larger text
+  - [ ] **F1.VE.4.2** - Reduced distractions
+  - [ ] **F1.VE.4.3** - Better typography
+  - [ ] **F1.VE.4.4** - Customizable
 
 #### Organization Enhancements
-- [ ] **Nested Folders**
-  - [ ] Add folder hierarchy
-  - [ ] Add folder tree view
-  - [ ] Add folder drag & drop
-  - [ ] Add folder rename
-  - [ ] Add folder delete
+- [ ] **F1.OR.1** - Nested Folders
+  - [ ] **F1.OR.1.1** - Add folder hierarchy
+  - [ ] **F1.OR.1.2** - Add folder tree view
+  - [ ] **F1.OR.1.3** - Add folder drag & drop
+  - [ ] **F1.OR.1.4** - Add folder rename
+  - [ ] **F1.OR.1.5** - Add folder delete
 
-- [ ] **Smart Folders**
-  - [ ] Add saved searches
-  - [ ] Add filter combinations
-  - [ ] Add custom queries
-  - [ ] Add smart folder management
+- [ ] **F1.OR.2** - Smart Folders
+  - [ ] **F1.OR.2.1** - Add saved searches
+  - [ ] **F1.OR.2.2** - Add filter combinations
+  - [ ] **F1.OR.2.3** - Add custom queries
+  - [ ] **F1.OR.2.4** - Add smart folder management
 
-- [ ] **Note Linking**
-  - [ ] Add `[[Note Title]]` syntax
-  - [ ] Add autocomplete for note links
-  - [ ] Add backlinks view
-  - [ ] Add graph view
-  - [ ] Add link validation
+- [ ] **F1.OR.3** - Note Linking
+  - [ ] **F1.OR.3.1** - Add `[[Note Title]]` syntax
+  - [ ] **F1.OR.3.2** - Add autocomplete for note links
+  - [ ] **F1.OR.3.3** - Add backlinks view
+  - [ ] **F1.OR.3.4** - Add graph view
+  - [ ] **F1.OR.3.5** - Add link validation
 
-- [ ] **Templates**
-  - [ ] Add note templates
-  - [ ] Add template management
-  - [ ] Add template variables
-  - [ ] Add default templates
+- [ ] **F1.OR.4** - Templates
+  - [ ] **F1.OR.4.1** - Add note templates
+  - [ ] **F1.OR.4.2** - Add template management
+  - [ ] **F1.OR.4.3** - Add template variables
+  - [ ] **F1.OR.4.4** - Add default templates
 
 ---
 
 ### Markdown Features
 
 #### Inline Formatting
-- [ ] Strikethrough (`~~text~~`)
-- [ ] Autolinks (`https://example.com`)
-- [ ] Emoji shortcodes (`:smile:`)
-- [ ] Subscript (`H~2~O`)
-- [ ] Superscript (`X^2^`)
-- [ ] Highlight (`==text==`)
-- [ ] Custom HTML (optional)
+- [ ] **F2.MD.1** - Strikethrough (`~~text~~`)
+- [ ] **F2.MD.2** - Autolinks (`https://example.com`)
+- [ ] **F2.MD.3** - Emoji shortcodes (`:smile:`)
+- [ ] **F2.MD.4** - Subscript (`H~2~O`)
+- [ ] **F2.MD.5** - Superscript (`X^2^`)
+- [ ] **F2.MD.6** - Highlight (`==text==`)
+- [ ] **F2.MD.7** - Custom HTML (optional)
 
 #### Block Elements
-- [ ] Tables
-- [ ] Task lists (`- [ ] task`)
-- [ ] Images (`![alt](url)`)
-- [ ] Footnotes
-- [ ] Definition lists
-- [ ] Nested lists (better support)
-- [ ] Math/LaTeX (optional)
-- [ ] Mermaid diagrams (optional)
+- [ ] **F2.MD.8** - Tables
+- [ ] **F2.MD.9** - Task lists (`- [ ] task`)
+- [ ] **F2.MD.10** - Images (`![alt](url)`)
+- [ ] **F2.MD.11** - Footnotes
+- [ ] **F2.MD.12** - Definition lists
+- [ ] **F2.MD.13** - Nested lists (better support)
+- [ ] **F2.MD.14** - Math/LaTeX (optional)
+- [ ] **F2.MD.15** - Mermaid diagrams (optional)
 
 #### Code Blocks
-- [ ] Syntax highlighting
-- [ ] Line numbers
-- [ ] Copy button
-- [ ] Language detection
-- [ ] Multiple themes
+- [ ] **F2.MD.16** - Syntax highlighting
+- [ ] **F2.MD.17** - Line numbers
+- [ ] **F2.MD.18** - Copy button
+- [ ] **F2.MD.19** - Language detection
+- [ ] **F2.MD.20** - Multiple themes
 
 ---
 
 ### Visual Features
 
 #### Theming
-- [ ] Custom accent colors
-- [ ] Multiple color schemes
-- [ ] Custom CSS
-- [ ] Theme presets
-- [ ] Theme import/export
-- [ ] System theme detection
+- [ ] **F3.VI.1** - Custom accent colors
+- [ ] **F3.VI.2** - Multiple color schemes
+- [ ] **F3.VI.3** - Custom CSS
+- [ ] **F3.VI.4** - Theme presets
+- [ ] **F3.VI.5** - Theme import/export
+- [ ] **F3.VI.6** - System theme detection
 
 #### Typography
-- [ ] Font family selection
-- [ ] Font size adjustment
-- [ ] Line height adjustment
-- [ ] Letter spacing adjustment
-- [ ] Dyslexia-friendly font
+- [ ] **F3.VI.7** - Font family selection
+- [ ] **F3.VI.8** - Font size adjustment
+- [ ] **F3.VI.9** - Line height adjustment
+- [ ] **F3.VI.10** - Letter spacing adjustment
+- [ ] **F3.VI.11** - Dyslexia-friendly font
 
 #### Layout
-- [ ] Resizable panels
-- [ ] Collapsible sidebar
-- [ ] Custom column widths
-- [ ] Grid view for notes
-- [ ] Card view for notes
+- [ ] **F3.VI.12** - Resizable panels
+- [ ] **F3.VI.13** - Collapsible sidebar
+- [ ] **F3.VI.14** - Custom column widths
+- [ ] **F3.VI.15** - Grid view for notes
+- [ ] **F3.VI.16** - Card view for notes
 
 #### Icons
-- [ ] Add icons to all actions
-- [ ] Add icon library
-- [ ] Add custom icon support
-- [ ] Add icon theming
+- [ ] **F3.VI.17** - Add icons to all actions
+- [ ] **F3.VI.18** - Add icon library
+- [ ] **F3.VI.19** - Add custom icon support
+- [ ] **F3.VI.20** - Add icon theming
 
 ---
 
 ### Mobile Features
 
 #### Touch Support
-- [ ] Swipe to delete
-- [ ] Swipe to archive
-- [ ] Pull to refresh
-- [ ] Long press for context menu
-- [ ] Pinch to zoom
+- [ ] **F4.MO.1** - Swipe to delete
+- [ ] **F4.MO.2** - Swipe to archive
+- [ ] **F4.MO.3** - Pull to refresh
+- [ ] **F4.MO.4** - Long press for context menu
+- [ ] **F4.MO.5** - Pinch to zoom
 
 #### Mobile UI
-- [ ] Mobile-optimized toolbar
-- [ ] Bottom navigation
-- [ ] Full-screen editor
-- [ ] Mobile-specific layouts
-- [ ] Touch-friendly buttons
+- [ ] **F4.MO.6** - Mobile-optimized toolbar
+- [ ] **F4.MO.7** - Bottom navigation
+- [ ] **F4.MO.8** - Full-screen editor
+- [ ] **F4.MO.9** - Mobile-specific layouts
+- [ ] **F4.MO.10** - Touch-friendly buttons
 
 #### Mobile Features
-- [ ] Offline indicator
-- [ ] Connection status
-- [ ] Mobile keyboard handling
-- [ ] Screen orientation handling
-- [ ] Mobile notifications
+- [ ] **F4.MO.11** - Offline indicator
+- [ ] **F4.MO.12** - Connection status
+- [ ] **F4.MO.13** - Mobile keyboard handling
+- [ ] **F4.MO.14** - Screen orientation handling
+- [ ] **F4.MO.15** - Mobile notifications
 
 ---
 
 ### Sync & Storage Features
 
 #### Local Storage
-- [ ] Storage versioning
-- [ ] Automatic migrations
-- [ ] Storage compression
-- [ ] Storage cleanup
-- [ ] Storage statistics
+- [ ] **F5.SS.1** - Storage versioning
+- [ ] **F5.SS.2** - Automatic migrations
+- [ ] **F5.SS.3** - Storage compression
+- [ ] **F5.SS.4** - Storage cleanup
+- [ ] **F5.SS.5** - Storage statistics
 
 #### File System
-- [ ] File System Access API
-- [ ] Local file sync
-- [ ] Auto-save to file
-- [ ] File watcher
-- [ ] Conflict resolution
+- [ ] **F5.SS.6** - File System Access API
+- [ ] **F5.SS.7** - Local file sync
+- [ ] **F5.SS.8** - Auto-save to file
+- [ ] **F5.SS.9** - File watcher
+- [ ] **F5.SS.10** - Conflict resolution
 
 #### Cloud Sync
-- [ ] GitHub sync
-- [ ] Dropbox sync
-- [ ] Google Drive sync
-- [ ] OneDrive sync
-- [ ] iCloud sync
+- [ ] **F5.SS.11** - GitHub sync
+- [ ] **F5.SS.12** - Dropbox sync
+- [ ] **F5.SS.13** - Google Drive sync
+- [ ] **F5.SS.14** - OneDrive sync
+- [ ] **F5.SS.15** - iCloud sync
 
 #### Security
-- [ ] End-to-end encryption
-- [ ] Password protection
-- [ ] Biometric authentication
-- [ ] Auto-lock
-- [ ] Secure storage
+- [ ] **F5.SS.16** - End-to-end encryption
+- [ ] **F5.SS.17** - Password protection
+- [ ] **F5.SS.18** - Biometric authentication
+- [ ] **F5.SS.19** - Auto-lock
+- [ ] **F5.SS.20** - Secure storage
 
 ---
 
 ### Advanced Features
 
 #### Plugins
-- [ ] Plugin architecture
-- [ ] Plugin API
-- [ ] Plugin loader
-- [ ] Plugin marketplace
-- [ ] Plugin documentation
+- [ ] **F6.AD.1** - Plugin architecture
+- [ ] **F6.AD.2** - Plugin API
+- [ ] **F6.AD.3** - Plugin loader
+- [ ] **F6.AD.4** - Plugin marketplace
+- [ ] **F6.AD.5** - Plugin documentation
 
 #### Views
-- [ ] Graph view
-- [ ] Calendar view
-- [ ] Kanban view
-- [ ] Mind map view
-- [ ] Timeline view
+- [ ] **F6.AD.6** - Graph view
+- [ ] **F6.AD.7** - Calendar view
+- [ ] **F6.AD.8** - Kanban view
+- [ ] **F6.AD.9** - Mind map view
+- [ ] **F6.AD.10** - Timeline view
 
 #### Collaboration
-- [ ] Real-time collaboration (optional)
-- [ ] Comments (optional)
-- [ ] Version history
-- [ ] Diff view
-- [ ] Restore previous versions
+- [ ] **F6.AD.11** - Real-time collaboration (optional)
+- [ ] **F6.AD.12** - Comments (optional)
+- [ ] **F6.AD.13** - Version history
+- [ ] **F6.AD.14** - Diff view
+- [ ] **F6.AD.15** - Restore previous versions
 
 ---
 
@@ -724,49 +731,49 @@ notes-app/
 ### Proposed Testing Improvements
 
 #### Unit Tests
-- [ ] Add tests for all pure functions
-- [ ] Add edge case tests
-- [ ] Add performance tests
-- [ ] Add property-based tests
-- [ ] Increase coverage to 90%+
+- [ ] **T1.UT.1** - Add tests for all pure functions
+- [ ] **T1.UT.2** - Add edge case tests
+- [ ] **T1.UT.3** - Add performance tests
+- [ ] **T1.UT.4** - Add property-based tests
+- [ ] **T1.UT.5** - Increase coverage to 90%+
 
 #### Integration Tests
-- [ ] Add component integration tests
-- [ ] Add state management tests
-- [ ] Add rendering tests
-- [ ] Add storage tests
-- [ ] Add sync tests
+- [ ] **T1.IT.1** - Add component integration tests
+- [ ] **T1.IT.2** - Add state management tests
+- [ ] **T1.IT.3** - Add rendering tests
+- [ ] **T1.IT.4** - Add storage tests
+- [ ] **T1.IT.5** - Add sync tests
 
 #### E2E Tests
-- [ ] Set up Playwright
-- [ ] Add basic navigation tests
-- [ ] Add note creation tests
-- [ ] Add note editing tests
-- [ ] Add note deletion tests
-- [ ] Add search tests
-- [ ] Add filter tests
-- [ ] Add theme toggle tests
-- [ ] Add import/export tests
+- [ ] **T1.E2.1** - Set up Playwright
+- [ ] **T1.E2.2** - Add basic navigation tests
+- [ ] **T1.E2.3** - Add note creation tests
+- [ ] **T1.E2.4** - Add note editing tests
+- [ ] **T1.E2.5** - Add note deletion tests
+- [ ] **T1.E2.6** - Add search tests
+- [ ] **T1.E2.7** - Add filter tests
+- [ ] **T1.E2.8** - Add theme toggle tests
+- [ ] **T1.E2.9** - Add import/export tests
 
 #### Visual Regression Tests
-- [ ] Set up Percy or Chromatic
-- [ ] Add screenshot tests for all views
-- [ ] Add theme tests
-- [ ] Add responsive tests
+- [ ] **T1.VR.1** - Set up Percy or Chromatic
+- [ ] **T1.VR.2** - Add screenshot tests for all views
+- [ ] **T1.VR.3** - Add theme tests
+- [ ] **T1.VR.4** - Add responsive tests
 
 #### Accessibility Tests
-- [ ] Set up axe-core
-- [ ] Add accessibility scans
-- [ ] Add screen reader tests
-- [ ] Add keyboard navigation tests
-- [ ] Add color contrast tests
+- [ ] **T1.A1.1** - Set up axe-core
+- [ ] **T1.A1.2** - Add accessibility scans
+- [ ] **T1.A1.3** - Add screen reader tests
+- [ ] **T1.A1.4** - Add keyboard navigation tests
+- [ ] **T1.A1.5** - Add color contrast tests
 
 #### Performance Tests
-- [ ] Set up Lighthouse CI
-- [ ] Add performance budgets
-- [ ] Add load time tests
-- [ ] Add rendering performance tests
-- [ ] Add memory usage tests
+- [ ] **T1.PF.1** - Set up Lighthouse CI
+- [ ] **T1.PF.2** - Add performance budgets
+- [ ] **T1.PF.3** - Add load time tests
+- [ ] **T1.PF.4** - Add rendering performance tests
+- [ ] **T1.PF.5** - Add memory usage tests
 
 ---
 
@@ -825,7 +832,7 @@ notes-app/
 1. Read `README.md` for project overview
 2. Read `IMPLEMENTATION_PLAN.md` (this file) for roadmap
 3. Run `npm test` to verify all tests pass
-4. Open `index.html` in a browser to test the app
+4. Open `index.html` in browser to test the app
 
 **Development Workflow:**
 1. Create a feature branch: `git checkout -b feature/feature-name`
@@ -884,15 +891,15 @@ notes-app/
 ### Quick Reference
 
 **Keyboard Shortcuts:**
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl/Cmd + N` | Create new note |
-| `Ctrl/Cmd + S` | Flush pending save |
-| `Ctrl/Cmd + D` | Duplicate note (to be implemented) |
-| `Arrow Up/Down` | Navigate note list |
-| `Enter` | Select focused note |
-| `Escape` | Clear search input |
-| `Ctrl/Cmd + F` | Find in note (to be implemented) |
+| Shortcut | Action | Task ID |
+|----------|--------|--------|
+| `Ctrl/Cmd + N` | Create new note | P1.UX.1 |
+| `Ctrl/Cmd + S` | Flush pending save | P1.PF.1 |
+| `Ctrl/Cmd + D` | Duplicate note | P1.UX.5 |
+| `Arrow Up/Down` | Navigate note list | P1.UX.2 |
+| `Enter` | Select focused note | P1.UX.2 |
+| `Escape` | Clear search input | P1.A1.6 |
+| `Ctrl/Cmd + F` | Find in note | P2.VE.7 |
 
 **Storage:**
 - Key: `notes-app.v1`
@@ -906,86 +913,55 @@ notes-app/
 
 ---
 
-## 📝 Checklist for New Sessions
+## 📝 Task Index
 
 ---
 
-### Before Starting
-- [ ] Read `README.md`
-- [ ] Read `IMPLEMENTATION_PLAN.md` (this file)
-- [ ] Run `npm test` to verify all tests pass
-- [ ] Open `index.html` in browser to test current state
-- [ ] Check `git status` for any uncommitted changes
+### How to Reference Tasks
 
-### During Development
-- [ ] Work on a feature branch
-- [ ] Make small, focused changes
-- [ ] Add tests for new functionality
-- [ ] Run `npm test` frequently
-- [ ] Test manually in browser
-- [ ] Follow existing code style
+All tasks in this document have **unique identifiers** in the format:
+- **Phase.Task**: `P1.UX.1` (Phase 1, User Experience, Task 1)
+- **Goal.Task**: `G1.T1` (Goal 1, Task 1)
+- **Feature.Task**: `F1.EE.1` (Feature Category 1, Editor Enhancement 1)
+- **Test.Task**: `T1.UT.1` (Test Category 1, Unit Test 1)
 
-### Before Committing
-- [ ] All tests pass (`npm test`)
-- [ ] Manual testing in browser
-- [ ] Code follows existing patterns
-- [ ] No console errors or warnings
-- [ ] Accessibility checked
-- [ ] Responsive design checked
+### Phase Index
+| Phase ID | Name | Tasks | Status |
+|----------|------|-------|--------|
+| P0 | Current State | 31 | ✅ Complete |
+| P1 | Quick Wins | 34 | ⏳ Not Started |
+| P2 | Feature Expansion | 31 | ⏳ Not Started |
+| P3 | Advanced Features | 29 | ⏳ Not Started |
+| P4 | Polish & Optimization | 28 | ⏳ Not Started |
+| P5 | Ecosystem & Community | 17 | ⏳ Not Started |
 
-### Before Opening PR
-- [ ] All tests pass
-- [ ] Manual testing complete
-- [ ] Code is well-documented
-- [ ] PR description is clear
-- [ ] Screenshots added (if UI changes)
+### Goal Index
+| Goal ID | Category | Tasks | Status |
+|---------|----------|-------|--------|
+| G1 | Short-Term (1-2 months) | 5 | ⏳ Not Started |
+| G2 | Medium-Term (2-4 months) | 4 | ⏳ Not Started |
+| G3 | Long-Term (4-8 months) | 5 | ⏳ Not Started |
+| G4 | Success Metrics | 5 | ⏳ Not Started |
 
----
+### Feature Category Index
+| Category | ID Prefix | Tasks | Status |
+|----------|-----------|-------|--------|
+| User Experience | F1 | 20+ | ⏳ Not Started |
+| Markdown | F2 | 20 | ⏳ Not Started |
+| Visual | F3 | 20 | ⏳ Not Started |
+| Mobile | F4 | 15 | ⏳ Not Started |
+| Sync & Storage | F5 | 20 | ⏳ Not Started |
+| Advanced | F6 | 15 | ⏳ Not Started |
 
-## 🎯 Next Steps
-
----
-
-### Immediate Actions (This Week)
-- [ ] Review and prioritize Phase 1 features
-- [ ] Choose 2-3 quick wins to implement first
-- [ ] Create feature branches for selected features
-- [ ] Implement rich text toolbar
-- [ ] Implement note drag & drop
-- [ ] Add word count display
-
-### Short-Term Actions (This Month)
-- [ ] Complete Phase 1: Quick Wins
-- [ ] Start Phase 2: Feature Expansion
-- [ ] Add E2E testing with Playwright
-- [ ] Improve code organization
-- [ ] Add more tests
-
-### Medium-Term Actions (Next 2-3 Months)
-- [ ] Complete Phase 2: Feature Expansion
-- [ ] Start Phase 3: Advanced Features
-- [ ] Add TypeScript support
-- [ ] Build PWA features
-- [ ] Grow community
-
----
-
-## 📞 Contact & Support
-
----
-
-### Questions?
-- Check `README.md` for usage instructions
-- Check `IMPLEMENTATION_PLAN.md` for roadmap
-- Check existing tests for examples
-- Check GitHub issues for known problems
-
-### Need Help?
-- Describe the problem clearly
-- Include steps to reproduce
-- Include browser/OS information
-- Include screenshots if applicable
-- Include error messages if any
+### Test Category Index
+| Category | ID Prefix | Tasks | Status |
+|----------|-----------|-------|--------|
+| Unit Tests | T1.UT | 5 | ⏳ Not Started |
+| Integration Tests | T1.IT | 5 | ⏳ Not Started |
+| E2E Tests | T1.E2 | 9 | ⏳ Not Started |
+| Visual Regression | T1.VR | 4 | ⏳ Not Started |
+| Accessibility | T1.A1 | 5 | ⏳ Not Started |
+| Performance | T1.PF | 5 | ⏳ Not Started |
 
 ---
 
@@ -993,11 +969,12 @@ notes-app/
 
 This implementation plan provides a **comprehensive roadmap** for enhancing the Notes App with:
 - **Clear phases** with estimated timelines
+- **Unique task identifiers** for easy reference (e.g., "Please implement P1.UX.1")
 - **Detailed feature lists** with checkboxes
 - **Technical architecture** improvements
 - **Testing strategy** for quality assurance
 - **Session context** for new agents
-- **Quick reference** for common tasks
+- **Task index** for quick lookup
 
 **Status**: Ready for implementation ✅
 
