@@ -45,12 +45,13 @@ session, read this file first for full context.
   - Decided against: adding `escapeHtml(url)` double-escapes `&` (`?a=1&b=2` → `&amp;amp;`), corrupting real URLs. Verified: `renderMarkdown('[click](https://x.com"onmouseover="alert(1))')` → `href="https://x.com&quot;onmouseover=&quot;alert(1)"` (single well-formed `href`, no raw quote).
   - Defense-in-depth option (optional, separate task): replace string-built `<a>` with `document.createElement('a')` + `el.href = url` so the browser parses the URL safely. Low priority given current safety.
 
-- [ ] **P0-2 — Paragraph parser prematurely terminates on list-like lines**
+- [x] **P0-2 — Paragraph parser prematurely terminates on list-like lines**
   - Location: `app.js` `isBlockStart()` + paragraph loop (~lines 8-21, ~95-105).
   - Problem: a line starting with `-` or `*` inside a paragraph ends the paragraph. E.g. `Some text\n- not a list` splits unexpectedly. Also paragraphs cannot contain intentional blank lines.
   - Acceptance: paragraph only breaks on a real block opener at column 0 (no leading indent) OR a blank line; document the limitation in a code comment OR handle indented continuation.
   - Tests: add `renderMarkdown` cases covering paragraph-then-dash and nested-looking content.
 
+  - Fix: Changed list marker regex from `/^\s*[-*]\s+/` to `/^[-*]\s+/` (and same for ordered lists) so only markers at column 0 start blocks. Indented list-like lines are now part of paragraphs. Added test file `test/markdown.test.js` with 11 passing tests.
 - [x] **P0-4 — Sidebar re-renders folder `<select>` on every keystroke**
   - Location: `renderSidebar()` + search `input` handler.
   - Done: split into `renderSidebarChrome()` + `renderNoteList()`; search calls `renderNoteList()` only. See PR #1.
