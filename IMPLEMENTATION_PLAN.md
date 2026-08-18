@@ -114,10 +114,11 @@ session, read this file first for full context.
   - Location: module-level `let notes`, `activeId`, `view`, etc.
   - Acceptance: introduce a small `store` object (`{ get, set, subscribe }`) so re-renders are predictable and `storage` events (multi-tab sync) become feasible later. Migrate incrementally; keep public behavior identical.
 
-- [ ] **P2-13 — No tests**
+- [x] **P2-13 — No tests**
   - Acceptance: add `test/app.test.js` runnable with `node --test` (no deps). Cover pure helpers first: `renderMarkdown`, `parseTagsInput`, `normalizeNote`, `visibleNotes` (latter needs a state shim). Add a `package.json` with a `"test"` script and a `.gitignore`.
   - Note: `renderMarkdown` and `parseTagsInput` are DOM-free; `visibleNotes` reads module state, so either export getters or test via a store abstraction (ties into P2-12).
 
+  - Fix: Added `package.json` with `"test": "node --test"` script, `.gitignore`, and `test/app.test.js` with 51 tests covering `escapeHtml`, `parseTagsInput`, `normalizeNote`, `isBlockStart`, `renderMarkdown`, and `timeAgo`.
 - [ ] **P2-14 — Markdown subset is small**
   - Missing: tables, nested lists, task lists (`- [ ]`), images, strikethrough, autolinks.
   - Acceptance: **decide** — either (a) declare "minimal markdown" as a feature and document it in the UI/README, or (b) adopt a vetted library (marked / markdown-it) behind a render function so the rest of the app is unaffected. Prefer (b) only if the app grows; otherwise document (a).
