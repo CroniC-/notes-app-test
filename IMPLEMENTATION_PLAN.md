@@ -55,13 +55,13 @@ session, read this file first for full context.
   - Location: `renderSidebar()` + search `input` handler.
   - Done: split into `renderSidebarChrome()` + `renderNoteList()`; search calls `renderNoteList()` only. See PR #1.
 
-- [ ] **P0-5 — `localStorage` quota errors silently swallowed**
+- [x] **P0-5 — `localStorage` quota errors silently swallowed**
   - Location: `app.js` `persist()` (~line 200).
   - Problem: `catch { return; }` hides save failures; user with many/large notes loses edits with no feedback.
   - Acceptance: on quota error, show "Save failed — storage full" in `#save-indicator` (reuse `flashSaved` pattern with a failure class) and do not clear the pending debounced save.
   - Tests: unit-test `persist()` with a mock `localStorage.setItem` that throws `QuotaExceededError`.
 
-- [ ] **P0-6 — No `beforeunload` flush of debounced save**
+- [x] **P0-6 — No `beforeunload` flush of debounced save**
   - Location: `app.js` near event wiring (~line 430+).
   - Problem: `scheduleSave` debounces 400ms; closing the tab mid-typing loses the last edits.
   - Acceptance: add `window.addEventListener('beforeunload', flushSave)` where `flushSave` clears `saveTimer` and calls `persist()` immediately if a save is pending.
@@ -73,7 +73,7 @@ session, read this file first for full context.
   - Acceptance: use `Number.isFinite(Number(n.updatedAt)) ? Number(n.updatedAt) : Date.now()` (or drop the note). Apply the same in `loadNotes`.
   - Tests: import a note with `updatedAt: null` / `"abc"` and assert it does not clobber ordering.
 
-- [ ] **P0-18 — `uid()` collision risk under rapid creates**
+- [x] **P0-18 — `uid()` collision risk under rapid creates**
   - Location: `app.js` `uid()` (~line 195).
   - Problem: `Date.now().toString(36) + Math.random().toString(36).slice(2,8)`; rapid creates in the same ms rely on 6 random chars.
   - Acceptance: use `crypto.randomUUID()` where available, fall back to current implementation.
@@ -135,9 +135,9 @@ session, read this file first for full context.
 
 - [ ] **Q-escape**: (Already investigated under P0-1 — no change required unless pursuing defense-in-depth.)
 - [ ] **Q-sidebar-render**: Done (P0-4).
-- [ ] **Q-beforeunload**: P0-6.
-- [ ] **Q-quota-feedback**: P0-5.
-- [ ] **Q-uuid**: P0-18 (`crypto.randomUUID()`).
+- [x] **Q-beforeunload**: P0-6.
+- [x] **Q-quota-feedback**: P0-5.
+- [x] **Q-uuid**: P0-18 (`crypto.randomUUID()`).
 - [ ] **Q-readme**: P2-15.
 
 ---
