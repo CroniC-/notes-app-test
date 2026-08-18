@@ -267,7 +267,7 @@ function renderSidebarChrome() {
   const tags = [...new Set(notes.flatMap((n) => n.tags))].sort();
   els.tagCloud.innerHTML = tags.length
     ? tags
-        .map((t) => '<span class="tag' + (selectedTags.has(t) ? ' selected' : '') + '" data-tag="' + escapeHtml(t) + '">' + escapeHtml(t) + '</span>')
+        .map((t) => '<span class="tag' + (selectedTags.has(t) ? ' selected' : '') + '" data-tag="' + escapeHtml(t) + '" role="button" tabindex="0">' + escapeHtml(t) + '</span>')
         .join('')
     : '';
 }
@@ -278,7 +278,7 @@ function renderNoteList() {
     els.noteList.innerHTML = list
       .map(
         (n) =>
-          '<li class="note-item' + (n.id === activeId ? ' active' : '') + '" data-id="' + escapeHtml(n.id) + '">' +
+          '<li class="note-item' + (n.id === activeId ? ' active' : '') + '" data-id="' + escapeHtml(n.id) + '" role="option" tabindex="' + (n.id === activeId ? '0' : '-1') + '">' +
           '<div class="note-title">' + escapeHtml(n.title || 'Untitled') + '</div>' +
           '<div class="note-sub">' +
           (n.folder ? '<span>' + escapeHtml(n.folder) + '</span>' : '') +
@@ -298,15 +298,15 @@ function renderNoteList() {
   }
 
   const chips = [];
-  if (folderFilter) chips.push('<span class="empty-filter-chip" data-filter="folder">Folder: ' + escapeHtml(folderFilter) + '</span>');
-  for (const t of selectedTags) chips.push('<span class="empty-filter-chip" data-filter="tag" data-tag="' + escapeHtml(t) + '">Tag: ' + escapeHtml(t) + '</span>');
-  if (searchQuery.trim()) chips.push('<span class="empty-filter-chip" data-filter="search">Search: ' + escapeHtml(searchQuery.trim()) + '</span>');
+  if (folderFilter) chips.push('<span class="empty-filter-chip" data-filter="folder" role="button" tabindex="0">Folder: ' + escapeHtml(folderFilter) + '</span>');
+  for (const t of selectedTags) chips.push('<span class="empty-filter-chip" data-filter="tag" data-tag="' + escapeHtml(t) + '" role="button" tabindex="0">Tag: ' + escapeHtml(t) + '</span>');
+  if (searchQuery.trim()) chips.push('<span class="empty-filter-chip" data-filter="search" role="button" tabindex="0">Search: ' + escapeHtml(searchQuery.trim()) + '</span>');
 
   els.noteList.innerHTML =
     '<li class="no-notes no-results">' +
     '<div class="no-results-msg">No notes match the current filters.</div>' +
     (chips.length ? '<div class="empty-filter-chips">' + chips.join('') + '</div>' : '') +
-    '<button class="btn btn-ghost clear-filters" type="button">Clear filters</button>' +
+    '<button class="btn btn-ghost clear-filters" type="button" role="button">Clear filters</button>' +
     '</li>';
 }
 
@@ -335,6 +335,8 @@ function applyView() {
   const previewing = view === 'preview';
   els.viewWrite.classList.toggle('active', !previewing);
   els.viewPreview.classList.toggle('active', previewing);
+  els.viewWrite.setAttribute('aria-pressed', String(!previewing));
+  els.viewPreview.setAttribute('aria-pressed', String(previewing));
   els.body.hidden = previewing;
   els.preview.hidden = !previewing;
   if (previewing) {
@@ -519,6 +521,31 @@ els.noteList.addEventListener('click', (e) => {
   if (item) selectNote(item.dataset.id);
 });
 
+els.noteList.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  // Handle filter chips
+  const chip = e.target.closest('.empty-filter-chip');
+  if (chip) {
+    e.preventDefault();
+    if (chip.dataset.filter === 'folder') {
+      folderFilter = '';
+    } else if (chip.dataset.filter === 'tag') {
+      selectedTags.delete(chip.dataset.tag);
+    } else if (chip.dataset.filter === 'search') {
+      searchQuery = '';
+      els.search.value = '';
+    }
+    renderSidebar();
+    return;
+  }
+  // Handle note items
+  const item = e.target.closest('.note-item');
+  if (item) {
+    e.preventDefault();
+    selectNote(item.dataset.id);
+  }
+});
+
 els.search.addEventListener('input', () => {
   searchQuery = els.search.value;
   renderNoteList();
@@ -532,6 +559,17 @@ els.folderFilter.addEventListener('change', () => {
 els.tagCloud.addEventListener('click', (e) => {
   const chip = e.target.closest('[data-tag]');
   if (!chip) return;
+  const t = chip.dataset.tag;
+  if (selectedTags.has(t)) selectedTags.delete(t);
+  else selectedTags.add(t);
+  renderSidebar();
+});
+
+els.tagCloud.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const chip = e.target.closest('[data-tag]');
+  if (!chip) return;
+  e.preventDefault();
   const t = chip.dataset.tag;
   if (selectedTags.has(t)) selectedTags.delete(t);
   else selectedTags.add(t);
