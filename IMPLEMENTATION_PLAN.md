@@ -122,9 +122,10 @@ session, read this file first for full context.
   - Note: `renderMarkdown` and `parseTagsInput` are DOM-free; `visibleNotes` reads module state, so either export getters or test via a store abstraction (ties into P2-12).
 
   - Fix: Added `package.json` with `"test": "node --test"` script, `.gitignore`, and `test/app.test.js` with 51 tests covering `escapeHtml`, `parseTagsInput`, `normalizeNote`, `isBlockStart`, `renderMarkdown`, and `timeAgo`.
-- [ ] **P2-14 — Markdown subset is small**
+- [x] **P2-14 — Markdown subset is small**
   - Missing: tables, nested lists, task lists (`- [ ]`), images, strikethrough, autolinks.
   - Acceptance: **decide** — either (a) declare "minimal markdown" as a feature and document it in the UI/README, or (b) adopt a vetted library (marked / markdown-it) behind a render function so the rest of the app is unaffected. Prefer (b) only if the app grows; otherwise document (a).
+  - Decision: (a) Document minimal markdown as a feature. Updated README.md to clarify that the app intentionally supports a lightweight markdown subset with zero dependencies. Features like tables, nested lists, task lists, images, strikethrough, and autolinks are explicitly noted as not supported.
 
 - [x] **P2-15 — No README / LICENSE / .gitignore**
   - Acceptance: add `README.md` (features, shortcuts, storage model, import/export format, dev/run instructions — "open index.html" or a static server), `LICENSE` (confirm owner's preferred license — ask if unclear), `.gitignore` (node_modules, OS files).
@@ -169,5 +170,5 @@ session, read this file first for full context.
 - Checkbox in this file updated (`- [x]` done / `- [-]` decided against) in the same commit.
 
 ## Open questions (resolve before starting the relevant item)
-- **P2-14**: keep minimal markdown or adopt a library? (Decision blocks that item only.)
+- **P2-14**: keep minimal markdown or adopt a library? Decided: (a) Document as feature.
 - **P2-15**: which license? Resolved - MIT license as specified in package.json.
