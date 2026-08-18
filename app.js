@@ -235,7 +235,7 @@ function visibleNotes() {
 
 // ---------- rendering ----------
 
-function renderSidebar() {
+function renderSidebarChrome() {
   const folders = [...new Set(notes.map((n) => n.folder).filter(Boolean))].sort();
   if (folderFilter && !folders.includes(folderFilter)) folderFilter = '';
   selectedTags = new Set([...selectedTags].filter((t) => notes.some((n) => n.tags.includes(t))));
@@ -252,7 +252,9 @@ function renderSidebar() {
         .map((t) => '<span class="tag' + (selectedTags.has(t) ? ' selected' : '') + '" data-tag="' + escapeHtml(t) + '">' + escapeHtml(t) + '</span>')
         .join('')
     : '';
+}
 
+function renderNoteList() {
   const list = visibleNotes();
   els.noteList.innerHTML = list.length
     ? list
@@ -268,6 +270,11 @@ function renderSidebar() {
         )
         .join('')
     : '<li class="no-notes">No notes match.</li>';
+}
+
+function renderSidebar() {
+  renderSidebarChrome();
+  renderNoteList();
 }
 
 function renderEditor() {
@@ -434,7 +441,7 @@ els.noteList.addEventListener('click', (e) => {
 
 els.search.addEventListener('input', () => {
   searchQuery = els.search.value;
-  renderSidebar();
+  renderNoteList();
 });
 
 els.folderFilter.addEventListener('change', () => {
