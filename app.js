@@ -575,3 +575,68 @@ window.addEventListener('beforeunload', flushSave);
 applyTheme(currentTheme());
 activeId = visibleNotes()[0] ? visibleNotes()[0].id : null;
 renderAll();
+
+// ---------- keyboard shortcuts ----------
+
+function handleKeyDown(e) {
+  // Ignore if typing in an input/textarea
+  const tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+    // Still allow Escape to clear search
+    if (e.key === 'Escape') {
+      if (tag === 'INPUT' && document.activeElement === els.search) {
+        e.preventDefault();
+        els.search.value = '';
+        searchQuery = '';
+        renderNoteList();
+        document.activeElement.blur();
+      }
+      return;
+    }
+    return;
+  }
+
+  // Ctrl/Cmd + N: new note
+  if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+    e.preventDefault();
+    createNote();
+    return;
+  }
+
+  // Ctrl/Cmd + S: flush pending save
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    flushSave();
+    return;
+  }
+
+  // Arrow Up/Down: navigate note list
+  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    const items = Array.from(els.noteList.querySelectorAll('.note-item'));
+    if (!items.length) return;
+
+    const current = items.findIndex((el) => el.classList.contains('active'));
+    let next;
+    if (e.key === 'ArrowDown') {
+      next = current === -1 || current === items.length - 1 ? 0 : current + 1;
+    } else {
+      next = current === -1 || current === 0 ? items.length - 1 : current - 1;
+    }
+    selectNote(items[next].dataset.id);
+    items[next].scrollIntoView({ block: 'nearest' });
+    return;
+  }
+
+  // Enter: select the focused note (if any)
+  if (e.key === 'Enter') {
+    const active = els.noteList.querySelector('.note-item.active');
+    if (active) {
+      e.preventDefault();
+      selectNote(active.dataset.id);
+    }
+    return;
+  }
+}
+
+window.addEventListener('keydown', handleKeyDown);
