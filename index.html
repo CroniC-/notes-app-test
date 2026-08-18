@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Notes</h1>
+        <button id="new-note" class="btn btn-primary">+ New</button>
+      </div>
+      <input type="search" id="search" placeholder="Search notes…" autocomplete="off">
+      <select id="folder-filter" aria-label="Filter by folder">
+        <option value="">All folders</option>
+      </select>
+      <div id="tag-cloud" class="tag-cloud"></div>
+      <ul id="note-list" class="note-list"></ul>
+      <div class="sidebar-footer">
+        <button id="export" class="btn btn-ghost">Export</button>
+        <button id="import" class="btn btn-ghost">Import</button>
+        <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme">Toggle theme</button>
+      </div>
+      <input type="file" id="import-file" accept="application/json,.json" hidden>
+    </aside>
+
+    <main class="main">
+      <div id="empty-state" class="empty-state">
+        <p class="empty-title">No note selected</p>
+        <p>Create a new note to get started.</p>
+      </div>
+
+      <div id="editor-pane" class="editor-pane" hidden>
+        <div class="note-meta">
+          <input id="note-title" type="text" placeholder="Untitled" autocomplete="off">
+          <div class="meta-row">
+            <label>Folder
+              <input id="note-folder" type="text" placeholder="none" autocomplete="off">
+            </label>
+            <label>Tags
+              <input id="note-tags" type="text" placeholder="comma, separated" autocomplete="off">
+            </label>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="view-toggle">
+            <button id="view-write" class="btn active">Write</button>
+            <button id="view-preview" class="btn">Preview</button>
+          </div>
+          <div class="toolbar-right">
+            <span id="save-indicator" class="save-indicator"></span>
+            <button id="delete-note" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <textarea id="note-body" placeholder="Write in Markdown…" spellcheck="true"></textarea>
+        <div id="preview" class="preview markdown" hidden></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
