@@ -89,7 +89,7 @@ session, read this file first for full context.
   - Tests: delete active note with a folder filter active; assert selection is a sibling or empty.
 
   - Fix: Changed `deleteActive()` to find index in sorted notes list before deleting, then select nearest sibling (previous or next in sort order) instead of using `visibleNotes()[0]`. Added `test/deleteActive.test.js` with 7 passing tests.
-- [ ] **P1-8 — Stale filters yield empty list with no explanation**
+- [x] **P1-8 — Stale filters yield empty list with no explanation**
   - Location: `app.js` `renderSidebar()` / `renderNoteList()`.
   - Problem: when `selectedTags`/`folderFilter` match nothing, the list shows "No notes match." with no way to see/clear the active filters.
   - Acceptance: when filtered result is empty due to active filters, show active filter chips and a "Clear filters" action; keep "No notes match." only for empty search.

@@ -274,20 +274,40 @@ function renderSidebarChrome() {
 
 function renderNoteList() {
   const list = visibleNotes();
-  els.noteList.innerHTML = list.length
-    ? list
-        .map(
-          (n) =>
-            '<li class="note-item' + (n.id === activeId ? ' active' : '') + '" data-id="' + escapeHtml(n.id) + '">' +
-            '<div class="note-title">' + escapeHtml(n.title || 'Untitled') + '</div>' +
-            '<div class="note-sub">' +
-            (n.folder ? '<span>' + escapeHtml(n.folder) + '</span>' : '') +
-            '<span>' + timeAgo(n.updatedAt) + '</span>' +
-            '</div>' +
-            '</li>'
-        )
-        .join('')
-    : '<li class="no-notes">No notes match.</li>';
+  if (list.length) {
+    els.noteList.innerHTML = list
+      .map(
+        (n) =>
+          '<li class="note-item' + (n.id === activeId ? ' active' : '') + '" data-id="' + escapeHtml(n.id) + '">' +
+          '<div class="note-title">' + escapeHtml(n.title || 'Untitled') + '</div>' +
+          '<div class="note-sub">' +
+          (n.folder ? '<span>' + escapeHtml(n.folder) + '</span>' : '') +
+          '<span>' + timeAgo(n.updatedAt) + '</span>' +
+          '</div>' +
+          '</li>'
+      )
+      .join('');
+    return;
+  }
+
+  // No notes match. Distinguish "nothing in the store" from "filters excluded
+  // everything": only the latter shows active filters + a clear-filters action.
+  if (!notes.length) {
+    els.noteList.innerHTML = '<li class="no-notes">No notes yet — create one with + New.</li>';
+    return;
+  }
+
+  const chips = [];
+  if (folderFilter) chips.push('<span class="empty-filter-chip" data-filter="folder">Folder: ' + escapeHtml(folderFilter) + '</span>');
+  for (const t of selectedTags) chips.push('<span class="empty-filter-chip" data-filter="tag" data-tag="' + escapeHtml(t) + '">Tag: ' + escapeHtml(t) + '</span>');
+  if (searchQuery.trim()) chips.push('<span class="empty-filter-chip" data-filter="search">Search: ' + escapeHtml(searchQuery.trim()) + '</span>');
+
+  els.noteList.innerHTML =
+    '<li class="no-notes no-results">' +
+    '<div class="no-results-msg">No notes match the current filters.</div>' +
+    (chips.length ? '<div class="empty-filter-chips">' + chips.join('') + '</div>' : '') +
+    '<button class="btn btn-ghost clear-filters" type="button">Clear filters</button>' +
+    '</li>';
 }
 
 function renderSidebar() {
@@ -369,6 +389,15 @@ function selectNote(id) {
   activeId = id;
   renderSidebar();
   renderEditor();
+}
+
+function clearFilters() {
+  searchQuery = '';
+  els.search.value = '';
+  folderFilter = '';
+  els.folderFilter.value = '';
+  selectedTags = new Set();
+  renderSidebar();
 }
 
 function deleteActive() {
@@ -478,6 +507,10 @@ function applyTheme(t) {
 els.newNote.addEventListener('click', createNote);
 
 els.noteList.addEventListener('click', (e) => {
+  if (e.target.closest('.clear-filters')) {
+    clearFilters();
+    return;
+  }
   const item = e.target.closest('.note-item');
   if (item) selectNote(item.dataset.id);
 });
