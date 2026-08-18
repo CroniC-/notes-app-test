@@ -363,9 +363,17 @@ function deleteActive() {
   const n = getActive();
   if (!n) return;
   if (!confirm('Delete "' + (n.title || 'Untitled') + '"?')) return;
+  // Find index in sorted list before deleting
+  const sortedNotes = [...notes].sort((a, b) => b.updatedAt - a.updatedAt);
+  const deletedIndex = sortedNotes.findIndex((x) => x.id === n.id);
   notes = notes.filter((x) => x.id !== n.id);
   persist();
-  activeId = visibleNotes()[0] ? visibleNotes()[0].id : null;
+  // Prefer nearest sibling in sort order
+  if (deletedIndex >= 0) {
+    activeId = sortedNotes[deletedIndex - 1]?.id || sortedNotes[deletedIndex + 1]?.id || null;
+  } else {
+    activeId = null;
+  }
   renderAll();
 }
 
