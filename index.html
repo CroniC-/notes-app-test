@@ -17,8 +17,8 @@
       <select id="folder-filter" aria-label="Filter by folder">
         <option value="">All folders</option>
       </select>
-      <div id="tag-cloud" class="tag-cloud"></div>
-      <ul id="note-list" class="note-list"></ul>
+      <div id="tag-cloud" class="tag-cloud" role="group" aria-label="Tags"></div>
+      <ul id="note-list" class="note-list" role="listbox" aria-label="Notes"></ul>
       <div class="sidebar-footer">
         <button id="export" class="btn btn-ghost">Export</button>
         <button id="import" class="btn btn-ghost">Import</button>
@@ -47,12 +47,12 @@
         </div>
 
         <div class="toolbar">
-          <div class="view-toggle">
-            <button id="view-write" class="btn active">Write</button>
-            <button id="view-preview" class="btn">Preview</button>
+          <div class="view-toggle" role="group" aria-label="View mode">
+            <button id="view-write" class="btn active" aria-pressed="true">Write</button>
+            <button id="view-preview" class="btn" aria-pressed="false">Preview</button>
           </div>
           <div class="toolbar-right">
-            <span id="save-indicator" class="save-indicator"></span>
+            <span id="save-indicator" class="save-indicator" aria-live="polite" aria-atomic="true"></span>
             <button id="delete-note" class="btn btn-danger">Delete</button>
           </div>
         </div>

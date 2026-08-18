@@ -127,9 +127,10 @@ session, read this file first for full context.
 - [ ] **P2-15 — No README / LICENSE / .gitignore**
   - Acceptance: add `README.md` (features, shortcuts, storage model, import/export format, dev/run instructions — "open index.html" or a static server), `LICENSE` (confirm owner's preferred license — ask if unclear), `.gitignore` (node_modules, OS files).
 
-- [ ] **P2-16 — Accessibility gaps**
+- [x] **P2-16 — Accessibility gaps**
   - Acceptance: tag chips and note items → `role="button"`/`role="option"` + `tabindex="0"` + Enter/Space handlers; view-toggle buttons → `aria-pressed`; folder filter → keep `aria-label` (already present); `#save-indicator` → `aria-live="polite"`.
   - Location: `index.html` (roles/labels) + `app.js` (keyboard handlers) + `style.css` (focus-visible styles).
+  - Done: Added ARIA roles, tabindex, keyboard handlers for tags/notes/filter chips, aria-pressed for view buttons, aria-live for save indicator, and focus-visible styles.
 
 - [ ] **P2-19 — `.editor-pane` visibility uses `hidden` on a flex child**
   - Note: the `[hidden] { display: none !important }` global rule handles this correctly; only one of empty-state/editor-pane is visible at a time via `hidden`. **No code change needed** — keep this checklist item as a verification note. Mark done after confirming in a quick smoke test.
@@ -153,7 +154,7 @@ session, read this file first for full context.
 4. **P0-2** (paragraph parser) — after tests exist.
 5. **P1-7 / P1-8 / P1-10 / P1-17** — UX pass.
 6. **P2-15** (README/LICENSE/.gitignore).
-7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green.
+7. **P2-16** (a11y) + **P2-11 / P2-12** (refactors) — larger, do last with tests green. - Done.
 
 ## Definition of done (per item)
 - Code change committed on a `vibe/<slug>-862446` branch, draft PR opened.
