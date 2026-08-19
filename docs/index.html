@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App - Demo</title>
+  <meta name="description" content="A lightweight, client-side markdown notes application built with vanilla JavaScript">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f6f7f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      color: #1c2128;
+      margin-bottom: 1rem;
+    }
+    
+    .subtitle {
+      color: #6b7280;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .feature {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e2e5ea;
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature h3 {
+      color: #1c2128;
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature p {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: #1d4ed8;
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: #2563eb;
+      border: 1px solid #e2e5ea;
+      margin-left: 1rem;
+    }
+    
+    .btn-secondary:hover {
+      background: #f0f2f5;
+    }
+    
+    .github-link {
+      margin-top: 2rem;
+      color: #6b7280;
+    }
+    
+    .github-link a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    
+    .github-link a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      
+      .btn-secondary {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Notes App</h1>
+    <p class="subtitle">A lightweight, client-side markdown notes application with zero dependencies</p>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📄</div>
+        <h3>Markdown Support</h3>
+        <p>Write notes with full markdown support including headings, lists, code blocks, and more.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗂️</div>
+        <h3>Organize Notes</h3>
+        <p>Use folders and tags to keep your notes organized and easy to find.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💾</div>
+        <h3>Local Storage</h3>
+        <p>All notes are saved automatically to your browser's localStorage.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔍</div>
+        <h3>Search & Filter</h3>
+        <p>Full-text search across all notes with folder and tag filtering.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌓</div>
+        <h3>Light & Dark Mode</h3>
+        <p>Toggle between light and dark themes for comfortable viewing.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⌨️</div>
+        <h3>Keyboard Shortcuts</h3>
+        <p>Navigate and create notes quickly with keyboard shortcuts.</p>
+      </div>
+    </div>
+    
+    <div>
+      <a href="index.html" class="btn">Launch App</a>
+      <a href="https://github.com/CroniC-/notes-app-test" class="btn btn-secondary">View on GitHub</a>
+    </div>
+    
+    <div class="github-link">
+      <p>Found a bug or have a feature request? <a href="https://github.com/CroniC-/notes-app-test/issues">Open an issue</a>.</p>
+    </div>
+  </div>
+</body>
+</html>
