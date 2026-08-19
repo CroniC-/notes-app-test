@@ -1,0 +1,24 @@
+# Code Owners
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default code owner for all files
+* @CroniC-
+
+# Documentation
+/README.md @CroniC-
+/IMPLEMENTATION_PLAN.md @CroniC-
+/CONTRIBUTING.md @CroniC-
+/CODE_OF_CONDUCT.md @CroniC-
+/CHANGELOG.md @CroniC-
+
+# Configuration
+/package.json @CroniC-
+/.github/ @CroniC-
+
+# Source files
+/index.html @CroniC-
+/app.js @CroniC-
+/style.css @CroniC-
+
+# Tests
+/test/ @CroniC-
