@@ -1,6 +1,7 @@
 # Notes App
 
 A lightweight, client-side markdown notes application built with vanilla JavaScript, HTML, and CSS. No build step, no dependencies, no server required — just open `index.html` in a browser.
+Test: https://cronic-.github.io/notes-app-test/
 
 ## Features
 
