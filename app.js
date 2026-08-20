@@ -218,6 +218,7 @@ const els = {
   viewWrite: $('#view-write'),
   viewPreview: $('#view-preview'),
   saveIndicator: $('#save-indicator'),
+  wordCount: $('#word-count'),
   deleteBtn: $('#delete-note'),
   body: $('#note-body'),
   preview: $('#preview'),
@@ -513,6 +514,7 @@ function renderEditor() {
   els.tags.value = n.tags.join(', ');
   els.body.value = n.body;
   applyView();
+  updateWordCount();
 }
 
 function applyView() {
@@ -581,6 +583,7 @@ function selectNote(id) {
   activeId = id;
   renderSidebar();
   renderEditor();
+  updateWordCount();
 }
 
 function clearFilters() {
@@ -619,6 +622,7 @@ function scheduleSave() {
   n.body = els.body.value;
   n.updatedAt = Date.now();
   clearTimeout(saveTimer);
+  updateWordCount();
   saveTimer = setTimeout(() => {
     saveTimer = null;
     persist();
@@ -643,6 +647,23 @@ function exportNotes() {
   URL.revokeObjectURL(a.href);
 }
 
+// Word and character count utility
+function countWordsAndChars(text) {
+  const trimmed = text.trim();
+  const charCount = trimmed.length;
+  const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
+  return { words: wordCount, chars: charCount };
+}
+
+function updateWordCount() {
+  const n = getActive();
+  if (!n) {
+    els.wordCount.textContent = '';
+    return;
+  }
+  const { words, chars } = countWordsAndChars(n.body);
+  els.wordCount.textContent = words + ' words, ' + chars + ' chars';
+}
 function importNotes(file) {
   const reader = new FileReader();
   reader.onload = () => {
