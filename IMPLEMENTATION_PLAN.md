@@ -335,7 +335,6 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 
 ---
 
-
 ## 🏗️ Technical Architecture
 
 ### Current Architecture

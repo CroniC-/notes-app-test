@@ -891,36 +891,35 @@ els.noteList.addEventListener('drop', (e) => {
   if (targetItem && draggedItem && targetItem !== draggedItem) {
     const fromId = draggedItem.dataset.id;
     const toId = targetItem.dataset.id;
-    
+
     // Clear all drag states
     Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
       el.classList.remove('dragging', 'drag-over');
     });
-    
+
     // Find the indices in the notes array
     const fromIndex = notes.findIndex((n) => n.id === fromId);
     const toIndex = notes.findIndex((n) => n.id === toId);
-    
+
     if (fromIndex !== -1 && toIndex !== -1) {
       // Reorder the notes array
       const [removed] = notes.splice(fromIndex, 1);
       notes.splice(toIndex, 0, removed);
-      
+
       // Update timestamp to trigger save
       removed.updatedAt = Date.now();
-      
+
       persist();
       renderSidebar();
-      
+
       // Keep the same note selected
       activeId = fromId;
       renderEditor();
     }
-    
+
     draggedItem = null;
   }
 });
-
 
 els.noteList.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter' && e.key !== ' ') return;
