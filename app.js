@@ -426,6 +426,7 @@ function renderNoteList() {
           'data-id': n.id,
           role: 'option',
           tabindex: n.id === activeId ? '0' : '-1',
+          draggable: 'true',
         },
         [
           el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
@@ -839,6 +840,87 @@ els.noteList.addEventListener('click', (e) => {
   const item = e.target.closest('.note-item');
   if (item) selectNote(item.dataset.id);
 });
+// Drag and drop reordering
+let draggedItem = null;
+
+els.noteList.addEventListener('dragstart', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    draggedItem = item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', item.dataset.id);
+  }
+});
+
+els.noteList.addEventListener('dragend', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    item.classList.remove('dragging');
+    draggedItem = null;
+    // Clear all drag-over states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('drag-over');
+    });
+  }
+});
+
+els.noteList.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  const item = e.target.closest('.note-item');
+  if (item && item !== draggedItem) {
+    // Clear previous drag-over states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('drag-over');
+    });
+    item.classList.add('drag-over');
+    e.dataTransfer.dropEffect = 'move';
+  }
+});
+
+els.noteList.addEventListener('dragleave', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    item.classList.remove('drag-over');
+  }
+});
+
+els.noteList.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const targetItem = e.target.closest('.note-item');
+  if (targetItem && draggedItem && targetItem !== draggedItem) {
+    const fromId = draggedItem.dataset.id;
+    const toId = targetItem.dataset.id;
+    
+    // Clear all drag states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('dragging', 'drag-over');
+    });
+    
+    // Find the indices in the notes array
+    const fromIndex = notes.findIndex((n) => n.id === fromId);
+    const toIndex = notes.findIndex((n) => n.id === toId);
+    
+    if (fromIndex !== -1 && toIndex !== -1) {
+      // Reorder the notes array
+      const [removed] = notes.splice(fromIndex, 1);
+      notes.splice(toIndex, 0, removed);
+      
+      // Update timestamp to trigger save
+      removed.updatedAt = Date.now();
+      
+      persist();
+      renderSidebar();
+      
+      // Keep the same note selected
+      activeId = fromId;
+      renderEditor();
+    }
+    
+    draggedItem = null;
+  }
+});
+
 
 els.noteList.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter' && e.key !== ' ') return;
