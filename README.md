@@ -7,7 +7,7 @@ Test: https://cronic-.github.io/notes-app-test/
 
 - **Markdown Support**: Write notes in a lightweight, intentional subset of markdown with live preview
   - Headings (`#`, `##`, `###`, `####`)
-  - Bold (`**bold**`), Italic (`*italic*`)
+  - Bold (`**bold**`), Italic (`*italic*`), Strikethrough (`~~strikethrough~~`)
   - Inline code (`` `code` ``)
   - Code blocks (``` ``` ``` ```)
   - Links (`[text](https://url)`)
@@ -15,7 +15,7 @@ Test: https://cronic-.github.io/notes-app-test/
   - Unordered lists (`- item` or `* item`)
   - Ordered lists (`1. item`)
   - Horizontal rules (`---` or `***`)
-  - *Note: This is a minimal markdown implementation by design. Features like tables, nested lists, task lists, images, strikethrough, and autolinks are intentionally not supported to keep the app lightweight with zero dependencies.*
+  - *Note: This is a minimal markdown implementation by design. Features like tables, nested lists, task lists, images, and autolinks are intentionally not supported to keep the app lightweight with zero dependencies.*
 
 - **Organization**
   - Folders: Categorize notes by folder
@@ -38,6 +38,9 @@ Test: https://cronic-.github.io/notes-app-test/
   |----------|--------|
   | `Ctrl/Cmd + N` | Create new note |
   | `Ctrl/Cmd + S` | Flush pending save |
+  | `Ctrl/Cmd + B` | Bold selected text |
+  | `Ctrl/Cmd + I` | Italic selected text |
+  | `Ctrl/Cmd + K` | Insert link |
   | `Arrow Up/Down` | Navigate note list |
   | `Enter` | Select focused note |
   | `Escape` | Clear search input |
@@ -45,6 +48,10 @@ Test: https://cronic-.github.io/notes-app-test/
 - **Theming**
   - Light and dark theme toggle
   - Responsive design for mobile and desktop
+
+- **Rich Text Formatting**
+  - Format toolbar with buttons for: Bold, Italic, Strikethrough, Heading 1-4, Bullet List, Numbered List, Link, Code Block, Blockquote, Horizontal Rule
+  - Keyboard shortcuts for common formatting (Ctrl/Cmd+B, Ctrl/Cmd+I, Ctrl/Cmd+K)
 
 - **Relative Timestamps**
   - Note timestamps show relative time ("2 hours ago", "yesterday", etc.)

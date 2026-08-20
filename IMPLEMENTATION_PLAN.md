@@ -3,7 +3,7 @@
 > **Project**: Notes App - A lightweight, client-side markdown notes application
 > **Repository**: [CroniC-/notes-app-test](https://github.com/CroniC-/notes-app-test)
 > **Status**: Active Development
-> **Last Updated**: Tue Aug 18 10:55:40 PM UTC 2026
+> **Last Updated**: Thu Aug 20 11:30:00 AM UTC 2026
 > **Current Version**: 1.0.0
 > **Task Reference Format**: `Category.Prefix.Number` (e.g., P1.UX.1)
 
@@ -122,14 +122,14 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 **Phase ID**: P1
 
 #### User Experience
-- [ ] **P1.UX.1** - Add rich text editor toolbar with formatting buttons
-  - [ ] **P1.UX.1.1** - Bold, Italic, Strikethrough
-  - [ ] **P1.UX.1.2** - Headers (H1-H4)
-  - [ ] **P1.UX.1.3** - Lists (ordered, unordered)
-  - [ ] **P1.UX.1.4** - Links
-  - [ ] **P1.UX.1.5** - Code blocks
-  - [ ] **P1.UX.1.6** - Blockquotes
-  - [ ] **P1.UX.1.7** - Horizontal rule
+- [x] **P1.UX.1** - Add rich text editor toolbar with formatting buttons
+- [x] **P1.UX.1.1** - Bold, Italic, Strikethrough
+- [x] **P1.UX.1.2** - Headers (H1-H4)
+- [x] **P1.UX.1.3** - Lists (ordered, unordered)
+- [x] **P1.UX.1.4** - Links
+- [x] **P1.UX.1.5** - Code blocks
+- [x] **P1.UX.1.6** - Blockquotes
+- [x] **P1.UX.1.7** - Horizontal rule
 - [ ] **P1.UX.2** - Implement note drag & drop reordering
 - [ ] **P1.UX.3** - Add word/character count display
 - [ ] **P1.UX.4** - Auto-focus title input when creating new note
