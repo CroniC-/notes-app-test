@@ -218,7 +218,10 @@ const els = {
   fmtBold: $('#fmt-bold'),
   fmtItalic: $('#fmt-italic'),
   fmtStrike: $('#fmt-strike'),
-  fmtHeading: $('#fmt-heading'),
+  fmtH1: $('#fmt-h1'),
+  fmtH2: $('#fmt-h2'),
+  fmtH3: $('#fmt-h3'),
+  fmtH4: $('#fmt-h4'),
   fmtUl: $('#fmt-ul'),
   fmtOl: $('#fmt-ol'),
   fmtLink: $('#fmt-link'),
@@ -295,7 +298,6 @@ store.set('selectedTags', selectedTags);
 
 let saveTimer = null;
 let indicatorTimer = null;
-let savedSelection = null;
 
 // ---------- storage ----------
 
@@ -719,16 +721,6 @@ function formatStrike() {
 
 function formatHeading(level) {
   const prefix = '#'.repeat(level) + ' ';
-  const textarea = getTextarea();
-  // Use saved selection if available
-  if (savedSelection) {
-    textarea.focus();
-    textarea.selectionStart = savedSelection.start;
-    textarea.selectionEnd = savedSelection.end;
-    savedSelection = null;
-  } else {
-    textarea.focus();
-  }
   wrapLine(prefix);
 }
 
@@ -893,31 +885,10 @@ window.addEventListener('visibilitychange', () => {
 els.fmtBold.addEventListener('click', () => formatBold());
 els.fmtItalic.addEventListener('click', () => formatItalic());
 els.fmtStrike.addEventListener('click', () => formatStrike());
-els.fmtHeading.addEventListener('mousedown', () => {
-  // Save selection before dropdown opens
-  const textarea = els.body;
-  savedSelection = {
-    start: textarea.selectionStart,
-    end: textarea.selectionEnd
-  };
-});
-
-els.fmtHeading.addEventListener('focus', () => {
-  // Also save on focus
-  const textarea = els.body;
-  savedSelection = {
-    start: textarea.selectionStart,
-    end: textarea.selectionEnd
-  };
-});
-
-els.fmtHeading.addEventListener('change', (e) => {
-  const level = parseInt(e.target.value);
-  if (level) {
-    formatHeading(level);
-    e.target.value = '';
-  }
-});
+els.fmtH1.addEventListener('click', () => formatHeading(1));
+els.fmtH2.addEventListener('click', () => formatHeading(2));
+els.fmtH3.addEventListener('click', () => formatHeading(3));
+els.fmtH4.addEventListener('click', () => formatHeading(4));
 els.fmtUl.addEventListener('click', () => formatUl());
 els.fmtOl.addEventListener('click', () => formatOl());
 els.fmtLink.addEventListener('click', () => formatLink());
