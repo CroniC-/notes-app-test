@@ -111,14 +111,6 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - [ ] **G3.T4** - End-to-end encryption
 - [ ] **G3.T5** - Multi-device sync
 
-### Success Metrics
-
-- [ ] **G4.T1** - Test coverage: 90%+
-- [ ] **G4.T2** - GitHub stars: 100+
-- [ ] **G4.T3** - Active contributors: 5+
-- [ ] **G4.T4** - Performance: < 100ms for all operations
-- [ ] **G4.T5** - Accessibility score: 100/100
-
 ---
 
 ## 📅 Implementation Phases
@@ -144,7 +136,7 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - [x] **P1.UX.1.7** - Horizontal rule
 - [ ] **P1.UX.2** - Implement note drag & drop reordering
 - [ ] **P1.UX.3** - Add word/character count display
-- [ ] **P1.UX.4** - Auto-focus title input when creating new note
+- [x] **P1.UX.4** - Auto-focus title input when creating new note
 - [ ] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
 - [ ] **P1.UX.6** - Add click-to-filter for tags in metadata
 - [ ] **P1.UX.7** - Show full timestamp on hover of relative time
@@ -343,41 +335,6 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 
 ---
 
-### Phase 5: Ecosystem & Community (Priority: Low, Effort: High)
-
-**Goal**: Build community and ecosystem
-**Estimated Time**: Ongoing
-**Status**: ⏳ Not Started
-**Phase ID**: P5
-
-#### Community
-
-- [ ] **P5.CO.1** - Enable GitHub Discussions
-- [ ] **P5.CO.2** - Add issue templates
-- [ ] **P5.CO.3** - Add pull request templates
-- [ ] **P5.CO.4** - Add code of conduct
-- [ ] **P5.CO.5** - Add contributing guide
-- [ ] **P5.CO.6** - Create website/landing page
-- [ ] **P5.CO.7** - Add roadmap to README
-- [ ] **P5.CO.8** - Add changelog
-
-#### Extensions
-
-- [ ] **P5.EX.1** - Create browser extension (Chrome/Firefox)
-- [ ] **P5.EX.2** - Create desktop app (Electron/Tauri)
-- [ ] **P5.EX.3** - Create mobile app (React Native/Capacitor)
-- [ ] **P5.EX.4** - Create VS Code extension
-- [ ] **P5.EX.5** - Create CLI tool
-
-#### Analytics (Optional, with consent)
-
-- [ ] **P5.AN.1** - Add local analytics (stored in localStorage)
-- [ ] **P5.AN.2** - Add opt-in telemetry
-- [ ] **P5.AN.3** - Add error tracking (anonymized)
-- [ ] **P5.AN.4** - Add feature usage tracking
-- [ ] **P5.AN.5** - Add performance metrics
-
----
 
 ## 🏗️ Technical Architecture
 
