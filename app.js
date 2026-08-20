@@ -719,12 +719,15 @@ function formatStrike() {
 
 function formatHeading(level) {
   const prefix = '#'.repeat(level) + ' ';
+  const textarea = getTextarea();
   // Use saved selection if available
   if (savedSelection) {
-    const textarea = getTextarea();
+    textarea.focus();
     textarea.selectionStart = savedSelection.start;
     textarea.selectionEnd = savedSelection.end;
     savedSelection = null;
+  } else {
+    textarea.focus();
   }
   wrapLine(prefix);
 }
@@ -892,6 +895,15 @@ els.fmtItalic.addEventListener('click', () => formatItalic());
 els.fmtStrike.addEventListener('click', () => formatStrike());
 els.fmtHeading.addEventListener('mousedown', () => {
   // Save selection before dropdown opens
+  const textarea = els.body;
+  savedSelection = {
+    start: textarea.selectionStart,
+    end: textarea.selectionEnd
+  };
+});
+
+els.fmtHeading.addEventListener('focus', () => {
+  // Also save on focus
   const textarea = els.body;
   savedSelection = {
     start: textarea.selectionStart,
