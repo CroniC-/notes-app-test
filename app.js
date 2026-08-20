@@ -295,6 +295,7 @@ store.set('selectedTags', selectedTags);
 
 let saveTimer = null;
 let indicatorTimer = null;
+let savedSelection = null;
 
 // ---------- storage ----------
 
@@ -718,6 +719,13 @@ function formatStrike() {
 
 function formatHeading(level) {
   const prefix = '#'.repeat(level) + ' ';
+  // Use saved selection if available
+  if (savedSelection) {
+    const textarea = getTextarea();
+    textarea.selectionStart = savedSelection.start;
+    textarea.selectionEnd = savedSelection.end;
+    savedSelection = null;
+  }
   wrapLine(prefix);
 }
 
@@ -882,6 +890,15 @@ window.addEventListener('visibilitychange', () => {
 els.fmtBold.addEventListener('click', () => formatBold());
 els.fmtItalic.addEventListener('click', () => formatItalic());
 els.fmtStrike.addEventListener('click', () => formatStrike());
+els.fmtHeading.addEventListener('mousedown', () => {
+  // Save selection before dropdown opens
+  const textarea = els.body;
+  savedSelection = {
+    start: textarea.selectionStart,
+    end: textarea.selectionEnd
+  };
+});
+
 els.fmtHeading.addEventListener('change', (e) => {
   const level = parseInt(e.target.value);
   if (level) {
