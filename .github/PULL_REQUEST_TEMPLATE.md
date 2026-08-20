@@ -14,6 +14,7 @@ Closes #
 A clear and concise description of what this PR does.
 
 **Changes Made**
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
@@ -23,10 +24,12 @@ A clear and concise description of what this PR does.
 - [ ] Dependency updates
 
 **Files Changed**
+
 - `file1.js` - Description of changes
 - `file2.css` - Description of changes
 
 **Testing**
+
 - [ ] All existing tests pass (`npm test`)
 - [ ] New tests added for new functionality
 - [ ] Manual testing completed in browser
@@ -35,6 +38,7 @@ A clear and concise description of what this PR does.
 Add screenshots showing the before and after behavior.
 
 **Checklist**
+
 - [ ] My code follows the project's style guidelines
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas

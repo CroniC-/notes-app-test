@@ -20,11 +20,13 @@ A clear and concise description of any alternative solutions or features you've 
 Add any other context or screenshots about the feature request here.
 
 **Priority (optional)**
+
 - [ ] Low - Nice to have
 - [ ] Medium - Would be useful
 - [ ] High - Important for my workflow
 
 **Willing to contribute?**
+
 - [ ] Yes, I'd like to implement this myself
 - [ ] Maybe, with some guidance
 - [ ] No, just suggesting

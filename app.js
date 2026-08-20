@@ -4,7 +4,7 @@
 //        el('div', {}, [el('span', {}, 'child1'), el('span', {}, 'child2')])
 function el(tag, props, children) {
   const element = document.createElement(tag);
-  
+
   // Set properties/attributes
   if (props) {
     for (const [key, value] of Object.entries(props)) {
@@ -25,7 +25,7 @@ function el(tag, props, children) {
       }
     }
   }
-  
+
   // Append children
   if (children !== undefined && children !== null) {
     if (Array.isArray(children)) {
@@ -44,10 +44,9 @@ function el(tag, props, children) {
       element.appendChild(children);
     }
   }
-  
+
   return element;
 }
-
 
 // === pure helpers ===
 
@@ -86,6 +85,7 @@ function renderMarkdown(src) {
     });
     s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    s = s.replace(/~~([^~]+)~~/g, '<s>$1</s>');
     s = s.replace(/\[([^\]]+)\]\(((?:[^()\s]|\([^()\s]*\))*)\)/g, (m, txt, url) => {
       if (!/^(https?:\/\/|mailto:)/i.test(url)) return txt;
       return '<a href="' + url + '" target="_blank" rel="noopener">' + txt + '</a>';
@@ -171,7 +171,14 @@ function renderMarkdown(src) {
 }
 
 function parseTagsInput(value) {
-  return [...new Set(String(value).split(',').map((t) => t.trim()).filter(Boolean))];
+  return [
+    ...new Set(
+      String(value)
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    ),
+  ];
 }
 
 function timeAgo(ts) {
@@ -214,8 +221,20 @@ const els = {
   deleteBtn: $('#delete-note'),
   body: $('#note-body'),
   preview: $('#preview'),
+  fmtBold: $('#fmt-bold'),
+  fmtItalic: $('#fmt-italic'),
+  fmtStrike: $('#fmt-strike'),
+  fmtH1: $('#fmt-h1'),
+  fmtH2: $('#fmt-h2'),
+  fmtH3: $('#fmt-h3'),
+  fmtH4: $('#fmt-h4'),
+  fmtUl: $('#fmt-ul'),
+  fmtOl: $('#fmt-ol'),
+  fmtLink: $('#fmt-link'),
+  fmtCode: $('#fmt-code'),
+  fmtQuote: $('#fmt-quote'),
+  fmtHr: $('#fmt-hr'),
 };
-
 
 // === store ===
 
@@ -260,7 +279,7 @@ const store = (() => {
     // Get current state (for debugging/testing)
     getState() {
       return { ...state };
-    }
+    },
   };
 })();
 
@@ -367,17 +386,30 @@ function renderSidebarChrome() {
   if (folderFilter && !folders.includes(folderFilter)) folderFilter = '';
   selectedTags = new Set([...selectedTags].filter((t) => notes.some((n) => n.tags.includes(t))));
 
-  els.folderFilter.textContent = "";
-  els.folderFilter.appendChild(el("option", { value: "" }, "All folders"));
+  els.folderFilter.textContent = '';
+  els.folderFilter.appendChild(el('option', { value: '' }, 'All folders'));
   for (const f of folders) {
-    els.folderFilter.appendChild(el("option", { value: f, selected: f === folderFilter }, escapeHtml(f)));
+    els.folderFilter.appendChild(
+      el('option', { value: f, selected: f === folderFilter }, escapeHtml(f))
+    );
   }
 
   const tags = [...new Set(notes.flatMap((n) => n.tags))].sort();
-  els.tagCloud.textContent = "";
+  els.tagCloud.textContent = '';
   if (tags.length) {
     for (const t of tags) {
-      els.tagCloud.appendChild(el("span", { class: "tag" + (selectedTags.has(t) ? " selected" : ""), "data-tag": t, role: "button", tabindex: "0" }, escapeHtml(t)));
+      els.tagCloud.appendChild(
+        el(
+          'span',
+          {
+            class: 'tag' + (selectedTags.has(t) ? ' selected' : ''),
+            'data-tag': t,
+            role: 'button',
+            tabindex: '0',
+          },
+          escapeHtml(t)
+        )
+      );
     }
   }
 }
@@ -385,15 +417,24 @@ function renderSidebarChrome() {
 function renderNoteList() {
   const list = visibleNotes();
   if (list.length) {
-    els.noteList.textContent = "";
+    els.noteList.textContent = '';
     for (const n of list) {
-      const li = el("li", { class: "note-item" + (n.id === activeId ? " active" : ""), "data-id": n.id, role: "option", tabindex: n.id === activeId ? "0" : "-1" }, [
-        el("div", { class: "note-title" }, escapeHtml(n.title || "Untitled")),
-        el("div", { class: "note-sub" }, [
-          n.folder ? el("span", {}, escapeHtml(n.folder)) : "",
-          el("span", {}, timeAgo(n.updatedAt))
-        ])
-      ]);
+      const li = el(
+        'li',
+        {
+          class: 'note-item' + (n.id === activeId ? ' active' : ''),
+          'data-id': n.id,
+          role: 'option',
+          tabindex: n.id === activeId ? '0' : '-1',
+        },
+        [
+          el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
+          el('div', { class: 'note-sub' }, [
+            n.folder ? el('span', {}, escapeHtml(n.folder)) : '',
+            el('span', {}, timeAgo(n.updatedAt)),
+          ]),
+        ]
+      );
       els.noteList.appendChild(li);
     }
     return;
@@ -401,20 +442,55 @@ function renderNoteList() {
   // No notes match. Distinguish "nothing in the store" from "filters excluded
   // everything": only the latter shows active filters + a clear-filters action.
   if (!notes.length) {
-    els.noteList.textContent = "";
-    els.noteList.appendChild(el("li", { class: "no-notes" }, "No notes yet — create one with + New."));
+    els.noteList.textContent = '';
+    els.noteList.appendChild(
+      el('li', { class: 'no-notes' }, 'No notes yet — create one with + New.')
+    );
     return;
   }
   const chips = [];
-  if (folderFilter) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "folder", role: "button", tabindex: "0" }, "Folder: " + escapeHtml(folderFilter)));
-  for (const t of selectedTags) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "tag", "data-tag": t, role: "button", tabindex: "0" }, "Tag: " + escapeHtml(t)));
-  if (searchQuery.trim()) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "search", role: "button", tabindex: "0" }, "Search: " + escapeHtml(searchQuery.trim())));
-  els.noteList.textContent = "";
-  els.noteList.appendChild(el("li", { class: "no-notes no-results" }, [
-    el("div", { class: "no-results-msg" }, "No notes match the current filters."),
-    chips.length ? el("div", { class: "empty-filter-chips" }, chips) : "",
-    el("button", { class: "btn btn-ghost clear-filters", type: "button", role: "button" }, "Clear filters")
-  ]));
+  if (folderFilter)
+    chips.push(
+      el(
+        'span',
+        { class: 'empty-filter-chip', 'data-filter': 'folder', role: 'button', tabindex: '0' },
+        'Folder: ' + escapeHtml(folderFilter)
+      )
+    );
+  for (const t of selectedTags)
+    chips.push(
+      el(
+        'span',
+        {
+          class: 'empty-filter-chip',
+          'data-filter': 'tag',
+          'data-tag': t,
+          role: 'button',
+          tabindex: '0',
+        },
+        'Tag: ' + escapeHtml(t)
+      )
+    );
+  if (searchQuery.trim())
+    chips.push(
+      el(
+        'span',
+        { class: 'empty-filter-chip', 'data-filter': 'search', role: 'button', tabindex: '0' },
+        'Search: ' + escapeHtml(searchQuery.trim())
+      )
+    );
+  els.noteList.textContent = '';
+  els.noteList.appendChild(
+    el('li', { class: 'no-notes no-results' }, [
+      el('div', { class: 'no-results-msg' }, 'No notes match the current filters.'),
+      chips.length ? el('div', { class: 'empty-filter-chips' }, chips) : '',
+      el(
+        'button',
+        { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' },
+        'Clear filters'
+      ),
+    ])
+  );
 }
 
 function renderSidebar() {
@@ -449,7 +525,9 @@ function applyView() {
   if (previewing) {
     const n = getActive();
     els.preview.innerHTML =
-      n && n.body.trim() ? renderMarkdown(n.body) : '<p class="empty-preview">Nothing to preview yet.</p>';
+      n && n.body.trim()
+        ? renderMarkdown(n.body)
+        : '<p class="empty-preview">Nothing to preview yet.</p>';
   }
 }
 
@@ -606,13 +684,147 @@ function currentTheme() {
   }
   return (
     saved ||
-    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light')
   );
 }
 
 function applyTheme(t) {
   document.documentElement.dataset.theme = t;
   els.themeToggle.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+}
+
+// ---------- formatting helpers ----------
+
+function getTextarea() {
+  return els.body;
+}
+
+function getSelection() {
+  const textarea = getTextarea();
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  return { start, end, text: textarea.value.substring(start, end) };
+}
+
+function replaceSelection(replacement) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+  textarea.selectionStart = start + replacement.length;
+  textarea.selectionEnd = start + replacement.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function wrapSelection(prefix, suffix = prefix) {
+  const { start, end, text } = getSelection();
+  const hasSelection = start !== end;
+
+  if (hasSelection) {
+    replaceSelection(prefix + text + suffix);
+  } else {
+    // Insert prefix and suffix with cursor in between
+    const textarea = getTextarea();
+    const pos = start;
+    textarea.value =
+      textarea.value.substring(0, pos) + prefix + suffix + textarea.value.substring(pos);
+    textarea.selectionStart = pos + prefix.length;
+    textarea.selectionEnd = pos + prefix.length;
+    textarea.focus();
+    scheduleSave();
+  }
+}
+
+function wrapLine(prefix) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  const before = textarea.value.substring(0, start);
+  const after = textarea.value.substring(end);
+  const selected = textarea.value.substring(start, end);
+
+  // Get the current line
+  const lineStart = before.lastIndexOf('\n') + 1;
+  const lineEnd = before.indexOf('\n', lineStart);
+  const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
+
+  // If there's a selection, wrap all selected lines
+  const lines = selected.split('\n');
+  const wrapped = lines.map((line) => prefix + line).join('\n');
+
+  textarea.value = before.substring(0, lineStart) + wrapped + after;
+  textarea.selectionStart = lineStart + wrapped.length;
+  textarea.selectionEnd = lineStart + wrapped.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function insertAtCursor(text) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  const before = textarea.value.substring(0, start);
+  const after = textarea.value.substring(end);
+
+  textarea.value = before + text + after;
+  textarea.selectionStart = start + text.length;
+  textarea.selectionEnd = start + text.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function formatBold() {
+  wrapSelection('**', '**');
+}
+
+function formatItalic() {
+  wrapSelection('*', '*');
+}
+
+function formatStrike() {
+  wrapSelection('~~', '~~');
+}
+
+function formatHeading(level) {
+  const prefix = '#'.repeat(level) + ' ';
+  wrapLine(prefix);
+}
+
+function formatUl() {
+  wrapLine('- ');
+}
+
+function formatOl() {
+  wrapLine('1. ');
+}
+
+function formatLink() {
+  const url = prompt('Enter URL:');
+  if (!url) return;
+  const { start, end, text } = getSelection();
+  const displayText = text || 'link text';
+  replaceSelection('[' + displayText + '](' + url + ')');
+}
+
+function formatCode() {
+  const { start, end, text } = getSelection();
+  if (start !== end) {
+    replaceSelection('`' + text + '`');
+  } else {
+    insertAtCursor('```\n\n```');
+    // Position cursor between the code block markers
+    const textarea = getTextarea();
+    textarea.selectionStart = start + 4;
+    textarea.selectionEnd = start + 4;
+  }
+}
+
+function formatQuote() {
+  wrapLine('> ');
+}
+
+function formatHr() {
+  insertAtCursor('\n\n---\n\n');
 }
 
 // ---------- events ----------
@@ -683,7 +895,9 @@ els.tagCloud.addEventListener('keydown', (e) => {
   renderSidebar();
 });
 
-[els.title, els.folder, els.tags, els.body].forEach((el) => el.addEventListener('input', scheduleSave));
+[els.title, els.folder, els.tags, els.body].forEach((el) =>
+  el.addEventListener('input', scheduleSave)
+);
 
 els.viewWrite.addEventListener('click', () => {
   view = 'write';
@@ -718,7 +932,6 @@ els.themeToggle.addEventListener('click', () => {
 });
 
 window.addEventListener('beforeunload', flushSave);
-clearInterval(timestampInterval);
 
 // ---------- init ----------
 
@@ -733,6 +946,22 @@ const timestampInterval = setInterval(refreshTimestamps, 60000);
 window.addEventListener('visibilitychange', () => {
   if (!document.hidden) refreshTimestamps();
 });
+
+// ---------- formatting event listeners ----------
+
+els.fmtBold.addEventListener('click', () => formatBold());
+els.fmtItalic.addEventListener('click', () => formatItalic());
+els.fmtStrike.addEventListener('click', () => formatStrike());
+els.fmtH1.addEventListener('click', () => formatHeading(1));
+els.fmtH2.addEventListener('click', () => formatHeading(2));
+els.fmtH3.addEventListener('click', () => formatHeading(3));
+els.fmtH4.addEventListener('click', () => formatHeading(4));
+els.fmtUl.addEventListener('click', () => formatUl());
+els.fmtOl.addEventListener('click', () => formatOl());
+els.fmtLink.addEventListener('click', () => formatLink());
+els.fmtCode.addEventListener('click', () => formatCode());
+els.fmtQuote.addEventListener('click', () => formatQuote());
+els.fmtHr.addEventListener('click', () => formatHr());
 
 // ---------- keyboard shortcuts ----------
 
@@ -783,6 +1012,27 @@ function handleKeyDown(e) {
     }
     selectNote(items[next].dataset.id);
     items[next].scrollIntoView({ block: 'nearest' });
+    return;
+  }
+
+  // Ctrl/Cmd + B: bold
+  if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+    e.preventDefault();
+    formatBold();
+    return;
+  }
+
+  // Ctrl/Cmd + I: italic
+  if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+    e.preventDefault();
+    formatItalic();
+    return;
+  }
+
+  // Ctrl/Cmd + K: link
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    formatLink();
     return;
   }
 

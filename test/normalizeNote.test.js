@@ -117,14 +117,33 @@ const tests = [
     name: 'fallback preserves id and other normalized fields',
     input: { id: 'a', title: 'T', body: 'B', folder: 'F', tags: ['t'], updatedAt: 'bad' },
     check: (r) =>
-      r.id === 'a' && r.title === 'T' && r.body === 'B' && r.folder === 'F' &&
-      Array.isArray(r.tags) && r.tags[0] === 't' && r.updatedAt === FIXED_NOW,
+      r.id === 'a' &&
+      r.title === 'T' &&
+      r.body === 'B' &&
+      r.folder === 'F' &&
+      Array.isArray(r.tags) &&
+      r.tags[0] === 't' &&
+      r.updatedAt === FIXED_NOW,
   },
   {
     name: 'result updatedAt is always a finite number',
     input: null,
     check: () => {
-      const cases = [null, undefined, 0, '0', '', '   ', NaN, Infinity, -1, { x: 1 }, true, 1690000000000, '1690000000000'];
+      const cases = [
+        null,
+        undefined,
+        0,
+        '0',
+        '',
+        '   ',
+        NaN,
+        Infinity,
+        -1,
+        { x: 1 },
+        true,
+        1690000000000,
+        '1690000000000',
+      ];
       return cases.every((c) => {
         const u = normalizeNote({ id: 'a', updatedAt: c }).updatedAt;
         return typeof u === 'number' && Number.isFinite(u);
@@ -141,8 +160,11 @@ const tests = [
       const older = normalizeNote({ id: 'old', updatedAt: 1690000000000 });
       const bad = normalizeNote({ id: 'bad', updatedAt: 'not-a-number' });
       const sorted = [older, bad].sort((a, b) => b.updatedAt - a.updatedAt);
-      return Number.isFinite(older.updatedAt) && Number.isFinite(bad.updatedAt) &&
-        sorted.every((n) => Number.isFinite(n.updatedAt));
+      return (
+        Number.isFinite(older.updatedAt) &&
+        Number.isFinite(bad.updatedAt) &&
+        sorted.every((n) => Number.isFinite(n.updatedAt))
+      );
     },
   },
 ];

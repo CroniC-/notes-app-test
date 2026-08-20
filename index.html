@@ -1,68 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="app">
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h1>Notes</h1>
-        <button id="new-note" class="btn btn-primary">+ New</button>
-      </div>
-      <input type="search" id="search" placeholder="Search notes…" autocomplete="off">
-      <select id="folder-filter" aria-label="Filter by folder">
-        <option value="">All folders</option>
-      </select>
-      <div id="tag-cloud" class="tag-cloud" role="group" aria-label="Tags"></div>
-      <ul id="note-list" class="note-list" role="listbox" aria-label="Notes"></ul>
-      <div class="sidebar-footer">
-        <button id="export" class="btn btn-ghost">Export</button>
-        <button id="import" class="btn btn-ghost">Import</button>
-        <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme">Toggle theme</button>
-      </div>
-      <input type="file" id="import-file" accept="application/json,.json" hidden>
-    </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h1>Notes</h1>
+          <button id="new-note" class="btn btn-primary">+ New</button>
+        </div>
+        <input type="search" id="search" placeholder="Search notes..." autocomplete="off" />
+        <select id="folder-filter" aria-label="Filter by folder">
+          <option value="">All folders</option>
+        </select>
+        <div id="tag-cloud" class="tag-cloud" role="group" aria-label="Tags"></div>
+        <ul id="note-list" class="note-list" role="listbox" aria-label="Notes"></ul>
+        <div class="sidebar-footer">
+          <button id="export" class="btn btn-ghost">Export</button>
+          <button id="import" class="btn btn-ghost">Import</button>
+          <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme">Toggle theme</button>
+        </div>
+        <input type="file" id="import-file" accept="application/json,.json" hidden />
+      </aside>
 
-    <main class="main">
-      <div id="empty-state" class="empty-state">
-        <p class="empty-title">No note selected</p>
-        <p>Create a new note to get started.</p>
-      </div>
-
-      <div id="editor-pane" class="editor-pane" hidden>
-        <div class="note-meta">
-          <input id="note-title" type="text" placeholder="Untitled" autocomplete="off">
-          <div class="meta-row">
-            <label>Folder
-              <input id="note-folder" type="text" placeholder="none" autocomplete="off">
-            </label>
-            <label>Tags
-              <input id="note-tags" type="text" placeholder="comma, separated" autocomplete="off">
-            </label>
-          </div>
+      <main class="main">
+        <div id="empty-state" class="empty-state">
+          <p class="empty-title">No note selected</p>
+          <p>Create a new note to get started.</p>
         </div>
 
-        <div class="toolbar">
-          <div class="view-toggle" role="group" aria-label="View mode">
-            <button id="view-write" class="btn active" aria-pressed="true">Write</button>
-            <button id="view-preview" class="btn" aria-pressed="false">Preview</button>
+        <div id="editor-pane" class="editor-pane" hidden>
+          <div class="note-meta">
+            <input id="note-title" type="text" placeholder="Untitled" autocomplete="off" />
+            <div class="meta-row">
+              <label
+                >Folder
+                <input id="note-folder" type="text" placeholder="none" autocomplete="off" />
+              </label>
+              <label
+                >Tags
+                <input
+                  id="note-tags"
+                  type="text"
+                  placeholder="comma, separated"
+                  autocomplete="off"
+                />
+              </label>
+            </div>
           </div>
-          <div class="toolbar-right">
-            <span id="save-indicator" class="save-indicator" aria-live="polite" aria-atomic="true"></span>
-            <button id="delete-note" class="btn btn-danger">Delete</button>
+
+          <div class="toolbar">
+            <div class="view-toggle" role="group" aria-label="View mode">
+              <button id="view-write" class="btn active" aria-pressed="true">Write</button>
+              <button id="view-preview" class="btn" aria-pressed="false">Preview</button>
+            </div>
+            <div class="toolbar-right">
+              <span
+                id="save-indicator"
+                class="save-indicator"
+                aria-live="polite"
+                aria-atomic="true"
+              ></span>
+              <button id="delete-note" class="btn btn-danger">Delete</button>
+            </div>
           </div>
+
+          <div class="format-toolbar" role="group" aria-label="Formatting">
+            <button id="fmt-bold" class="fmt-btn" title="Bold (Ctrl+B)" aria-label="Bold">B</button>
+            <button id="fmt-italic" class="fmt-btn" title="Italic (Ctrl+I)" aria-label="Italic">
+              I
+            </button>
+            <button
+              id="fmt-strike"
+              class="fmt-btn"
+              title="Strikethrough"
+              aria-label="Strikethrough"
+            >
+              S
+            </button>
+            <button id="fmt-h1" class="fmt-btn" title="Heading 1 (Ctrl+1)" aria-label="Heading 1">
+              H1
+            </button>
+            <button id="fmt-h2" class="fmt-btn" title="Heading 2 (Ctrl+2)" aria-label="Heading 2">
+              H2
+            </button>
+            <button id="fmt-h3" class="fmt-btn" title="Heading 3 (Ctrl+3)" aria-label="Heading 3">
+              H3
+            </button>
+            <button id="fmt-h4" class="fmt-btn" title="Heading 4 (Ctrl+4)" aria-label="Heading 4">
+              H4
+            </button>
+            <button id="fmt-ul" class="fmt-btn" title="Bullet List" aria-label="Bullet List">
+              UL
+            </button>
+            <button id="fmt-ol" class="fmt-btn" title="Numbered List" aria-label="Numbered List">
+              OL
+            </button>
+            <button id="fmt-link" class="fmt-btn" title="Link (Ctrl+K)" aria-label="Link">
+              Link
+            </button>
+            <button id="fmt-code" class="fmt-btn" title="Code Block" aria-label="Code Block">
+              Code
+            </button>
+            <button id="fmt-quote" class="fmt-btn" title="Blockquote" aria-label="Blockquote">
+              Quote
+            </button>
+            <button
+              id="fmt-hr"
+              class="fmt-btn"
+              title="Horizontal Rule"
+              aria-label="Horizontal Rule"
+            >
+              HR
+            </button>
+          </div>
+
+          <textarea id="note-body" placeholder="Write in Markdown..." spellcheck="true"></textarea>
+          <div id="preview" class="preview markdown" hidden></div>
         </div>
+      </main>
+    </div>
 
-        <textarea id="note-body" placeholder="Write in Markdown…" spellcheck="true"></textarea>
-        <div id="preview" class="preview markdown" hidden></div>
-      </div>
-    </main>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

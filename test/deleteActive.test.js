@@ -83,9 +83,9 @@ describe('P1-7: deleteActive fallback behavior', () => {
       { id: '3', title: 'Note 3', updatedAt: 3000 },
     ];
     activeId = '2';
-    
+
     deleteActive();
-    
+
     strictEqual(activeId, '3'); // Should select the note that was before it in sorted order (newer)
   });
 
@@ -96,20 +96,18 @@ describe('P1-7: deleteActive fallback behavior', () => {
       { id: '3', title: 'Note 3', updatedAt: 3000 },
     ];
     activeId = '3'; // Newest note (first in sorted order)
-    
+
     deleteActive();
-    
+
     strictEqual(activeId, '2'); // Should select the next note
   });
 
   it('clears activeId when deleting last note', () => {
-    notes = [
-      { id: '1', title: 'Note 1', updatedAt: 1000 },
-    ];
+    notes = [{ id: '1', title: 'Note 1', updatedAt: 1000 }];
     activeId = '1';
-    
+
     deleteActive();
-    
+
     strictEqual(activeId, null);
   });
 
@@ -123,9 +121,9 @@ describe('P1-7: deleteActive fallback behavior', () => {
     ];
     activeId = '2'; // Active note is in folder-b
     folderFilter = 'folder-a'; // But filter is set to folder-a
-    
+
     deleteActive();
-    
+
     // Should select nearest sibling in sort order (note 3), not first visible note (note 3)
     // In this case, note 3 is the nearest sibling
     strictEqual(activeId, '3');
@@ -140,9 +138,9 @@ describe('P1-7: deleteActive fallback behavior', () => {
     ];
     activeId = '4'; // Newest note in folder-a
     folderFilter = 'folder-a';
-    
+
     deleteActive();
-    
+
     // Should select note 3 (previous in sort order)
     strictEqual(activeId, '3');
   });
@@ -154,9 +152,9 @@ describe('P1-7: deleteActive fallback behavior', () => {
       { id: '3', title: 'Note 3', folder: 'folder-a', updatedAt: 3000 },
     ];
     activeId = '2'; // Note in folder-b
-    
+
     deleteActive();
-    
+
     // Should select nearest sibling in global sort order
     // Sorted: note 3 (3000), note 2 (2000), note 1 (1000)
     // Deleting note 2, should select note 3 (previous) or note 1 (next)
@@ -165,13 +163,11 @@ describe('P1-7: deleteActive fallback behavior', () => {
   });
 
   it('handles no active note', () => {
-    notes = [
-      { id: '1', title: 'Note 1', updatedAt: 1000 },
-    ];
+    notes = [{ id: '1', title: 'Note 1', updatedAt: 1000 }];
     activeId = null;
-    
+
     deleteActive();
-    
+
     // Should do nothing
     strictEqual(notes.length, 1);
     strictEqual(activeId, null);

@@ -127,7 +127,14 @@ function renderMarkdown(src) {
 }
 
 function parseTagsInput(value) {
-  return [...new Set(String(value).split(',').map((t) => t.trim()).filter(Boolean))];
+  return [
+    ...new Set(
+      String(value)
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    ),
+  ];
 }
 
 function timeAgo(ts) {
@@ -247,7 +254,14 @@ describe('normalizeNote', () => {
   });
 
   it('filters non-string tags', () => {
-    const note = { id: '1', title: '', body: '', folder: '', tags: ['valid', 123, null, 'also-valid'], updatedAt: 0 };
+    const note = {
+      id: '1',
+      title: '',
+      body: '',
+      folder: '',
+      tags: ['valid', 123, null, 'also-valid'],
+      updatedAt: 0,
+    };
     deepStrictEqual(normalizeNote(note).tags, ['valid', 'also-valid']);
   });
 
@@ -429,34 +443,34 @@ describe('timeAgo', () => {
   it('returns minutes for timestamps within an hour', () => {
     const oneMinAgo = Date.now() - 60000;
     strictEqual(timeAgo(oneMinAgo), '1 min ago');
-    
-    const fiftyNineMinAgo = Date.now() - (59 * 60000);
+
+    const fiftyNineMinAgo = Date.now() - 59 * 60000;
     strictEqual(timeAgo(fiftyNineMinAgo), '59 min ago');
   });
 
   it('returns hours for timestamps within a day', () => {
-    const oneHourAgo = Date.now() - (60 * 60000);
+    const oneHourAgo = Date.now() - 60 * 60000;
     strictEqual(timeAgo(oneHourAgo), '1 h ago');
-    
-    const twentyThreeHoursAgo = Date.now() - (23 * 60 * 60000);
+
+    const twentyThreeHoursAgo = Date.now() - 23 * 60 * 60000;
     strictEqual(timeAgo(twentyThreeHoursAgo), '23 h ago');
   });
 
   it('returns "yesterday" for timestamps from 1 day ago', () => {
-    const yesterday = Date.now() - (24 * 60 * 60000);
+    const yesterday = Date.now() - 24 * 60 * 60000;
     strictEqual(timeAgo(yesterday), 'yesterday');
   });
 
   it('returns days for timestamps within a week', () => {
-    const twoDaysAgo = Date.now() - (2 * 24 * 60 * 60000);
+    const twoDaysAgo = Date.now() - 2 * 24 * 60 * 60000;
     strictEqual(timeAgo(twoDaysAgo), '2 days ago');
-    
-    const sixDaysAgo = Date.now() - (6 * 24 * 60 * 60000);
+
+    const sixDaysAgo = Date.now() - 6 * 24 * 60 * 60000;
     strictEqual(timeAgo(sixDaysAgo), '6 days ago');
   });
 
   it('returns date string for older timestamps', () => {
-    const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60000);
+    const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60000;
     const result = timeAgo(oneWeekAgo);
     // Should return a date string like "1/1/2024" (format varies by locale)
     ok(typeof result === 'string');

@@ -9,6 +9,7 @@
 ## 🎯 How to Create This Roadmap in GitHub
 
 ### Option 1: GitHub Projects (Recommended)
+
 1. Go to your repository: https://github.com/CroniC-/notes-app-test
 2. Click **Projects** tab
 3. Click **New project** > **Board**
@@ -17,12 +18,14 @@
 6. Add issues to each column based on the structure below
 
 ### Option 2: GitHub Milestones + Issues
+
 1. Go to **Issues** tab
 2. Click **Milestones** > **New milestone**
 3. Create milestones for each phase (see below)
 4. Create issues and assign them to milestones
 
 ### Option 3: GitHub Discussions
+
 1. Enable Discussions in repository settings
 2. Create a **Roadmap** discussion
 3. Pin it for visibility
@@ -32,12 +35,14 @@
 ## 📅 Milestones Structure
 
 ### Milestone 1: Phase 1 - Quick Wins
+
 - **Title**: `Phase 1: Quick Wins`
 - **Description**: Immediate UX improvements with minimal code changes
 - **Due Date**: 2 weeks from start
 - **Labels**: `phase-1`, `priority:high`, `effort:low`
 
-### Milestone 2: Phase 2 - Feature Expansion  
+### Milestone 2: Phase 2 - Feature Expansion
+
 - **Title**: `Phase 2: Feature Expansion`
 - **Description**: Add commonly requested features
 - **Due Date**: 4 weeks from start
@@ -45,6 +50,7 @@
 - **Depends On**: Phase 1
 
 ### Milestone 3: Phase 3 - Advanced Features
+
 - **Title**: `Phase 3: Advanced Features`
 - **Description**: Power user features and polish
 - **Due Date**: 8 weeks from start
@@ -52,6 +58,7 @@
 - **Depends On**: Phase 2
 
 ### Milestone 4: Phase 4 - Polish & Optimization
+
 - **Title**: `Phase 4: Polish & Optimization`
 - **Description**: Performance, accessibility, and refinement
 - **Due Date**: Ongoing
@@ -59,6 +66,7 @@
 - **Depends On**: Phase 3
 
 ### Milestone 5: Phase 5 - Ecosystem & Community
+
 - **Title**: `Phase 5: Ecosystem & Community`
 - **Description**: Build community and ecosystem
 - **Due Date**: Ongoing
@@ -69,17 +77,20 @@
 ## 🏷️ Labels to Create
 
 ### Priority Labels
+
 - `priority:critical` (color: #d73a49)
 - `priority:high` (color: #e94437)
 - `priority:medium` (color: #fbca04)
 - `priority:low` (color: #0e8a16)
 
 ### Effort Labels
+
 - `effort:low` (color: #005cc5)
 - `effort:medium` (color: #0366d6)
 - `effort:high` (color: #000000)
 
 ### Category Labels
+
 - `category:ux` (color: #a371f7)
 - `category:feature` (color: #5319e7)
 - `category:performance` (color: #009800)
@@ -90,6 +101,7 @@
 - `category:refactor` (color: #f97583)
 
 ### Type Labels
+
 - `type:enhancement` (color: #a2eeef)
 - `type:bug` (color: #d73a49)
 - `type:feature` (color: #009800)
@@ -100,10 +112,11 @@
 ## 📋 Phase 1: Quick Wins (1-2 weeks)
 
 ### User Experience
+
 - [ ] **P1.UX.1** - Add rich text editor toolbar with formatting buttons
   - Labels: `priority:high`, `effort:medium`, `category:ux`, `type:feature`, `phase-1`
   - Description: Add toolbar with buttons for bold, italic, headers, lists, links, code blocks, blockquotes, horizontal rule
-  
+
 - [ ] **P1.UX.2** - Implement note drag & drop reordering
   - Labels: `priority:high`, `effort:medium`, `category:ux`, `type:feature`, `phase-1`
 
@@ -129,6 +142,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:ux`, `type:enhancement`, `phase-1`
 
 ### Mobile Experience
+
 - [ ] **P1.MO.1** - Add swipe gestures (swipe to delete)
   - Labels: `priority:high`, `effort:medium`, `category:mobile`, `type:feature`, `phase-1`
 
@@ -148,6 +162,7 @@
   - Labels: `priority:medium`, `effort:low`, `category:mobile`, `type:chore`, `phase-1`
 
 ### Performance
+
 - [ ] **P1.PF.1** - Debounce search input
   - Labels: `priority:high`, `effort:low`, `category:performance`, `type:enhancement`, `phase-1`
 
@@ -161,6 +176,7 @@
   - Labels: `priority:low`, `effort:medium`, `category:performance`, `type:chore`, `phase-1`
 
 ### Accessibility
+
 - [ ] **P1.A1.1** - Add skip-to-main-content link
   - Labels: `priority:high`, `effort:low`, `category:accessibility`, `type:enhancement`, `phase-1`
 
@@ -180,6 +196,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:accessibility`, `type:feature`, `phase-1`
 
 ### Code Quality
+
 - [ ] **P1.CQ.1** - Add JSDoc comments to all functions
   - Labels: `priority:medium`, `effort:medium`, `category:documentation`, `type:chore`, `phase-1`
 
@@ -197,6 +214,7 @@
 ## 📋 Phase 2: Feature Expansion (2-4 weeks)
 
 ### Markdown Support
+
 - [ ] **P2.MD.1** - Add strikethrough support (`~~text~~`)
   - Labels: `priority:high`, `effort:low`, `category:feature`, `type:feature`, `phase-2`
 
@@ -222,6 +240,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:feature`, `type:enhancement`, `phase-2`
 
 ### Organization
+
 - [ ] **P2.OR.1** - Implement nested folders
   - Labels: `priority:high`, `effort:high`, `category:feature`, `type:feature`, `phase-2`
 
@@ -250,6 +269,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:ux`, `type:feature`, `phase-2`
 
 ### Viewing & Editing
+
 - [ ] **P2.VE.1** - Add split view (editor + preview side-by-side)
   - Labels: `priority:high`, `effort:medium`, `category:feature`, `type:feature`, `phase-2`
 
@@ -275,6 +295,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:feature`, `type:feature`, `phase-2`
 
 ### Visual Improvements
+
 - [ ] **P2.VI.1** - Add icons to all buttons and actions
   - Labels: `priority:medium`, `effort:medium`, `category:ux`, `type:enhancement`, `phase-2`
 
@@ -301,6 +322,7 @@
 ## 📋 Phase 3: Advanced Features (4-8 weeks)
 
 ### Sync & Storage
+
 - [ ] **P3.SS.1** - Implement File System Access API for local file sync
   - Labels: `priority:high`, `effort:high`, `category:feature`, `type:feature`, `phase-3`
 
@@ -332,6 +354,7 @@
   - Labels: `priority:medium`, `effort:medium`, `category:feature`, `type:feature`, `phase-3`
 
 ### Plugins & Extensions
+
 - [ ] **P3.PL.1** - Design plugin architecture
   - Labels: `priority:medium`, `effort:high`, `category:feature`, `type:feature`, `phase-3`
 
@@ -348,6 +371,7 @@
   - Labels: `priority:low`, `effort:medium`, `category:documentation`, `type:chore`, `phase-3`
 
 ### Advanced Features
+
 - [ ] **P3.AF.1** - Add graph view for note connections
   - Labels: `priority:medium`, `effort:high`, `category:feature`, `type:feature`, `phase-3`
 
@@ -376,6 +400,7 @@
   - Labels: `priority:low`, `effort:high`, `category:feature`, `type:feature`, `phase-3`
 
 ### PWA Features
+
 - [ ] **P3.PW.1** - Add service worker for offline support
   - Labels: `priority:high`, `effort:high`, `category:feature`, `type:feature`, `phase-3`
 
@@ -399,6 +424,7 @@
 ## 📋 Phase 4: Polish & Optimization (Ongoing)
 
 ### Performance
+
 - [ ] **P4.PF.1** - Implement virtual scrolling for large note lists
   - Labels: `priority:medium`, `effort:high`, `category:performance`, `type:feature`, `phase-4`
 
@@ -424,6 +450,7 @@
   - Labels: `priority:low`, `effort:medium`, `category:performance`, `type:chore`, `phase-4`
 
 ### Testing
+
 - [ ] **P4.TE.1** - Add E2E tests with Playwright
   - Labels: `priority:high`, `effort:high`, `category:testing`, `type:chore`, `phase-4`
 
@@ -446,6 +473,7 @@
   - Labels: `priority:low`, `effort:medium`, `category:testing`, `type:chore`, `phase-4`
 
 ### Code Quality
+
 - [ ] **P4.CQ.1** - Migrate to TypeScript
   - Labels: `priority:medium`, `effort:high`, `category:refactor`, `type:chore`, `phase-4`
 
@@ -468,6 +496,7 @@
   - Labels: `priority:low`, `effort:medium`, `category:documentation`, `type:chore`, `phase-4`
 
 ### Documentation
+
 - [ ] **P4.DO.1** - Create user guide
   - Labels: `priority:medium`, `effort:medium`, `category:documentation`, `type:chore`, `phase-4`
 
@@ -497,6 +526,7 @@
 ## 📋 Phase 5: Ecosystem & Community (Ongoing)
 
 ### Community
+
 - [ ] **P5.CO.1** - Enable GitHub Discussions
   - Labels: `priority:medium`, `effort:low`, `category:documentation`, `type:chore`, `phase-5`
 
@@ -522,6 +552,7 @@
   - Labels: `priority:low`, `effort:low`, `category:documentation`, `type:chore`, `phase-5`
 
 ### Extensions
+
 - [ ] **P5.EX.1** - Create browser extension (Chrome/Firefox)
   - Labels: `priority:low`, `effort:high`, `category:feature`, `type:feature`, `phase-5`
 
@@ -538,6 +569,7 @@
   - Labels: `priority:low`, `effort:high`, `category:feature`, `type:feature`, `phase-5`
 
 ### Analytics (Optional)
+
 - [ ] **P5.AN.1** - Add local analytics (stored in localStorage)
   - Labels: `priority:low`, `effort:medium`, `category:feature`, `type:feature`, `phase-5`
 
@@ -557,20 +589,21 @@
 
 ## 📊 Summary Statistics
 
-| Phase | Tasks | Status | Priority | Effort |
-|-------|-------|--------|----------|--------|
-| Phase 1 | 34 | ⏳ Not Started | High | Low |
-| Phase 2 | 31 | ⏳ Not Started | High | Medium |
-| Phase 3 | 29 | ⏳ Not Started | Medium | High |
-| Phase 4 | 28 | ⏳ Not Started | Medium | Varies |
-| Phase 5 | 17 | ⏳ Not Started | Low | High |
-| **Total** | **139** | - | - | - |
+| Phase     | Tasks   | Status         | Priority | Effort |
+| --------- | ------- | -------------- | -------- | ------ |
+| Phase 1   | 34      | ⏳ Not Started | High     | Low    |
+| Phase 2   | 31      | ⏳ Not Started | High     | Medium |
+| Phase 3   | 29      | ⏳ Not Started | Medium   | High   |
+| Phase 4   | 28      | ⏳ Not Started | Medium   | Varies |
+| Phase 5   | 17      | ⏳ Not Started | Low      | High   |
+| **Total** | **139** | -              | -        | -      |
 
 ---
 
 ## 🎯 Quick Start Commands
 
 ### Create Labels (run in terminal)
+
 ```bash
 # Priority labels
 gh label create priority:critical --color d73a49
@@ -608,6 +641,7 @@ gh label create phase-5 --color e94437
 ```
 
 ### Create Milestones (run in terminal)
+
 ```bash
 # Phase 1
 gh api repos/CroniC-/notes-app-test/milestones --method POST \
@@ -661,4 +695,4 @@ gh api repos/CroniC-/notes-app-test/milestones --method POST \
 
 ---
 
-*Last updated: Tue Aug 18 10:55:40 PM UTC 2026*
+_Last updated: Tue Aug 18 10:55:40 PM UTC 2026_

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - GitHub repository configuration with issue/PR templates
 - GitHub Actions workflows for automated testing and linting
 - ESLint and Prettier configuration for code quality
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-08-18
 
 ### Added
+
 - Initial release of Notes App
 - Markdown support (headings, bold, italic, code, lists, links, blockquotes, horizontal rules)
 - LocalStorage persistence with auto-save (400ms debounce)
@@ -40,18 +42,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Template for Future Releases
 
 ### Added
+
 - New features
 
 ### Changed
+
 - Changes in existing functionality
 
 ### Fixed
+
 - Bug fixes
 
 ### Removed
+
 - Deprecated features that were removed
 
 ### Security
+
 - Vulnerability fixes
 
 ---
