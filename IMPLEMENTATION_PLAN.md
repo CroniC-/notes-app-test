@@ -83,7 +83,7 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 ## 🎯 Goals & Vision
 
 ### Short-Term Goals (1-2 months)
-- [ ] **G1.T1** - Enhance user experience with rich text editing
+- [x] **G1.T1** - Enhance user experience with rich text editing
 - [ ] **G1.T2** - Improve mobile experience
 - [ ] **G1.T3** - Add commonly requested features (tables, task lists, note linking)
 - [ ] **G1.T4** - Polish visual design with icons and animations
