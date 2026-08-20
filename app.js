@@ -860,7 +860,6 @@ els.themeToggle.addEventListener('click', () => {
 });
 
 window.addEventListener('beforeunload', flushSave);
-clearInterval(timestampInterval);
 
 // ---------- init ----------
 
