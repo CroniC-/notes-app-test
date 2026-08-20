@@ -13,7 +13,7 @@
         <h1>Notes</h1>
         <button id="new-note" class="btn btn-primary">+ New</button>
       </div>
-      <input type="search" id="search" placeholder="Search notes…" autocomplete="off">
+      <input type="search" id="search" placeholder="Search notes\u2026" autocomplete="off">
       <select id="folder-filter" aria-label="Filter by folder">
         <option value="">All folders</option>
       </select>
@@ -57,7 +57,26 @@
           </div>
         </div>
 
-        <textarea id="note-body" placeholder="Write in Markdown…" spellcheck="true"></textarea>
+        <div class="format-toolbar" role="group" aria-label="Formatting">
+          <button id="fmt-bold" class="fmt-btn" title="Bold (Ctrl+B)" aria-label="Bold">B</button>
+          <button id="fmt-italic" class="fmt-btn" title="Italic (Ctrl+I)" aria-label="Italic">I</button>
+          <button id="fmt-strike" class="fmt-btn" title="Strikethrough" aria-label="Strikethrough">S</button>
+          <select id="fmt-heading" class="fmt-btn fmt-select" title="Heading" aria-label="Heading">
+            <option value="">Text</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+          </select>
+          <button id="fmt-ul" class="fmt-btn" title="Bullet List" aria-label="Bullet List">UL</button>
+          <button id="fmt-ol" class="fmt-btn" title="Numbered List" aria-label="Numbered List">OL</button>
+          <button id="fmt-link" class="fmt-btn" title="Link (Ctrl+K)" aria-label="Link">Link</button>
+          <button id="fmt-code" class="fmt-btn" title="Code Block" aria-label="Code Block">Code</button>
+          <button id="fmt-quote" class="fmt-btn" title="Blockquote" aria-label="Blockquote">Quote</button>
+          <button id="fmt-hr" class="fmt-btn" title="Horizontal Rule" aria-label="Horizontal Rule">HR</button>
+        </div>
+
+        <textarea id="note-body" placeholder="Write in Markdown\u2026" spellcheck="true"></textarea>
         <div id="preview" class="preview markdown" hidden></div>
       </div>
     </main>

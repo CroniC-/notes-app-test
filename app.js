@@ -214,6 +214,16 @@ const els = {
   deleteBtn: $('#delete-note'),
   body: $('#note-body'),
   preview: $('#preview'),
+  fmtBold: $('#fmt-bold'),
+  fmtItalic: $('#fmt-italic'),
+  fmtStrike: $('#fmt-strike'),
+  fmtHeading: $('#fmt-heading'),
+  fmtUl: $('#fmt-ul'),
+  fmtOl: $('#fmt-ol'),
+  fmtLink: $('#fmt-link'),
+  fmtCode: $('#fmt-code'),
+  fmtQuote: $('#fmt-quote'),
+  fmtHr: $('#fmt-hr'),
 };
 
 
@@ -615,6 +625,148 @@ function applyTheme(t) {
   els.themeToggle.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
 }
 
+
+// ---------- formatting helpers ----------
+
+function getTextarea() {
+  return els.body;
+}
+
+function getSelection() {
+  const textarea = getTextarea();
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  return { start, end, text: textarea.value.substring(start, end) };
+}
+
+function replaceSelection(replacement) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+  textarea.selectionStart = start + replacement.length;
+  textarea.selectionEnd = start + replacement.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function wrapSelection(prefix, suffix = prefix) {
+  const { start, end, text } = getSelection();
+  const hasSelection = start !== end;
+  
+  if (hasSelection) {
+    replaceSelection(prefix + text + suffix);
+  } else {
+    // Insert prefix and suffix with cursor in between
+    const textarea = getTextarea();
+    const pos = start;
+    textarea.value = textarea.value.substring(0, pos) + prefix + suffix + textarea.value.substring(pos);
+    textarea.selectionStart = pos + prefix.length;
+    textarea.selectionEnd = pos + prefix.length;
+    textarea.focus();
+    scheduleSave();
+  }
+}
+
+function wrapLine(prefix) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  const before = textarea.value.substring(0, start);
+  const after = textarea.value.substring(end);
+  const selected = textarea.value.substring(start, end);
+  
+  // Get the current line
+  const lineStart = before.lastIndexOf('
+') + 1;
+  const lineEnd = before.indexOf('
+', lineStart);
+  const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
+  
+  // If there's a selection, wrap all selected lines
+  const lines = selected.split('
+');
+  const wrapped = lines.map(line => prefix + line).join('
+');
+  
+  textarea.value = before.substring(0, lineStart) + wrapped + after;
+  textarea.selectionStart = lineStart + wrapped.length;
+  textarea.selectionEnd = lineStart + wrapped.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function insertAtCursor(text) {
+  const textarea = getTextarea();
+  const { start, end } = getSelection();
+  const before = textarea.value.substring(0, start);
+  const after = textarea.value.substring(end);
+  
+  textarea.value = before + text + after;
+  textarea.selectionStart = start + text.length;
+  textarea.selectionEnd = start + text.length;
+  textarea.focus();
+  scheduleSave();
+}
+
+function formatBold() {
+  wrapSelection('**', '**');
+}
+
+function formatItalic() {
+  wrapSelection('*', '*');
+}
+
+function formatStrike() {
+  wrapSelection('~~', '~~');
+}
+
+function formatHeading(level) {
+  const prefix = '#'.repeat(level) + ' ';
+  wrapLine(prefix);
+}
+
+function formatUl() {
+  wrapLine('- ');
+}
+
+function formatOl() {
+  wrapLine('1. ');
+}
+
+function formatLink() {
+  const url = prompt('Enter URL:');
+  if (!url) return;
+  const { start, end, text } = getSelection();
+  const displayText = text || 'link text';
+  replaceSelection('[' + displayText + '](' + url + ')');
+}
+
+function formatCode() {
+  const { start, end, text } = getSelection();
+  if (start !== end) {
+    replaceSelection('`' + text + '`');
+  } else {
+    insertAtCursor('```
+
+```');
+    // Position cursor between the code block markers
+    const textarea = getTextarea();
+    textarea.selectionStart = start + 4;
+    textarea.selectionEnd = start + 4;
+  }
+}
+
+function formatQuote() {
+  wrapLine('> ');
+}
+
+function formatHr() {
+  insertAtCursor('
+
+---
+
+');
+}
+
 // ---------- events ----------
 
 els.newNote.addEventListener('click', createNote);
@@ -734,6 +886,26 @@ window.addEventListener('visibilitychange', () => {
   if (!document.hidden) refreshTimestamps();
 });
 
+
+// ---------- formatting event listeners ----------
+
+els.fmtBold.addEventListener('click', () => formatBold());
+els.fmtItalic.addEventListener('click', () => formatItalic());
+els.fmtStrike.addEventListener('click', () => formatStrike());
+els.fmtHeading.addEventListener('change', (e) => {
+  const level = parseInt(e.target.value);
+  if (level) {
+    formatHeading(level);
+    e.target.value = '';
+  }
+});
+els.fmtUl.addEventListener('click', () => formatUl());
+els.fmtOl.addEventListener('click', () => formatOl());
+els.fmtLink.addEventListener('click', () => formatLink());
+els.fmtCode.addEventListener('click', () => formatCode());
+els.fmtQuote.addEventListener('click', () => formatQuote());
+els.fmtHr.addEventListener('click', () => formatHr());
+
 // ---------- keyboard shortcuts ----------
 
 function handleKeyDown(e) {
@@ -783,6 +955,28 @@ function handleKeyDown(e) {
     }
     selectNote(items[next].dataset.id);
     items[next].scrollIntoView({ block: 'nearest' });
+    return;
+  }
+
+
+  // Ctrl/Cmd + B: bold
+  if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+    e.preventDefault();
+    formatBold();
+    return;
+  }
+
+  // Ctrl/Cmd + I: italic
+  if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+    e.preventDefault();
+    formatItalic();
+    return;
+  }
+
+  // Ctrl/Cmd + K: link
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    formatLink();
     return;
   }
 
