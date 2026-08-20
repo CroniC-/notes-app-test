@@ -897,24 +897,46 @@ els.noteList.addEventListener('drop', (e) => {
       el.classList.remove('dragging', 'drag-over');
     });
 
-    // Find the indices in the notes array
-    const fromIndex = notes.findIndex((n) => n.id === fromId);
-    const toIndex = notes.findIndex((n) => n.id === toId);
+    // Get visible notes (already sorted by updatedAt)
+    const visible = visibleNotes();
+    const fromIndex = visible.findIndex((n) => n.id === fromId);
+    const toIndex = visible.findIndex((n) => n.id === toId);
 
     if (fromIndex !== -1 && toIndex !== -1) {
-      // Reorder the notes array
-      const [removed] = notes.splice(fromIndex, 1);
-      notes.splice(toIndex, 0, removed);
+      // Determine if we're dropping above or below the target
+      const rect = targetItem.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      const dropAbove = e.clientY < midY;
+      const finalIndex = dropAbove ? toIndex : toIndex + 1;
 
-      // Update timestamp to trigger save
-      removed.updatedAt = Date.now();
+      if (fromIndex !== finalIndex) {
+        // Update timestamps to reflect new order
+        // Use decreasing timestamps so newer notes appear first
+        const now = Date.now();
+        const draggedNote = notes.find((n) => n.id === fromId);
 
-      persist();
-      renderSidebar();
+        // Set the dragged note's timestamp to be between the notes
+        // at finalIndex-1 and finalIndex
+        if (finalIndex === 0) {
+          // Move to top - make it newest
+          draggedNote.updatedAt = now;
+        } else if (finalIndex >= visible.length) {
+          // Move to bottom - make it oldest
+          draggedNote.updatedAt = visible[visible.length - 1].updatedAt - 1;
+        } else {
+          // Insert between finalIndex-1 and finalIndex
+          const beforeNote = visible[finalIndex - 1];
+          const afterNote = visible[finalIndex];
+          draggedNote.updatedAt = (beforeNote.updatedAt + afterNote.updatedAt) / 2;
+        }
 
-      // Keep the same note selected
-      activeId = fromId;
-      renderEditor();
+        persist();
+        renderSidebar();
+
+        // Keep the same note selected
+        activeId = fromId;
+        renderEditor();
+      }
     }
 
     draggedItem = null;
