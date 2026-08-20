@@ -675,17 +675,13 @@ function wrapLine(prefix) {
   const selected = textarea.value.substring(start, end);
   
   // Get the current line
-  const lineStart = before.lastIndexOf('
-') + 1;
-  const lineEnd = before.indexOf('
-', lineStart);
+  const lineStart = before.lastIndexOf('\n') + 1;
+  const lineEnd = before.indexOf('\n', lineStart);
   const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
   
   // If there's a selection, wrap all selected lines
-  const lines = selected.split('
-');
-  const wrapped = lines.map(line => prefix + line).join('
-');
+  const lines = selected.split('\n');
+  const wrapped = lines.map(line => prefix + line).join('\n');
   
   textarea.value = before.substring(0, lineStart) + wrapped + after;
   textarea.selectionStart = lineStart + wrapped.length;
@@ -745,9 +741,7 @@ function formatCode() {
   if (start !== end) {
     replaceSelection('`' + text + '`');
   } else {
-    insertAtCursor('```
-
-```');
+    insertAtCursor('```\n\n```');
     // Position cursor between the code block markers
     const textarea = getTextarea();
     textarea.selectionStart = start + 4;
@@ -760,11 +754,7 @@ function formatQuote() {
 }
 
 function formatHr() {
-  insertAtCursor('
-
----
-
-');
+  insertAtCursor('\n\n---\n\n');
 }
 
 // ---------- events ----------
