@@ -343,7 +343,7 @@ function persist() {
   let ok = true;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-  } catch (e) {
+  } catch {
     ok = false;
   }
   if (ok) flashSaved();
@@ -677,7 +677,7 @@ function importNotes(file) {
 // ---------- theme ----------
 
 function currentTheme() {
-  let saved = null;
+  let saved;
   try {
     saved = localStorage.getItem(THEME_KEY);
   } catch {
@@ -747,8 +747,8 @@ function wrapLine(prefix) {
 
   // Get the current line
   const lineStart = before.lastIndexOf('\n') + 1;
-  const lineEnd = before.indexOf('\n', lineStart);
-  const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
+  // const lineEnd = before.indexOf('\n', lineStart);
+  // const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
 
   // If there's a selection, wrap all selected lines
   const lines = selected.split('\n');
@@ -802,7 +802,7 @@ function formatOl() {
 function formatLink() {
   const url = prompt('Enter URL:');
   if (!url) return;
-  const { start, end, text } = getSelection();
+  const { text } = getSelection();
   const displayText = text || 'link text';
   replaceSelection('[' + displayText + '](' + url + ')');
 }
@@ -1021,7 +1021,7 @@ activeId = visibleNotes()[0] ? visibleNotes()[0].id : null;
 renderAll();
 
 // Refresh relative timestamps every 60 seconds
-const timestampInterval = setInterval(refreshTimestamps, 60000);
+window.timestampInterval = setInterval(refreshTimestamps, 60000);
 
 // Also refresh when the page regains visibility
 window.addEventListener('visibilitychange', () => {
