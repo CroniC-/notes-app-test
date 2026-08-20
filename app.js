@@ -343,7 +343,7 @@ function persist() {
   let ok = true;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-  } catch (e) {
+  } catch {
     ok = false;
   }
   if (ok) flashSaved();
@@ -426,6 +426,7 @@ function renderNoteList() {
           'data-id': n.id,
           role: 'option',
           tabindex: n.id === activeId ? '0' : '-1',
+          draggable: 'true',
         },
         [
           el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
@@ -676,7 +677,7 @@ function importNotes(file) {
 // ---------- theme ----------
 
 function currentTheme() {
-  let saved = null;
+  let saved;
   try {
     saved = localStorage.getItem(THEME_KEY);
   } catch {
@@ -746,8 +747,8 @@ function wrapLine(prefix) {
 
   // Get the current line
   const lineStart = before.lastIndexOf('\n') + 1;
-  const lineEnd = before.indexOf('\n', lineStart);
-  const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
+  // const lineEnd = before.indexOf('\n', lineStart);
+  // const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
 
   // If there's a selection, wrap all selected lines
   const lines = selected.split('\n');
@@ -801,7 +802,7 @@ function formatOl() {
 function formatLink() {
   const url = prompt('Enter URL:');
   if (!url) return;
-  const { start, end, text } = getSelection();
+  const { text } = getSelection();
   const displayText = text || 'link text';
   replaceSelection('[' + displayText + '](' + url + ')');
 }
@@ -838,6 +839,108 @@ els.noteList.addEventListener('click', (e) => {
   }
   const item = e.target.closest('.note-item');
   if (item) selectNote(item.dataset.id);
+});
+// Drag and drop reordering
+let draggedItem = null;
+
+els.noteList.addEventListener('dragstart', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    draggedItem = item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', item.dataset.id);
+  }
+});
+
+els.noteList.addEventListener('dragend', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    item.classList.remove('dragging');
+    draggedItem = null;
+    // Clear all drag-over states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('drag-over');
+    });
+  }
+});
+
+els.noteList.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  const item = e.target.closest('.note-item');
+  if (item && item !== draggedItem) {
+    // Clear previous drag-over states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('drag-over');
+    });
+    item.classList.add('drag-over');
+    e.dataTransfer.dropEffect = 'move';
+  }
+});
+
+els.noteList.addEventListener('dragleave', (e) => {
+  const item = e.target.closest('.note-item');
+  if (item) {
+    item.classList.remove('drag-over');
+  }
+});
+
+els.noteList.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const targetItem = e.target.closest('.note-item');
+  if (targetItem && draggedItem && targetItem !== draggedItem) {
+    const fromId = draggedItem.dataset.id;
+    const toId = targetItem.dataset.id;
+
+    // Clear all drag states
+    Array.from(els.noteList.querySelectorAll('.note-item')).forEach((el) => {
+      el.classList.remove('dragging', 'drag-over');
+    });
+
+    // Get visible notes (already sorted by updatedAt)
+    const visible = visibleNotes();
+    const fromIndex = visible.findIndex((n) => n.id === fromId);
+    const toIndex = visible.findIndex((n) => n.id === toId);
+
+    if (fromIndex !== -1 && toIndex !== -1) {
+      // Determine if we're dropping above or below the target
+      const rect = targetItem.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      const dropAbove = e.clientY < midY;
+      const finalIndex = dropAbove ? toIndex : toIndex + 1;
+
+      if (fromIndex !== finalIndex) {
+        // Update timestamps to reflect new order
+        // Use decreasing timestamps so newer notes appear first
+        const now = Date.now();
+        const draggedNote = notes.find((n) => n.id === fromId);
+
+        // Set the dragged note's timestamp to be between the notes
+        // at finalIndex-1 and finalIndex
+        if (finalIndex === 0) {
+          // Move to top - make it newest
+          draggedNote.updatedAt = now;
+        } else if (finalIndex >= visible.length) {
+          // Move to bottom - make it oldest
+          draggedNote.updatedAt = visible[visible.length - 1].updatedAt - 1;
+        } else {
+          // Insert between finalIndex-1 and finalIndex
+          const beforeNote = visible[finalIndex - 1];
+          const afterNote = visible[finalIndex];
+          draggedNote.updatedAt = (beforeNote.updatedAt + afterNote.updatedAt) / 2;
+        }
+
+        persist();
+        renderSidebar();
+
+        // Keep the same note selected
+        activeId = fromId;
+        renderEditor();
+      }
+    }
+
+    draggedItem = null;
+  }
 });
 
 els.noteList.addEventListener('keydown', (e) => {
@@ -940,7 +1043,7 @@ activeId = visibleNotes()[0] ? visibleNotes()[0].id : null;
 renderAll();
 
 // Refresh relative timestamps every 60 seconds
-const timestampInterval = setInterval(refreshTimestamps, 60000);
+window.timestampInterval = setInterval(refreshTimestamps, 60000);
 
 // Also refresh when the page regains visibility
 window.addEventListener('visibilitychange', () => {
