@@ -464,6 +464,10 @@ body {
   color: var(--accent);
 }
 
+.markdown s {
+  text-decoration: line-through;
+}
+
 .markdown code {
   background: var(--code-bg);
   padding: 2px 5px;

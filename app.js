@@ -86,6 +86,7 @@ function renderMarkdown(src) {
     });
     s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    s = s.replace(/~~([^~]+)~~/g, '<s>$1</s>');
     s = s.replace(/\[([^\]]+)\]\(((?:[^()\s]|\([^()\s]*\))*)\)/g, (m, txt, url) => {
       if (!/^(https?:\/\/|mailto:)/i.test(url)) return txt;
       return '<a href="' + url + '" target="_blank" rel="noopener">' + txt + '</a>';
