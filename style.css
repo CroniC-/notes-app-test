@@ -306,27 +306,39 @@ body {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  padding: 8px;
-  background: var(--bg);
+  padding: 6px;
+  background: var(--panel);
   border-radius: 8px;
   border: 1px solid var(--border);
+  margin-bottom: 10px;
 }
 
 .fmt-btn {
   font: inherit;
   font-size: 12px;
-  padding: 4px 8px;
+  font-weight: 500;
+  padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
+  min-width: 28px;
+  text-align: center;
+  transition: all 0.15s ease;
 }
 
 .fmt-btn:hover {
   background: var(--accent-soft);
   color: var(--accent);
+  border-color: var(--accent);
   font-weight: 600;
+}
+
+.fmt-btn:active {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
 }
 
 .fmt-btn:focus-visible {
