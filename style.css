@@ -15,7 +15,7 @@
   --code-bg: #f0f2f5;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --bg: #12151a;
   --panel: #1a1f26;
   --text: #e5e9f0;
@@ -35,7 +35,12 @@ body {
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   font-size: 14px;
   background: var(--bg);
   color: var(--text);
@@ -74,7 +79,7 @@ body {
   font-size: 18px;
 }
 
-.sidebar input[type="search"],
+.sidebar input[type='search'],
 .sidebar select {
   width: 100%;
   padding: 8px 10px;
@@ -463,10 +468,18 @@ body {
   margin: 1.1em 0 0.5em;
 }
 
-.markdown h1 { font-size: 1.6em; }
-.markdown h2 { font-size: 1.4em; }
-.markdown h3 { font-size: 1.2em; }
-.markdown h4 { font-size: 1.05em; }
+.markdown h1 {
+  font-size: 1.6em;
+}
+.markdown h2 {
+  font-size: 1.4em;
+}
+.markdown h3 {
+  font-size: 1.2em;
+}
+.markdown h4 {
+  font-size: 1.05em;
+}
 
 .markdown p {
   margin: 0.6em 0;

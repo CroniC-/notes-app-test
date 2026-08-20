@@ -33,7 +33,7 @@ describe('store', () => {
       },
       getState() {
         return { ...state };
-      }
+      },
     };
   };
 

@@ -21,7 +21,7 @@ class ElementNode {
     this.className = '';
     this.dataset = {};
   }
-  
+
   setAttribute(name, value) {
     this.attributes[name] = value;
     if (name === 'class') {
@@ -31,15 +31,15 @@ class ElementNode {
       this.dataset[key] = value;
     }
   }
-  
+
   getAttribute(name) {
     return this.attributes[name] ?? null;
   }
-  
+
   hasAttribute(name) {
     return name in this.attributes;
   }
-  
+
   appendChild(child) {
     this.childNodes.push(child);
   }
@@ -52,13 +52,13 @@ const document = {
   },
   createTextNode(data) {
     return new TextNode(data);
-  }
+  },
 };
 
 // The el() helper function (copied from app.js)
 function el(tag, props, children) {
   const element = document.createElement(tag);
-  
+
   // Set properties/attributes
   if (props) {
     for (const [key, value] of Object.entries(props)) {
@@ -79,7 +79,7 @@ function el(tag, props, children) {
       }
     }
   }
-  
+
   // Append children
   if (children !== undefined && children !== null) {
     if (Array.isArray(children)) {
@@ -98,7 +98,7 @@ function el(tag, props, children) {
       element.appendChild(children);
     }
   }
-  
+
   return element;
 }
 
@@ -162,9 +162,9 @@ describe('el() helper', () => {
   it('creates note item structure with accessibility attributes', () => {
     const li = el('li', { class: 'note-item', 'data-id': '123', role: 'option', tabindex: '0' }, [
       el('div', { class: 'note-title' }, 'Test Note'),
-      el('div', { class: 'note-sub' }, '1 hour ago')
+      el('div', { class: 'note-sub' }, '1 hour ago'),
     ]);
-    
+
     assert.strictEqual(li.tagName, 'LI');
     assert.strictEqual(li.className, 'note-item');
     assert.strictEqual(li.getAttribute('data-id'), '123');
@@ -176,7 +176,11 @@ describe('el() helper', () => {
   });
 
   it('creates tag span with accessibility attributes', () => {
-    const tag = el('span', { class: 'tag selected', 'data-tag': 'test', role: 'button', tabindex: '0' }, 'Test Tag');
+    const tag = el(
+      'span',
+      { class: 'tag selected', 'data-tag': 'test', role: 'button', tabindex: '0' },
+      'Test Tag'
+    );
     assert.strictEqual(tag.tagName, 'SPAN');
     assert.strictEqual(tag.className, 'tag selected');
     assert.strictEqual(tag.getAttribute('data-tag'), 'test');
@@ -187,7 +191,11 @@ describe('el() helper', () => {
   });
 
   it('creates filter chip with accessibility attributes', () => {
-    const chip = el('span', { class: 'empty-filter-chip', 'data-filter': 'folder', role: 'button', tabindex: '0' }, 'Folder: test');
+    const chip = el(
+      'span',
+      { class: 'empty-filter-chip', 'data-filter': 'folder', role: 'button', tabindex: '0' },
+      'Folder: test'
+    );
     assert.strictEqual(chip.tagName, 'SPAN');
     assert.strictEqual(chip.className, 'empty-filter-chip');
     assert.strictEqual(chip.getAttribute('data-filter'), 'folder');
@@ -196,7 +204,11 @@ describe('el() helper', () => {
   });
 
   it('creates button with role attribute', () => {
-    const btn = el('button', { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' }, 'Clear filters');
+    const btn = el(
+      'button',
+      { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' },
+      'Clear filters'
+    );
     assert.strictEqual(btn.tagName, 'BUTTON');
     assert.strictEqual(btn.className, 'btn btn-ghost clear-filters');
     assert.strictEqual(btn.getAttribute('type'), 'button');

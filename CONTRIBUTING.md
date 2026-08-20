@@ -234,6 +234,7 @@ changes
 ### Scope
 
 The scope should be the file or module affected by the change:
+
 - `app` for changes to `app.js`
 - `style` for changes to `style.css`
 - `markdown` for markdown-related changes

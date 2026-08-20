@@ -9,13 +9,13 @@ Test: https://cronic-.github.io/notes-app-test/
   - Headings (`#`, `##`, `###`, `####`)
   - Bold (`**bold**`), Italic (`*italic*`), Strikethrough (`~~strikethrough~~`)
   - Inline code (`` `code` ``)
-  - Code blocks (``` ``` ``` ```)
+  - Code blocks (` ` ` `)
   - Links (`[text](https://url)`)
   - Blockquotes (`> quoted text`)
   - Unordered lists (`- item` or `* item`)
   - Ordered lists (`1. item`)
   - Horizontal rules (`---` or `***`)
-  - *Note: This is a minimal markdown implementation by design. Features like tables, nested lists, task lists, images, and autolinks are intentionally not supported to keep the app lightweight with zero dependencies.*
+  - _Note: This is a minimal markdown implementation by design. Features like tables, nested lists, task lists, images, and autolinks are intentionally not supported to keep the app lightweight with zero dependencies._
 
 - **Organization**
   - Folders: Categorize notes by folder
@@ -34,16 +34,17 @@ Test: https://cronic-.github.io/notes-app-test/
   - Import notes from JSON file
 
 - **Keyboard Shortcuts**
-  | Shortcut | Action |
-  |----------|--------|
-  | `Ctrl/Cmd + N` | Create new note |
-  | `Ctrl/Cmd + S` | Flush pending save |
-  | `Ctrl/Cmd + B` | Bold selected text |
-  | `Ctrl/Cmd + I` | Italic selected text |
-  | `Ctrl/Cmd + K` | Insert link |
-  | `Arrow Up/Down` | Navigate note list |
-  | `Enter` | Select focused note |
-  | `Escape` | Clear search input |
+
+  | Shortcut        | Action               |
+  | --------------- | -------------------- |
+  | `Ctrl/Cmd + N`  | Create new note      |
+  | `Ctrl/Cmd + S`  | Flush pending save   |
+  | `Ctrl/Cmd + B`  | Bold selected text   |
+  | `Ctrl/Cmd + I`  | Italic selected text |
+  | `Ctrl/Cmd + K`  | Insert link          |
+  | `Arrow Up/Down` | Navigate note list   |
+  | `Enter`         | Select focused note  |
+  | `Escape`        | Clear search input   |
 
 - **Theming**
   - Light and dark theme toggle
@@ -61,6 +62,7 @@ Test: https://cronic-.github.io/notes-app-test/
 ## Quick Start
 
 ### Option 1: Open Directly
+
 ```bash
 # Simply open index.html in your browser
 open index.html  # macOS
@@ -69,7 +71,9 @@ start index.html  # Windows
 ```
 
 ### Option 2: Local Server
+
 For best experience (especially with file import):
+
 ```bash
 # Python 3
 python3 -m http.server 8000
@@ -126,6 +130,7 @@ Notes are stored in `localStorage` under the key `notes-app-data` as a JSON arra
 The import/export JSON file contains an array of note objects in the same format as stored in `localStorage`.
 
 Example `export.json`:
+
 ```json
 [
   {
@@ -155,6 +160,7 @@ node --test test/markdown.test.js
 ```
 
 Tests cover:
+
 - HTML escaping
 - Markdown rendering
 - Tag parsing
@@ -171,6 +177,7 @@ Tests cover:
 - Mobile browsers (iOS Safari, Chrome for Android)
 
 Requires:
+
 - `localStorage` support
 - `crypto.randomUUID()` (with fallback for older browsers)
 - ES6+ JavaScript support
@@ -187,6 +194,7 @@ Requires:
 ### Code Organization
 
 `app.js` is organized into sections:
+
 - **Pure helpers**: DOM-free, side-effect-free utilities
 - **DOM cache**: Cached element references (`els` object)
 - **State**: Notes array and UI state variables

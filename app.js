@@ -4,7 +4,7 @@
 //        el('div', {}, [el('span', {}, 'child1'), el('span', {}, 'child2')])
 function el(tag, props, children) {
   const element = document.createElement(tag);
-  
+
   // Set properties/attributes
   if (props) {
     for (const [key, value] of Object.entries(props)) {
@@ -25,7 +25,7 @@ function el(tag, props, children) {
       }
     }
   }
-  
+
   // Append children
   if (children !== undefined && children !== null) {
     if (Array.isArray(children)) {
@@ -44,10 +44,9 @@ function el(tag, props, children) {
       element.appendChild(children);
     }
   }
-  
+
   return element;
 }
-
 
 // === pure helpers ===
 
@@ -172,7 +171,14 @@ function renderMarkdown(src) {
 }
 
 function parseTagsInput(value) {
-  return [...new Set(String(value).split(',').map((t) => t.trim()).filter(Boolean))];
+  return [
+    ...new Set(
+      String(value)
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    ),
+  ];
 }
 
 function timeAgo(ts) {
@@ -230,7 +236,6 @@ const els = {
   fmtHr: $('#fmt-hr'),
 };
 
-
 // === store ===
 
 // Simple reactive store for managing application state
@@ -274,7 +279,7 @@ const store = (() => {
     // Get current state (for debugging/testing)
     getState() {
       return { ...state };
-    }
+    },
   };
 })();
 
@@ -381,17 +386,30 @@ function renderSidebarChrome() {
   if (folderFilter && !folders.includes(folderFilter)) folderFilter = '';
   selectedTags = new Set([...selectedTags].filter((t) => notes.some((n) => n.tags.includes(t))));
 
-  els.folderFilter.textContent = "";
-  els.folderFilter.appendChild(el("option", { value: "" }, "All folders"));
+  els.folderFilter.textContent = '';
+  els.folderFilter.appendChild(el('option', { value: '' }, 'All folders'));
   for (const f of folders) {
-    els.folderFilter.appendChild(el("option", { value: f, selected: f === folderFilter }, escapeHtml(f)));
+    els.folderFilter.appendChild(
+      el('option', { value: f, selected: f === folderFilter }, escapeHtml(f))
+    );
   }
 
   const tags = [...new Set(notes.flatMap((n) => n.tags))].sort();
-  els.tagCloud.textContent = "";
+  els.tagCloud.textContent = '';
   if (tags.length) {
     for (const t of tags) {
-      els.tagCloud.appendChild(el("span", { class: "tag" + (selectedTags.has(t) ? " selected" : ""), "data-tag": t, role: "button", tabindex: "0" }, escapeHtml(t)));
+      els.tagCloud.appendChild(
+        el(
+          'span',
+          {
+            class: 'tag' + (selectedTags.has(t) ? ' selected' : ''),
+            'data-tag': t,
+            role: 'button',
+            tabindex: '0',
+          },
+          escapeHtml(t)
+        )
+      );
     }
   }
 }
@@ -399,15 +417,24 @@ function renderSidebarChrome() {
 function renderNoteList() {
   const list = visibleNotes();
   if (list.length) {
-    els.noteList.textContent = "";
+    els.noteList.textContent = '';
     for (const n of list) {
-      const li = el("li", { class: "note-item" + (n.id === activeId ? " active" : ""), "data-id": n.id, role: "option", tabindex: n.id === activeId ? "0" : "-1" }, [
-        el("div", { class: "note-title" }, escapeHtml(n.title || "Untitled")),
-        el("div", { class: "note-sub" }, [
-          n.folder ? el("span", {}, escapeHtml(n.folder)) : "",
-          el("span", {}, timeAgo(n.updatedAt))
-        ])
-      ]);
+      const li = el(
+        'li',
+        {
+          class: 'note-item' + (n.id === activeId ? ' active' : ''),
+          'data-id': n.id,
+          role: 'option',
+          tabindex: n.id === activeId ? '0' : '-1',
+        },
+        [
+          el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
+          el('div', { class: 'note-sub' }, [
+            n.folder ? el('span', {}, escapeHtml(n.folder)) : '',
+            el('span', {}, timeAgo(n.updatedAt)),
+          ]),
+        ]
+      );
       els.noteList.appendChild(li);
     }
     return;
@@ -415,20 +442,55 @@ function renderNoteList() {
   // No notes match. Distinguish "nothing in the store" from "filters excluded
   // everything": only the latter shows active filters + a clear-filters action.
   if (!notes.length) {
-    els.noteList.textContent = "";
-    els.noteList.appendChild(el("li", { class: "no-notes" }, "No notes yet — create one with + New."));
+    els.noteList.textContent = '';
+    els.noteList.appendChild(
+      el('li', { class: 'no-notes' }, 'No notes yet — create one with + New.')
+    );
     return;
   }
   const chips = [];
-  if (folderFilter) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "folder", role: "button", tabindex: "0" }, "Folder: " + escapeHtml(folderFilter)));
-  for (const t of selectedTags) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "tag", "data-tag": t, role: "button", tabindex: "0" }, "Tag: " + escapeHtml(t)));
-  if (searchQuery.trim()) chips.push(el("span", { class: "empty-filter-chip", "data-filter": "search", role: "button", tabindex: "0" }, "Search: " + escapeHtml(searchQuery.trim())));
-  els.noteList.textContent = "";
-  els.noteList.appendChild(el("li", { class: "no-notes no-results" }, [
-    el("div", { class: "no-results-msg" }, "No notes match the current filters."),
-    chips.length ? el("div", { class: "empty-filter-chips" }, chips) : "",
-    el("button", { class: "btn btn-ghost clear-filters", type: "button", role: "button" }, "Clear filters")
-  ]));
+  if (folderFilter)
+    chips.push(
+      el(
+        'span',
+        { class: 'empty-filter-chip', 'data-filter': 'folder', role: 'button', tabindex: '0' },
+        'Folder: ' + escapeHtml(folderFilter)
+      )
+    );
+  for (const t of selectedTags)
+    chips.push(
+      el(
+        'span',
+        {
+          class: 'empty-filter-chip',
+          'data-filter': 'tag',
+          'data-tag': t,
+          role: 'button',
+          tabindex: '0',
+        },
+        'Tag: ' + escapeHtml(t)
+      )
+    );
+  if (searchQuery.trim())
+    chips.push(
+      el(
+        'span',
+        { class: 'empty-filter-chip', 'data-filter': 'search', role: 'button', tabindex: '0' },
+        'Search: ' + escapeHtml(searchQuery.trim())
+      )
+    );
+  els.noteList.textContent = '';
+  els.noteList.appendChild(
+    el('li', { class: 'no-notes no-results' }, [
+      el('div', { class: 'no-results-msg' }, 'No notes match the current filters.'),
+      chips.length ? el('div', { class: 'empty-filter-chips' }, chips) : '',
+      el(
+        'button',
+        { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' },
+        'Clear filters'
+      ),
+    ])
+  );
 }
 
 function renderSidebar() {
@@ -463,7 +525,9 @@ function applyView() {
   if (previewing) {
     const n = getActive();
     els.preview.innerHTML =
-      n && n.body.trim() ? renderMarkdown(n.body) : '<p class="empty-preview">Nothing to preview yet.</p>';
+      n && n.body.trim()
+        ? renderMarkdown(n.body)
+        : '<p class="empty-preview">Nothing to preview yet.</p>';
   }
 }
 
@@ -620,7 +684,9 @@ function currentTheme() {
   }
   return (
     saved ||
-    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light')
   );
 }
 
@@ -628,7 +694,6 @@ function applyTheme(t) {
   document.documentElement.dataset.theme = t;
   els.themeToggle.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
 }
-
 
 // ---------- formatting helpers ----------
 
@@ -656,14 +721,15 @@ function replaceSelection(replacement) {
 function wrapSelection(prefix, suffix = prefix) {
   const { start, end, text } = getSelection();
   const hasSelection = start !== end;
-  
+
   if (hasSelection) {
     replaceSelection(prefix + text + suffix);
   } else {
     // Insert prefix and suffix with cursor in between
     const textarea = getTextarea();
     const pos = start;
-    textarea.value = textarea.value.substring(0, pos) + prefix + suffix + textarea.value.substring(pos);
+    textarea.value =
+      textarea.value.substring(0, pos) + prefix + suffix + textarea.value.substring(pos);
     textarea.selectionStart = pos + prefix.length;
     textarea.selectionEnd = pos + prefix.length;
     textarea.focus();
@@ -677,16 +743,16 @@ function wrapLine(prefix) {
   const before = textarea.value.substring(0, start);
   const after = textarea.value.substring(end);
   const selected = textarea.value.substring(start, end);
-  
+
   // Get the current line
   const lineStart = before.lastIndexOf('\n') + 1;
   const lineEnd = before.indexOf('\n', lineStart);
   const currentLineStart = lineEnd === -1 ? lineStart : lineEnd;
-  
+
   // If there's a selection, wrap all selected lines
   const lines = selected.split('\n');
-  const wrapped = lines.map(line => prefix + line).join('\n');
-  
+  const wrapped = lines.map((line) => prefix + line).join('\n');
+
   textarea.value = before.substring(0, lineStart) + wrapped + after;
   textarea.selectionStart = lineStart + wrapped.length;
   textarea.selectionEnd = lineStart + wrapped.length;
@@ -699,7 +765,7 @@ function insertAtCursor(text) {
   const { start, end } = getSelection();
   const before = textarea.value.substring(0, start);
   const after = textarea.value.substring(end);
-  
+
   textarea.value = before + text + after;
   textarea.selectionStart = start + text.length;
   textarea.selectionEnd = start + text.length;
@@ -829,7 +895,9 @@ els.tagCloud.addEventListener('keydown', (e) => {
   renderSidebar();
 });
 
-[els.title, els.folder, els.tags, els.body].forEach((el) => el.addEventListener('input', scheduleSave));
+[els.title, els.folder, els.tags, els.body].forEach((el) =>
+  el.addEventListener('input', scheduleSave)
+);
 
 els.viewWrite.addEventListener('click', () => {
   view = 'write';
@@ -878,7 +946,6 @@ const timestampInterval = setInterval(refreshTimestamps, 60000);
 window.addEventListener('visibilitychange', () => {
   if (!document.hidden) refreshTimestamps();
 });
-
 
 // ---------- formatting event listeners ----------
 
@@ -947,7 +1014,6 @@ function handleKeyDown(e) {
     items[next].scrollIntoView({ block: 'nearest' });
     return;
   }
-
 
   // Ctrl/Cmd + B: bold
   if ((e.ctrlKey || e.metaKey) && e.key === 'b') {

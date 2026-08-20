@@ -126,58 +126,68 @@ const tests = [
   {
     name: 'List at column 0',
     input: '- item 1\n- item 2',
-    check: (r) => r.includes('<ul>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>')
+    check: (r) =>
+      r.includes('<ul>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>'),
   },
   {
     name: 'Asterisk list at column 0',
     input: '* item 1\n* item 2',
-    check: (r) => r.includes('<ul>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>')
+    check: (r) =>
+      r.includes('<ul>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>'),
   },
   {
     name: 'Ordered list at column 0',
     input: '1. item 1\n2. item 2',
-    check: (r) => r.includes('<ol>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>')
+    check: (r) =>
+      r.includes('<ol>') && r.includes('<li>item 1</li>') && r.includes('<li>item 2</li>'),
   },
   {
     name: 'Indented dash in paragraph (P0-2 fix)',
     input: 'Paragraph text\n  - indented dash',
-    check: (r) => r.includes('<p>Paragraph text<br>  - indented dash</p>')
+    check: (r) => r.includes('<p>Paragraph text<br>  - indented dash</p>'),
   },
   {
     name: 'Indented asterisk in paragraph (P0-2 fix)',
     input: 'Paragraph text\n  * indented asterisk',
-    check: (r) => r.includes('<p>Paragraph text<br>  * indented asterisk</p>')
+    check: (r) => r.includes('<p>Paragraph text<br>  * indented asterisk</p>'),
   },
   {
     name: 'Indented ordered list marker in paragraph (P0-2 fix)',
     input: 'Paragraph text\n  1. not a list',
-    check: (r) => r.includes('<p>Paragraph text<br>  1. not a list</p>')
+    check: (r) => r.includes('<p>Paragraph text<br>  1. not a list</p>'),
   },
   {
     name: 'Paragraph with blank line separation',
     input: 'First paragraph\n\nSecond paragraph',
-    check: (r) => r.includes('<p>First paragraph</p>') && r.includes('<p>Second paragraph</p>')
+    check: (r) => r.includes('<p>First paragraph</p>') && r.includes('<p>Second paragraph</p>'),
   },
   {
     name: 'Paragraph followed by list with blank line',
     input: 'Start of paragraph\n\n- actual list item',
-    check: (r) => r.includes('<p>Start of paragraph</p>') && r.includes('<ul>') && r.includes('<li>actual list item</li>')
+    check: (r) =>
+      r.includes('<p>Start of paragraph</p>') &&
+      r.includes('<ul>') &&
+      r.includes('<li>actual list item</li>'),
   },
   {
     name: 'Multiple indented list-like lines in paragraph',
     input: 'Start\n  - item 1\n  * item 2\n  1. item 3',
-    check: (r) => r.includes('<p>Start<br>  - item 1<br>  * item 2<br>  1. item 3</p>') && !r.includes('<ul>') && !r.includes('<ol>')
+    check: (r) =>
+      r.includes('<p>Start<br>  - item 1<br>  * item 2<br>  1. item 3</p>') &&
+      !r.includes('<ul>') &&
+      !r.includes('<ol>'),
   },
   {
     name: 'Paragraph text then dash at column 0',
     input: 'Some text\n- not a list',
-    check: (r) => r.includes('<p>Some text</p>') && r.includes('<ul>') && r.includes('<li>not a list</li>')
+    check: (r) =>
+      r.includes('<p>Some text</p>') && r.includes('<ul>') && r.includes('<li>not a list</li>'),
   },
   {
     name: 'Blockquote with content',
     input: '> quoted text\n> more text',
-    check: (r) => r.includes('<blockquote>quoted text<br>more text</blockquote>')
-  }
+    check: (r) => r.includes('<blockquote>quoted text<br>more text</blockquote>'),
+  },
 ];
 
 let passCount = 0;
