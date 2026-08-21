@@ -137,7 +137,7 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - [x] **P1.UX.2** - Implement note drag & drop reordering
 - [x] **P1.UX.3** - Add word/character count display
 - [x] **P1.UX.4** - Auto-focus title input when creating new note
-- [ ] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
+- [x] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
 - [ ] **P1.UX.6** - Add click-to-filter for tags in metadata
 - [ ] **P1.UX.7** - Show full timestamp on hover of relative time
 - [ ] **P1.UX.8** - Add smooth transitions and animations
