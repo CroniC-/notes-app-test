@@ -1051,10 +1051,13 @@ els.noteList.addEventListener('keydown', (e) => {
   }
 });
 
-els.search.addEventListener('input', debounce(() => {
-  searchQuery = els.search.value;
-  renderNoteList();
-}, 300));
+els.search.addEventListener(
+  'input',
+  debounce(() => {
+    searchQuery = els.search.value;
+    renderNoteList();
+  }, 300)
+);
 
 els.folderFilter.addEventListener('change', () => {
   folderFilter = els.folderFilter.value;
