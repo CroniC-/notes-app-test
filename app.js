@@ -453,7 +453,11 @@ function renderNoteList() {
           el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
           el('div', { class: 'note-sub' }, [
             n.folder ? el('span', {}, escapeHtml(n.folder)) : '',
-            el('span', { class: 'note-timestamp', title: formatFullTimestamp(n.updatedAt) }, timeAgo(n.updatedAt)),
+            el(
+              'span',
+              { class: 'note-timestamp', title: formatFullTimestamp(n.updatedAt) },
+              timeAgo(n.updatedAt)
+            ),
           ]),
           tags.length > 0 ? el('div', { class: 'note-tags' }, tags) : '',
         ]

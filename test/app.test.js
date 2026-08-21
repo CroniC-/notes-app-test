@@ -149,7 +149,6 @@ function timeAgo(ts) {
   return new Date(ts).toLocaleDateString();
 }
 
-
 function formatFullTimestamp(ts) {
   return new Date(ts).toLocaleString();
 }
@@ -226,7 +225,6 @@ describe('parseTagsInput', () => {
     deepStrictEqual(parseTagsInput('multi word tag, another'), ['multi word tag', 'another']);
   });
 });
-
 
 // === Tests for formatFullTimestamp ===
 
