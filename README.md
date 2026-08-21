@@ -19,7 +19,10 @@ Test: https://cronic-.github.io/notes-app-test/
 
 - **Organization**
   - Folders: Categorize notes by folder
-  - Tags: Add comma-separated tags to notes
+  - Tags: Add comma-separated tags to notes with click-to-filter functionality
+    - Click on any tag in the note list to filter by that tag
+    - Selected tags are highlighted for easy identification
+    - Toggle tags on/off by clicking them
   - Search: Full-text search across all notes
   - Filter by folder and/or tags
 
