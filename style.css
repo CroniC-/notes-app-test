@@ -193,7 +193,8 @@ body {
   transition: all 0.2s ease;
 }
 
-.note-tag:hover, .note-tag:focus-visible {
+.note-tag:hover,
+.note-tag:focus-visible {
   background: var(--accent);
   color: white;
   border-color: var(--accent);

@@ -420,15 +420,22 @@ function renderNoteList() {
   if (list.length) {
     els.noteList.textContent = '';
     for (const n of list) {
-      const tags = n.tags && n.tags.length > 0 ? n.tags.map((t) => 
-        el('span', {
-          class: 'note-tag' + (selectedTags.has(t) ? ' selected' : ''),
-          'data-tag': t,
-          role: 'button',
-          tabindex: '0',
-        }, escapeHtml(t))
-      ) : [];
-      
+      const tags =
+        n.tags && n.tags.length > 0
+          ? n.tags.map((t) =>
+              el(
+                'span',
+                {
+                  class: 'note-tag' + (selectedTags.has(t) ? ' selected' : ''),
+                  'data-tag': t,
+                  role: 'button',
+                  tabindex: '0',
+                },
+                escapeHtml(t)
+              )
+            )
+          : [];
+
       const li = el(
         'li',
         {
