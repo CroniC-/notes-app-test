@@ -193,6 +193,10 @@ function timeAgo(ts) {
   return new Date(ts).toLocaleDateString();
 }
 
+function formatFullTimestamp(ts) {
+  return new Date(ts).toLocaleString();
+}
+
 // === dom ===
 
 const STORAGE_KEY = 'notes-app.v1';
@@ -449,7 +453,11 @@ function renderNoteList() {
           el('div', { class: 'note-title' }, escapeHtml(n.title || 'Untitled')),
           el('div', { class: 'note-sub' }, [
             n.folder ? el('span', {}, escapeHtml(n.folder)) : '',
-            el('span', {}, timeAgo(n.updatedAt)),
+            el(
+              'span',
+              { class: 'note-timestamp', title: formatFullTimestamp(n.updatedAt) },
+              timeAgo(n.updatedAt)
+            ),
           ]),
           tags.length > 0 ? el('div', { class: 'note-tags' }, tags) : '',
         ]
