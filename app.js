@@ -613,6 +613,26 @@ function deleteActive() {
   renderAll();
 }
 
+function duplicateNote() {
+  const n = getActive();
+  if (!n) return;
+  const now = Date.now();
+  const duplicate = {
+    id: uid(),
+    title: n.title + ' (Copy)',
+    body: n.body,
+    folder: n.folder,
+    tags: [...n.tags],
+    updatedAt: now,
+  };
+  notes.unshift(duplicate);
+  persist();
+  activeId = duplicate.id;
+  view = 'write';
+  renderAll();
+  els.title.focus();
+}
+
 function scheduleSave() {
   const n = getActive();
   if (!n) return;
@@ -1157,6 +1177,13 @@ function handleKeyDown(e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault();
     formatLink();
+    return;
+  }
+
+  // Ctrl/Cmd + D: duplicate note
+  if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+    e.preventDefault();
+    duplicateNote();
     return;
   }
 
