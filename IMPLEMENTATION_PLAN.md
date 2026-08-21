@@ -140,8 +140,8 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - [x] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
 - [x] **P1.UX.6** - Add click-to-filter for tags in metadata
 - [x] **P1.UX.7** - Show full timestamp on hover of relative time
-- [ ] **P1.UX.8** - Add smooth transitions and animations
-- [ ] **P1.UX.9** - Improve empty states with icons and illustrations
+- [x] **P1.UX.8** - Add smooth transitions and animations
+- [x] **P1.UX.9** - Improve empty states with icons and illustrations
 
 #### Mobile Experience
 
