@@ -38,6 +38,7 @@ Test: https://cronic-.github.io/notes-app-test/
   | Shortcut        | Action               |
   | --------------- | -------------------- |
   | `Ctrl/Cmd + N`  | Create new note      |
+  | `Ctrl/Cmd + D`  | Duplicate note       |
   | `Ctrl/Cmd + S`  | Flush pending save   |
   | `Ctrl/Cmd + B`  | Bold selected text   |
   | `Ctrl/Cmd + I`  | Italic selected text |
