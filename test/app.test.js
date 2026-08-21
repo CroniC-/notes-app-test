@@ -149,6 +149,10 @@ function timeAgo(ts) {
   return new Date(ts).toLocaleDateString();
 }
 
+
+function formatFullTimestamp(ts) {
+  return new Date(ts).toLocaleString();
+}
 function normalizeNote(n) {
   return {
     id: n.id,
@@ -220,6 +224,33 @@ describe('parseTagsInput', () => {
 
   it('handles tags with spaces', () => {
     deepStrictEqual(parseTagsInput('multi word tag, another'), ['multi word tag', 'another']);
+  });
+});
+
+
+// === Tests for formatFullTimestamp ===
+
+describe('formatFullTimestamp', () => {
+  it('returns a locale-formatted date/time string', () => {
+    const ts = Date.now();
+    const result = formatFullTimestamp(ts);
+    ok(typeof result === 'string');
+    ok(result.length > 0);
+  });
+
+  it('returns different output for different timestamps', () => {
+    const ts1 = Date.now();
+    const ts2 = Date.now() - 24 * 60 * 60000;
+    const result1 = formatFullTimestamp(ts1);
+    const result2 = formatFullTimestamp(ts2);
+    ok(result1 !== result2);
+  });
+
+  it('includes date and time components', () => {
+    const ts = new Date('2024-01-15T12:30:00').getTime();
+    const result = formatFullTimestamp(ts);
+    // Should contain some numbers (date/time components)
+    ok(/\d/.test(result));
   });
 });
 

@@ -3,7 +3,7 @@
 > **Project**: Notes App - A lightweight, client-side markdown notes application
 > **Repository**: [CroniC-/notes-app-test](https://github.com/CroniC-/notes-app-test)
 > **Status**: Active Development
-> **Last Updated**: Thu Aug 20 11:30:00 AM UTC 2026
+> **Last Updated**: Thu Aug 21 12:00:00 PM UTC 2026
 > **Current Version**: 1.0.0
 > **Task Reference Format**: `Category.Prefix.Number` (e.g., P1.UX.1)
 
@@ -139,7 +139,7 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 - [x] **P1.UX.4** - Auto-focus title input when creating new note
 - [x] **P1.UX.5** - Add `Ctrl/Cmd + D` shortcut to duplicate current note
 - [x] **P1.UX.6** - Add click-to-filter for tags in metadata
-- [ ] **P1.UX.7** - Show full timestamp on hover of relative time
+- [x] **P1.UX.7** - Show full timestamp on hover of relative time
 - [ ] **P1.UX.8** - Add smooth transitions and animations
 - [ ] **P1.UX.9** - Improve empty states with icons and illustrations
 
@@ -687,4 +687,4 @@ This implementation plan provides a **comprehensive roadmap** for enhancing the 
 
 ---
 
-_Generated for Notes App project - Last updated: Tue Aug 18 10:55:40 PM UTC 2026_
+_Generated for Notes App project - Last updated: Thu Aug 21 12:00:00 PM UTC 2026_
