@@ -420,6 +420,22 @@ function renderNoteList() {
   if (list.length) {
     els.noteList.textContent = '';
     for (const n of list) {
+      const tags =
+        n.tags && n.tags.length > 0
+          ? n.tags.map((t) =>
+              el(
+                'span',
+                {
+                  class: 'note-tag' + (selectedTags.has(t) ? ' selected' : ''),
+                  'data-tag': t,
+                  role: 'button',
+                  tabindex: '0',
+                },
+                escapeHtml(t)
+              )
+            )
+          : [];
+
       const li = el(
         'li',
         {
@@ -435,6 +451,7 @@ function renderNoteList() {
             n.folder ? el('span', {}, escapeHtml(n.folder)) : '',
             el('span', {}, timeAgo(n.updatedAt)),
           ]),
+          tags.length > 0 ? el('div', { class: 'note-tags' }, tags) : '',
         ]
       );
       els.noteList.appendChild(li);
@@ -1034,6 +1051,27 @@ els.tagCloud.addEventListener('keydown', (e) => {
   if (!chip) return;
   e.preventDefault();
   const t = chip.dataset.tag;
+  if (selectedTags.has(t)) selectedTags.delete(t);
+  else selectedTags.add(t);
+  renderSidebar();
+});
+
+// Event listener for note tags in the note list
+els.noteList.addEventListener('click', (e) => {
+  const tag = e.target.closest('.note-tag');
+  if (!tag) return;
+  const t = tag.dataset.tag;
+  if (selectedTags.has(t)) selectedTags.delete(t);
+  else selectedTags.add(t);
+  renderSidebar();
+});
+
+els.noteList.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const tag = e.target.closest('.note-tag');
+  if (!tag) return;
+  e.preventDefault();
+  const t = tag.dataset.tag;
   if (selectedTags.has(t)) selectedTags.delete(t);
   else selectedTags.add(t);
   renderSidebar();
