@@ -154,7 +154,7 @@ A zero-dependency, client-side markdown notes application built with vanilla Jav
 
 #### Performance
 
-- [ ] **P1.PF.1** - Debounce search input (currently fires on every keystroke)
+- [x] **P1.PF.1** - Debounce search input (currently fires on every keystroke)
 - [ ] **P1.PF.2** - Add loading indicators for async operations
 - [ ] **P1.PF.3** - Optimize markdown rendering
 - [ ] **P1.PF.4** - Add performance profiling
