@@ -197,6 +197,16 @@ function formatFullTimestamp(ts) {
   return new Date(ts).toLocaleString();
 }
 
+// Debounce function - delays invocation until after delay ms have elapsed
+// since the last time it was invoked
+function debounce(fn, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 // === dom ===
 
 const STORAGE_KEY = 'notes-app.v1';
@@ -1041,10 +1051,13 @@ els.noteList.addEventListener('keydown', (e) => {
   }
 });
 
-els.search.addEventListener('input', () => {
-  searchQuery = els.search.value;
-  renderNoteList();
-});
+els.search.addEventListener(
+  'input',
+  debounce(() => {
+    searchQuery = els.search.value;
+    renderNoteList();
+  }, 300)
+);
 
 els.folderFilter.addEventListener('change', () => {
   folderFilter = els.folderFilter.value;
