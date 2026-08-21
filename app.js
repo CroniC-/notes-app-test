@@ -470,9 +470,11 @@ function renderNoteList() {
   // everything": only the latter shows active filters + a clear-filters action.
   if (!notes.length) {
     els.noteList.textContent = '';
-    els.noteList.appendChild(
-      el('li', { class: 'no-notes' }, 'No notes yet — create one with + New.')
-    );
+    const emptyLi = el('li', { class: 'no-notes' });
+    emptyLi.appendChild(el('div', { class: 'empty-state-icon' }, '🗒'));
+    emptyLi.appendChild(el('div', { class: 'no-notes-msg' }, 'No notes yet'));
+    emptyLi.appendChild(el('p', { class: 'no-notes-hint' }, 'Create one with + New.'));
+    els.noteList.appendChild(emptyLi);
     return;
   }
   const chips = [];
@@ -507,17 +509,22 @@ function renderNoteList() {
       )
     );
   els.noteList.textContent = '';
-  els.noteList.appendChild(
-    el('li', { class: 'no-notes no-results' }, [
-      el('div', { class: 'no-results-msg' }, 'No notes match the current filters.'),
-      chips.length ? el('div', { class: 'empty-filter-chips' }, chips) : '',
-      el(
-        'button',
-        { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' },
-        'Clear filters'
-      ),
-    ])
+  const resultsLi = el('li', { class: 'no-notes no-results' });
+  resultsLi.appendChild(el('div', { class: 'empty-state-icon' }, '🔍'));
+  resultsLi.appendChild(
+    el('div', { class: 'no-results-msg' }, 'No notes match the current filters.')
   );
+  if (chips.length) {
+    resultsLi.appendChild(el('div', { class: 'empty-filter-chips' }, chips));
+  }
+  resultsLi.appendChild(
+    el(
+      'button',
+      { class: 'btn btn-ghost clear-filters', type: 'button', role: 'button' },
+      'Clear filters'
+    )
+  );
+  els.noteList.appendChild(resultsLi);
 }
 
 function renderSidebar() {
