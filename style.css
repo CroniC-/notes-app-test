@@ -13,6 +13,14 @@
   --accent-text: #ffffff;
   --danger: #dc2626;
   --code-bg: #f0f2f5;
+  /* Animation durations */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.2s;
+  --transition-slow: 0.3s;
+  /* Animation timing functions */
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
 }
 
 [data-theme='dark'] {
@@ -44,15 +52,121 @@ body {
   font-size: 14px;
   background: var(--bg);
   color: var(--text);
+  transition:
+    background var(--transition-slow) var(--ease-in-out-expo),
+    color var(--transition-slow) var(--ease-in-out-expo);
+}
+
+/* Smooth theme transitions */
+[data-theme],
+[data-theme] *,
+[data-theme] *::before,
+[data-theme] *::after {
+  transition:
+    background-color var(--transition-slow) var(--ease-in-out-expo),
+    color var(--transition-slow) var(--ease-in-out-expo),
+    border-color var(--transition-slow) var(--ease-in-out-expo),
+    box-shadow var(--transition-slow) var(--ease-in-out-expo) !important;
+  transition-delay: 0s !important;
 }
 
 [hidden] {
   display: none !important;
 }
 
+/* Fade-in animation for new elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale-in animation for modals and dropdowns */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide-in animation for sidebar panels */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Utility animation classes */
+.fade-in {
+  animation: fadeIn var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.scale-in {
+  animation: scaleIn var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.slide-in {
+  animation: slideIn var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.shake {
+  animation: shake 0.4s var(--ease-in-out-expo);
+}
+
 .app {
   display: flex;
   height: 100vh;
+  transition: all var(--transition-slow) var(--ease-in-out-expo);
 }
 
 /* ---------- sidebar ---------- */
@@ -66,6 +180,10 @@ body {
   flex-direction: column;
   gap: 12px;
   padding: 16px;
+  transition:
+    width var(--transition-slow) var(--ease-in-out-expo),
+    background var(--transition-slow) var(--ease-in-out-expo),
+    border-color var(--transition-slow) var(--ease-in-out-expo);
 }
 
 .sidebar-header {
@@ -89,6 +207,15 @@ body {
   color: var(--text);
   font: inherit;
   font-size: 13px;
+  transition:
+    border-color var(--transition-fast) var(--ease-in-out-expo),
+    box-shadow var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.sidebar input[type='search']:focus,
+.sidebar select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
 }
 
 .tag-cloud {
@@ -110,11 +237,18 @@ body {
 .tag-cloud .tag {
   cursor: pointer;
   border: 1px solid transparent;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.tag-cloud .tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tag-cloud .tag.selected {
   border-color: var(--accent);
   font-weight: 600;
+  animation: pulse 0.5s ease-out;
 }
 
 .note-list {
@@ -126,6 +260,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  scroll-behavior: smooth;
 }
 
 .note-item {
@@ -133,28 +268,36 @@ body {
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
   user-select: none;
 }
 
 .note-item:hover {
   background: var(--bg);
+  transform: translateX(2px);
 }
 
 .note-item.active {
   background: var(--accent-soft);
   border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
 }
 
 .note-item.dragging {
   opacity: 0.5;
   background: var(--accent);
   color: var(--accent-text);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+  transform: scale(1.02);
+  z-index: 10;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .note-item.drag-over {
   border-color: var(--accent);
   background: var(--accent-soft);
+  transform: scale(1.01);
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .note-item .note-title {
@@ -184,7 +327,7 @@ body {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
   background: var(--panel);
   color: var(--text);
   padding: 4px 8px;
@@ -195,6 +338,16 @@ body {
   border: 1px solid var(--border);
   z-index: 100;
   margin-bottom: 4px;
+  opacity: 1;
+  pointer-events: none;
+  transition:
+    opacity var(--transition-fast) var(--ease-in-out-expo),
+    transform var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.note-timestamp::after {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-10px);
 }
 
 [data-theme='dark'] .note-timestamp:hover::after {
@@ -217,7 +370,7 @@ body {
   color: var(--accent);
   cursor: pointer;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .note-tag:hover,
@@ -225,6 +378,7 @@ body {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+  transform: scale(1.05);
 }
 
 .note-tag.selected {
@@ -232,6 +386,7 @@ body {
   font-weight: 600;
   background: var(--accent);
   color: white;
+  animation: pulse 0.3s ease-out;
 }
 
 .no-notes {
@@ -294,12 +449,23 @@ body {
   margin: auto;
   text-align: center;
   color: var(--muted);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--transition-slow) var(--ease-out-expo),
+    transform var(--transition-slow) var(--ease-out-expo);
+}
+
+.empty-state.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .empty-state .empty-title {
   font-size: 18px;
   font-weight: 600;
   color: var(--text);
+  animation: fadeIn var(--transition-slow) var(--ease-out-expo);
 }
 
 .editor-pane {
@@ -308,6 +474,7 @@ body {
   height: 100%;
   gap: 14px;
   padding: 24px 32px;
+  transition: padding var(--transition-slow) var(--ease-in-out-expo);
 }
 
 .note-meta {
@@ -325,6 +492,12 @@ body {
   width: 100%;
   outline: none;
   padding: 0;
+  transition: font-size var(--transition-normal) var(--ease-in-out-expo);
+}
+
+#note-title:focus {
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  border-radius: 4px;
 }
 
 .meta-row {
@@ -349,6 +522,14 @@ body {
   padding: 4px 8px;
   font-size: 13px;
   width: 150px;
+  transition:
+    border-color var(--transition-fast) var(--ease-in-out-expo),
+    box-shadow var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.meta-row input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
 }
 
 .toolbar {
@@ -368,10 +549,17 @@ body {
 .view-toggle .btn {
   border: none;
   border-radius: 0;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .view-toggle .btn + .btn {
   border-left: 1px solid var(--border);
+}
+
+.view-toggle .btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .toolbar-right {
@@ -389,6 +577,7 @@ body {
   border-radius: 8px;
   border: 1px solid var(--border);
   margin-bottom: 10px;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .fmt-btn {
@@ -403,7 +592,7 @@ body {
   cursor: pointer;
   min-width: 28px;
   text-align: center;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .fmt-btn:hover {
@@ -411,12 +600,14 @@ body {
   color: var(--accent);
   border-color: var(--accent);
   font-weight: 600;
+  transform: translateY(-1px);
 }
 
 .fmt-btn:active {
   background: var(--accent);
   color: var(--accent-text);
   border-color: var(--accent);
+  transform: translateY(0);
 }
 
 .fmt-btn:focus-visible {
@@ -432,6 +623,7 @@ body {
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .fmt-select:hover {
@@ -448,16 +640,21 @@ body {
   font-size: 12px;
   color: var(--muted);
   opacity: 0;
-  transition: opacity 0.3s;
+  transform: translateY(-10px);
+  transition:
+    opacity var(--transition-normal) var(--ease-out-expo),
+    transform var(--transition-normal) var(--ease-out-expo);
 }
 
 .save-indicator.show {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .save-indicator.error {
   color: var(--danger);
   font-weight: 600;
+  animation: shake 0.4s var(--ease-in-out-expo);
 }
 
 .word-count {
@@ -478,10 +675,14 @@ body {
   font-size: 14px;
   line-height: 1.6;
   outline: none;
+  transition:
+    border-color var(--transition-fast) var(--ease-in-out-expo),
+    box-shadow var(--transition-fast) var(--ease-in-out-expo);
 }
 
 #note-body:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .preview {
@@ -492,6 +693,13 @@ body {
   background: var(--panel);
   padding: 20px 24px;
   line-height: 1.6;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
+  scroll-behavior: smooth;
+}
+
+.preview:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ---------- buttons ---------- */
@@ -505,26 +713,52 @@ body {
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .btn:hover {
   background: var(--bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-text);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
 }
 
 .btn-primary:hover {
   background: var(--accent);
   filter: brightness(1.1);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
 }
 
 .btn-danger {
   color: var(--danger);
   border-color: var(--danger);
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.btn-danger:hover {
+  background: rgba(220, 38, 38, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+  background: rgba(220, 38, 38, 0.2);
 }
 
 .btn.active {
@@ -545,27 +779,39 @@ body {
 .markdown h4 {
   line-height: 1.3;
   margin: 1.1em 0 0.5em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 .markdown h1 {
-  font-size: 1.6em;
+  animation-delay: 0.05s;
 }
 .markdown h2 {
-  font-size: 1.4em;
+  animation-delay: 0.1s;
 }
 .markdown h3 {
-  font-size: 1.2em;
+  animation-delay: 0.15s;
 }
 .markdown h4 {
-  font-size: 1.05em;
+  animation-delay: 0.2s;
 }
 
 .markdown p {
   margin: 0.6em 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 .markdown a {
   color: var(--accent);
+  transition: color var(--transition-fast) var(--ease-in-out-expo);
+}
+
+.markdown a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .markdown s {
@@ -578,6 +824,7 @@ body {
   border-radius: 4px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.9em;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .markdown pre {
@@ -585,6 +832,7 @@ body {
   padding: 12px 14px;
   border-radius: 8px;
   overflow-x: auto;
+  transition: all var(--transition-fast) var(--ease-in-out-expo);
 }
 
 .markdown pre code {
@@ -597,26 +845,41 @@ body {
   margin: 0.6em 0;
   padding: 2px 14px;
   color: var(--muted);
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 .markdown ul,
 .markdown ol {
   margin: 0.6em 0;
   padding-left: 1.5em;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 .markdown li {
   margin: 0.2em 0;
+  opacity: 0;
+  animation: fadeIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 .markdown hr {
   border: none;
   border-top: 1px solid var(--border);
   margin: 16px 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: scaleIn var(--transition-normal) var(--ease-out-expo) forwards;
+  animation-delay: 0.1s;
 }
 
 .empty-preview {
   color: var(--muted);
+  opacity: 0;
+  animation: fadeIn var(--transition-normal) var(--ease-out-expo) forwards;
 }
 
 /* ---------- responsive ---------- */
@@ -626,22 +889,35 @@ body {
     flex-direction: column;
     height: auto;
     min-height: 100vh;
+    transition: all var(--transition-slow) var(--ease-in-out-expo);
   }
 
   .sidebar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    transition: all var(--transition-slow) var(--ease-in-out-expo);
   }
 
   .note-list {
     max-height: 220px;
     flex: none;
+    scroll-behavior: smooth;
   }
 
   .editor-pane {
     padding: 16px;
     min-height: 70vh;
+    transition: all var(--transition-slow) var(--ease-in-out-expo);
+  }
+
+  /* Mobile-specific animations */
+  .note-item:hover {
+    transform: none;
+  }
+
+  .btn:hover {
+    transform: none;
   }
 }
 
